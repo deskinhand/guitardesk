@@ -1,0 +1,1013 @@
+<!doctype html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="チューナー、トライアド、テンション、3音ヴォイシング、コード、スケールをまとめたギター練習ツール。">
+<meta name="theme-color" content="#2A1F1A">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="GuitarDesk">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" href="icons/favicon.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<style>:root{color-scheme:light;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0;font:14px/1.5 system-ui,sans-serif;-webkit-text-size-adjust:100%}img{max-width:100%}</style>
+<title>GuitarDesk</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Dela+Gothic+One&family=JetBrains+Mono:wght@400;600&family=Zen+Kaku+Gothic+New:wght@400;500;700&display=swap">
+<style>
+/* Layout: sticky header with user-ordered tool tabs; each tool = control strip on top, rosewood fingerboard visual below. All neck diagrams are horizontal: low frets left, string 1 on top. */
+:root{
+  --bg:#ECEEF1; --surface:#FFFFFF; --sunk:#F5F6F8; --fg:#181B20; --muted:#5B636E; --line:#D3D8DE;
+  --accent:#B0741A; --accent-ink:#FFFFFF; --accent-soft:#F3E6CF;
+  --wood:#2A1F1A; --fretwire:#BFC4CA; --nut:#EDE6D6; --stringc:#D9CDB2; --inlay:#CFC6B4;
+  --root:#DC4B37; --third:#2F7FD0; --fifth:#24966A; --other:#7E6FD0; --on-dot:#FFFFFF;
+  --ok:#24966A; --warn:#D08A1E; --bad:#DC4B37;
+  --f-display:"Dela Gothic One","Zen Kaku Gothic New","Hiragino Sans",sans-serif;
+  --f-body:"Zen Kaku Gothic New","Hiragino Sans","Yu Gothic",system-ui,sans-serif;
+  --f-mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme: dark){:root:not([data-theme="light"]){
+  --bg:#111317; --surface:#1A1D22; --sunk:#15181C; --fg:#E7E9EC; --muted:#9AA2AD; --line:#2B3038;
+  --accent:#E2A33C; --accent-ink:#1A1206; --accent-soft:#3A2C14; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#111317; --surface:#1A1D22; --sunk:#15181C; --fg:#E7E9EC; --muted:#9AA2AD; --line:#2B3038;
+  --accent:#E2A33C; --accent-ink:#1A1206; --accent-soft:#3A2C14; color-scheme:dark}
+*{box-sizing:border-box}
+[hidden]{display:none!important}
+body{background:var(--bg);color:var(--fg);font-family:var(--f-body);font-size:15px;line-height:1.6}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--surface)}
+.wrap{max-width:1040px;margin:0 auto;padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var(--surface);border-bottom:1px solid var(--line)}
+.hrow{display:flex;align-items:center;gap:12px;flex-wrap:wrap;padding-block:10px}
+.brand{font-family:var(--f-display);font-weight:400;font-size:20px;letter-spacing:.02em;margin:0;display:flex;align-items:center;gap:8px}
+.brand svg{flex:none}
+.prefs{margin-left:auto;display:flex;gap:8px;flex-wrap:wrap}
+.navrow{display:flex;align-items:flex-end;gap:6px}
+nav.tabs{display:flex;gap:4px;overflow-x:auto;min-width:0;flex:1}
+nav.tabs a{flex:none;text-decoration:none;color:var(--muted);font-weight:700;padding:8px 14px 10px;border-bottom:3px solid transparent;font-size:14px}
+nav.tabs a[aria-current="page"]{color:var(--fg);border-bottom-color:var(--accent)}
+.arrange{flex:none;font:inherit;font-size:12px;font-weight:700;border:1px solid var(--line);background:var(--sunk);color:var(--muted);border-radius:8px;padding:4px 10px;margin-bottom:7px;cursor:pointer}
+.arrange[aria-expanded="true"]{color:var(--accent-ink);background:var(--accent);border-color:var(--accent)}
+a:focus-visible,button:focus-visible,select:focus-visible,input:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+main{padding-block:20px 48px}
+section.view{display:grid;gap:18px}
+section.view>*,.panel>*,.tnGrid>*{min-width:0}
+h2{font-family:var(--f-display);font-weight:400;font-size:26px;margin:0;text-wrap:balance;line-height:1.25}
+h3{font-size:13px;letter-spacing:.08em;color:var(--muted);margin:0 0 8px;font-weight:700}
+.lead{color:var(--muted);margin:4px 0 0;max-width:62ch}
+.panel{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:16px}
+.controls{display:grid;gap:12px}
+.ctl{display:grid;grid-template-columns:96px 1fr;gap:10px;align-items:start}
+.ctl>span{font-size:12px;color:var(--muted);font-weight:700;padding-top:7px;letter-spacing:.04em}
+@media (max-width:560px){.ctl{grid-template-columns:1fr;gap:4px}.ctl>span{padding-top:0}}
+.chips{display:flex;flex-wrap:wrap;gap:6px;min-width:0}
+.chip{font:inherit;font-size:13px;font-weight:500;border:1px solid var(--line);background:var(--sunk);color:var(--fg);border-radius:999px;padding:4px 11px;cursor:pointer;min-width:36px;font-variant-numeric:tabular-nums}
+.chip:hover{border-color:var(--accent)}
+.chip[aria-pressed="true"]{background:var(--accent);color:var(--accent-ink);border-color:var(--accent);font-weight:700}
+.chip.mono{font-family:var(--f-mono);font-size:12.5px}
+.btn{font:inherit;font-weight:700;font-size:14px;border:1px solid var(--accent);background:var(--accent);color:var(--accent-ink);border-radius:8px;padding:8px 14px;cursor:pointer;display:inline-flex;align-items:center;gap:6px}
+.btn.ghost{background:transparent;color:var(--fg);border-color:var(--line)}
+.btn.ghost:hover{border-color:var(--accent)}
+.seg{display:inline-flex;border:1px solid var(--line);border-radius:8px;overflow:hidden}
+.seg button{font:inherit;font-size:12px;font-weight:700;border:0;background:var(--sunk);color:var(--muted);padding:5px 10px;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--fg);color:var(--bg)}
+.board{overflow-x:auto;border-radius:10px;background:var(--surface);border:1px solid var(--line);padding:10px 8px 4px}
+.board svg{display:block}
+.legend{display:flex;gap:14px;flex-wrap:wrap;font-size:12px;color:var(--muted)}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:5px;vertical-align:-1px}
+.notes{display:flex;gap:8px;flex-wrap:wrap}
+.note{display:grid;justify-items:center;min-width:46px;padding:6px 8px;border-radius:8px;background:var(--sunk);border:1px solid var(--line)}
+.note b{font-family:var(--f-mono);font-size:16px}
+.note small{font-family:var(--f-mono);font-size:11px;color:var(--muted)}
+.note.omit{background:transparent;border-style:dashed;opacity:.65}
+.note.omit b{text-decoration:line-through}
+.row{display:flex;gap:12px;flex-wrap:wrap;align-items:center}
+.spread{justify-content:space-between}
+.big{font-family:var(--f-display);font-size:44px;line-height:1}
+.muted{color:var(--muted)}
+.small{font-size:13px}
+.hint{font-size:12.5px;color:var(--muted);margin:2px 0 0}
+.count{font-family:var(--f-mono);font-size:13px;color:var(--muted)}
+svg text{font-family:var(--f-mono)}
+/* arrange panel */
+.arr{display:grid;gap:10px}
+.arr ol{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.arr li{display:grid;grid-template-columns:26px minmax(0,1fr) auto;gap:10px;align-items:center;background:var(--sunk);border:1px solid var(--line);border-radius:8px;padding:6px 8px}
+.arr li.off .tname{opacity:.45;text-decoration:line-through}
+.arr .pos{font-family:var(--f-mono);font-size:12px;color:var(--muted);text-align:center}
+.arr .tname{font-weight:700}
+.arr .tools{display:flex;gap:4px;align-items:center}
+.arr .tools button{width:32px;height:30px;border-radius:6px;border:1px solid var(--line);background:var(--surface);color:var(--fg);cursor:pointer;font:inherit}
+.arr .tools button:disabled{opacity:.3;cursor:default}
+.arr .tools label{font-size:12px;display:flex;gap:4px;align-items:center;margin-left:6px;color:var(--muted)}
+.start{font-size:11px;font-weight:700;color:var(--accent);margin-left:8px}
+/* Tuner */
+.tuner{display:grid;grid-template-columns:minmax(0,1.2fr) minmax(0,1fr);gap:18px}
+@media (max-width:760px){.tuner{grid-template-columns:1fr}}
+.meter{background:var(--wood);color:#F2EBDD;border-radius:12px;padding:20px 18px 18px;display:grid;gap:14px}
+.readout{display:flex;align-items:flex-end;justify-content:space-between;gap:12px}
+.notebig{font-family:var(--f-display);font-size:84px;line-height:.9;letter-spacing:-.02em}
+.notebig sub{font-family:var(--f-mono);font-size:22px;vertical-align:baseline;margin-left:4px;opacity:.7}
+.hz{font-family:var(--f-mono);text-align:right;font-variant-numeric:tabular-nums}
+.hz b{display:block;font-size:26px}
+.hz span{font-size:12px;opacity:.7}
+.gauge{position:relative;height:64px}
+.gauge svg{width:100%;height:100%;display:block}
+.needle{position:absolute;top:2px;bottom:16px;width:3px;margin-left:-1.5px;left:50%;background:#F2EBDD;border-radius:2px;transition:left .12s ease-out,background .2s}
+@media (prefers-reduced-motion:reduce){.needle{transition:none}}
+.status{font-size:13px;min-height:1.6em}
+.target{font-family:var(--f-mono);font-size:13px;opacity:.85}
+.strbtns{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:6px}
+.strbtn{font:inherit;border:1px solid var(--line);background:var(--sunk);color:var(--fg);border-radius:8px;padding:8px 2px;cursor:pointer;display:grid;justify-items:center}
+.strbtn small{font-size:10.5px;color:var(--muted)}
+.strbtn b{font-family:var(--f-mono);font-size:15px}
+.strbtn.hit{border-color:var(--ok);box-shadow:0 0 0 2px color-mix(in srgb,var(--ok) 35%,transparent)}
+.stepper{display:inline-flex;align-items:center;gap:6px;font-family:var(--f-mono)}
+.stepper button{width:30px;height:30px;border-radius:6px;border:1px solid var(--line);background:var(--sunk);color:var(--fg);cursor:pointer;font:inherit}
+select{font:inherit;font-size:14px;padding:6px 10px;border-radius:8px;border:1px solid var(--line);background:var(--sunk);color:var(--fg);max-width:100%}
+.err{background:color-mix(in srgb,var(--bad) 12%,var(--surface));border:1px solid color-mix(in srgb,var(--bad) 40%,var(--line));border-radius:8px;padding:10px 12px;font-size:13px}
+/* Chord boxes (horizontal) */
+.boxes{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:10px}
+.box{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:8px 6px 6px;cursor:pointer;display:grid;justify-items:center;gap:2px;font:inherit;color:var(--fg)}
+.box:hover{border-color:var(--accent)}
+.box .cap{font-family:var(--f-mono);font-size:11.5px;color:var(--muted)}
+.alts{display:flex;gap:8px;flex-wrap:wrap}
+.alts span{font-family:var(--f-mono);font-size:14px;padding:2px 9px;border:1px solid var(--line);border-radius:999px;background:var(--sunk)}
+.diat{display:grid;grid-template-columns:repeat(auto-fill,minmax(92px,1fr));gap:6px}
+.diat button{font:inherit;border:1px solid var(--line);background:var(--sunk);color:var(--fg);border-radius:8px;padding:6px 4px;cursor:pointer;display:grid;justify-items:center}
+.diat button:hover{border-color:var(--accent)}
+.diat small{font-family:var(--f-mono);color:var(--muted);font-size:11px}
+.diat b{font-family:var(--f-mono);font-size:15px}
+/* 3-note voicings */
+.pats{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:8px}
+.pat{font:inherit;text-align:left;border:1px solid var(--line);background:var(--surface);color:var(--fg);border-radius:10px;padding:10px 12px;cursor:pointer;display:grid;gap:4px;min-width:0}
+.pat:hover{border-color:var(--accent)}
+.pat[aria-pressed="true"]{border-color:var(--accent);box-shadow:inset 0 0 0 1px var(--accent);background:var(--accent-soft)}
+.pat .keep{font-family:var(--f-mono);font-size:16px;font-weight:600}
+.pat .om{font-size:12px;color:var(--muted)}
+.pat .om s{font-family:var(--f-mono)}
+.tag{justify-self:start;font-size:11px;font-weight:700;padding:1px 8px;border-radius:999px;border:1px solid currentColor}
+.tag.g0{color:var(--ok)}.tag.g1{color:var(--accent)}.tag.g2{color:var(--muted)}
+.why{display:grid;gap:8px;font-size:14px}
+.why ul{margin:0;padding-left:1.2em;display:grid;gap:4px}
+.why .eq{font-family:var(--f-mono);font-weight:600}
+/* Tensions */
+.how{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:0;padding:0;list-style:none;counter-reset:st}
+@media (max-width:700px){.how{grid-template-columns:1fr}}
+.how li{counter-increment:st;display:grid;grid-template-columns:28px 1fr;gap:8px;align-items:start;font-size:13px;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:10px 12px}
+.how li::before{content:counter(st);font-family:var(--f-display);font-size:18px;color:var(--accent);line-height:1.2}
+.tnGrid{display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);gap:18px}
+@media (max-width:760px){.tnGrid{grid-template-columns:1fr}}
+.ladder{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:10px 12px}
+.rung{display:grid;grid-template-columns:46px 46px minmax(0,1fr);gap:10px;align-items:center;padding:7px 0}
+.rung .deg{font-family:var(--f-display);font-size:20px;line-height:1}
+.rung .nm{font-family:var(--f-mono);font-size:16px;font-weight:600}
+.rung .info{font-size:12px;color:var(--muted);min-width:0}
+.rung.tension{background:linear-gradient(90deg,var(--accent-soft),transparent 85%);border-radius:8px;padding-inline:6px;margin-inline:-6px}
+.rung.empty .deg,.rung.empty .nm{opacity:.3}
+.gap{display:flex;align-items:center;gap:8px;padding-left:20px;font-size:11px;color:var(--muted);font-family:var(--f-mono);height:18px}
+.gap::before{content:"";width:2px;height:100%;background:var(--line)}
+.divider{border-top:1px dashed var(--accent);margin:6px 0;font-size:11px;color:var(--accent);padding-top:2px;font-weight:700;letter-spacing:.04em}
+.tsel{display:flex;gap:4px;flex-wrap:wrap;margin-top:5px}
+.tchip{font:inherit;font-family:var(--f-mono);font-size:13px;border:1px solid var(--line);background:var(--surface);color:var(--fg);border-radius:6px;padding:3px 9px;cursor:pointer;display:inline-flex;gap:5px;align-items:center}
+.tchip.none{font-family:var(--f-body);font-size:12px}
+.tchip[aria-pressed="true"]{background:var(--fg);color:var(--bg);border-color:var(--fg)}
+.tchip:disabled{opacity:.35;cursor:not-allowed;text-decoration:line-through}
+.st{font-style:normal;font-weight:700}
+.st.ok{color:var(--ok)}.st.caution{color:var(--warn)}.st.avoid{color:var(--bad)}
+.tchip[aria-pressed="true"] .st{color:inherit}
+.tnKey{display:flex;gap:14px;flex-wrap:wrap;font-size:12px;color:var(--muted)}
+</style>
+</head>
+<body>
+
+<header>
+  <div class="wrap">
+    <div class="hrow">
+      <h1 class="brand">
+        <svg width="26" height="26" viewBox="0 0 26 26" aria-hidden="true"><rect x="1" y="4" width="24" height="18" rx="3" fill="var(--wood)"/><g stroke="var(--fretwire)" stroke-width="1.4"><line x1="9" y1="4" x2="9" y2="22"/><line x1="17" y1="4" x2="17" y2="22"/></g><g stroke="var(--stringc)" stroke-width=".9"><line x1="1" y1="8" x2="25" y2="8"/><line x1="1" y1="13" x2="25" y2="13"/><line x1="1" y1="18" x2="25" y2="18"/></g><circle cx="13" cy="13" r="3.4" fill="var(--accent)"/></svg>
+        <span data-t="app">GuitarDesk</span>
+      </h1>
+      <div class="prefs">
+        <div class="seg" role="group" aria-label="Language / 言語">
+          <button id="langJa" type="button">日本語</button><button id="langEn" type="button">EN</button>
+        </div>
+        <div class="seg" role="group" data-ta="pref.acc">
+          <button id="accS" type="button">♯</button><button id="accF" type="button">♭</button>
+        </div>
+        <div class="seg" role="group" data-ta="pref.lab">
+          <button id="labD" type="button" data-t="pref.deg">度数</button><button id="labN" type="button" data-t="pref.name">音名</button>
+        </div>
+      </div>
+    </div>
+    <div class="navrow">
+      <nav class="tabs" id="tabs" data-ta="nav"></nav>
+      <button class="arrange" id="arrBtn" type="button" aria-expanded="false" aria-controls="arrPanel">⇅ <span data-t="arr.btn">並べ替え</span></button>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <div class="panel arr" id="arrPanel" hidden style="margin-bottom:18px">
+    <div class="row spread">
+      <div>
+        <h2 style="font-size:20px" data-t="arr.title">タブの並べ替え</h2>
+        <p class="hint" data-t="arr.hint">今練習している項目を一番上に置くと、アプリを開いたときにそのタブから始まります。使わないタブは非表示にできます。</p>
+      </div>
+      <div class="row">
+        <button class="btn ghost" type="button" id="arrReset" data-t="arr.reset">もとに戻す</button>
+        <button class="btn" type="button" id="arrDone" data-t="arr.done">完了</button>
+      </div>
+    </div>
+    <ol id="arrList"></ol>
+  </div>
+
+  <!-- TUNER -->
+  <section class="view" id="v-tuner" hidden>
+    <div>
+      <h2 data-t="tu.h">チューナー</h2>
+      <p class="lead" data-t="tu.lead"></p>
+    </div>
+    <div class="tuner">
+      <div class="meter" aria-live="polite">
+        <div class="readout">
+          <div class="notebig" id="tNote">–</div>
+          <div class="hz"><b id="tHz">— Hz</b><span id="tCents">±0 cent</span></div>
+        </div>
+        <div class="gauge">
+          <svg viewBox="0 0 400 64" preserveAspectRatio="none" aria-hidden="true">
+            <rect x="180" y="4" width="40" height="40" rx="4" fill="#24966A" opacity=".28"/>
+            <g id="ticks"></g>
+          </svg>
+          <div class="needle" id="tNeedle"></div>
+        </div>
+        <div class="target" id="tTarget"></div>
+        <div class="row">
+          <button class="btn" id="micBtn" type="button"></button>
+          <span class="status" id="tStatus"></span>
+        </div>
+      </div>
+      <div class="panel controls">
+        <div>
+          <h3 data-t="tu.tuning">チューニング</h3>
+          <select id="tuningSel" data-ta="tu.tuning"></select>
+        </div>
+        <div>
+          <h3 data-t="tu.ref">基準音</h3>
+          <div class="strbtns" id="strBtns"></div>
+        </div>
+        <div>
+          <h3 data-t="tu.pitch">基準ピッチ</h3>
+          <div class="stepper">
+            <button type="button" id="a4m" aria-label="−">−</button>
+            <span>A4 = <b id="a4v">440</b> Hz</span>
+            <button type="button" id="a4p" aria-label="+">＋</button>
+          </div>
+        </div>
+        <div id="micErr" class="err" hidden></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRIADS -->
+  <section class="view" id="v-triads" hidden>
+    <div>
+      <h2 data-t="tri.h">トライアド・ポジション</h2>
+      <p class="lead" data-t="tri.lead"></p>
+    </div>
+    <div class="panel controls">
+      <div class="ctl"><span data-t="c.root">ルート</span><div class="chips" id="triRoot"></div></div>
+      <div class="ctl"><span data-t="c.quality">種類</span><div class="chips" id="triQ"></div></div>
+      <div class="ctl"><span data-t="c.set">弦セット</span><div class="chips" id="triSet"></div></div>
+      <div class="ctl"><span data-t="c.inv">転回形</span><div class="chips" id="triInv"></div></div>
+    </div>
+    <div class="row spread">
+      <div class="row"><span class="big" id="triName">C</span><div class="notes" id="triNotes"></div></div>
+      <div class="row">
+        <button class="btn ghost" type="button" id="triPrev" data-ta="c.prev">◀</button>
+        <span class="count" id="triCount">1 / 6</span>
+        <button class="btn ghost" type="button" id="triNext" data-ta="c.next">▶</button>
+        <button class="btn" type="button" id="triPlay" data-t="c.play">▶ 鳴らす</button>
+      </div>
+    </div>
+    <div class="board" id="triBoard"></div>
+    <div class="chips" id="triList"></div>
+    <div class="legend" id="triLegend"></div>
+  </section>
+
+  <!-- TENSIONS -->
+  <section class="view" id="v-tensions" hidden>
+    <div>
+      <h2 data-t="tn.h">テンション・ビルダー</h2>
+      <p class="lead" data-t="tn.lead"></p>
+    </div>
+    <ol class="how">
+      <li data-t="tn.s1"></li><li data-t="tn.s2"></li><li data-t="tn.s3"></li>
+    </ol>
+    <div class="panel controls">
+      <div class="ctl"><span data-t="c.root">ルート</span><div class="chips" id="tnRoot"></div></div>
+      <div class="ctl"><span data-t="tn.base">土台のコード</span><div class="chips" id="tnBase"></div></div>
+    </div>
+    <div class="tnGrid">
+      <div class="ladder" id="tnLadder"></div>
+      <div style="display:grid;gap:14px;align-content:start;min-width:0">
+        <span class="big" id="tnName">A9</span>
+        <div class="notes" id="tnNotes"></div>
+        <div class="row">
+          <button class="btn" type="button" id="tnArp" data-t="tn.arp">▶</button>
+          <button class="btn ghost" type="button" id="tnV3" hidden data-t="tn.v3"></button>
+        </div>
+        <div class="panel why" id="tnWhy"></div>
+        <div class="tnKey">
+          <span><b class="st ok">◎</b> <span data-t="st.o"></span></span><span><b class="st caution">△</b> <span data-t="st.c"></span></span><span><b class="st avoid">×</b> <span data-t="st.a"></span></span>
+        </div>
+      </div>
+    </div>
+    <div>
+      <h3 data-t="c.shapes">押さえ方（タップで鳴らす）</h3>
+      <div class="boxes" id="tnBoxes"></div>
+    </div>
+    <div>
+      <h3 data-t="tn.board">指板上のコードトーンとテンション</h3>
+      <div class="board" id="tnBoard"></div>
+      <div class="legend" id="tnLegend" style="margin-top:8px"></div>
+    </div>
+  </section>
+
+  <!-- 3-NOTE VOICINGS -->
+  <section class="view" id="v-voicings" hidden>
+    <div>
+      <h2 data-t="v3.h">3音ヴォイシング</h2>
+      <p class="lead" data-t="v3.lead"></p>
+    </div>
+    <div class="panel controls">
+      <div class="ctl"><span data-t="c.root">ルート</span><div class="chips" id="v3Root"></div></div>
+      <div class="ctl"><span data-t="c.chord">コード</span><div class="chips" id="v3Type"></div></div>
+      <div class="ctl"><span data-t="c.set">弦セット</span><div class="chips" id="v3Set"></div></div>
+    </div>
+    <div>
+      <h3 data-t="v3.pats">省略パターン</h3>
+      <div class="pats" id="v3Pats"></div>
+    </div>
+    <div class="row spread">
+      <div class="row"><span class="big" id="v3Name">A7</span><div class="notes" id="v3Notes"></div></div>
+      <div class="row">
+        <button class="btn ghost" type="button" id="v3Prev" data-ta="c.prev">◀</button>
+        <span class="count" id="v3Count">1 / 6</span>
+        <button class="btn ghost" type="button" id="v3Next" data-ta="c.next">▶</button>
+        <button class="btn" type="button" id="v3Play" data-t="c.play">▶ 鳴らす</button>
+      </div>
+    </div>
+    <label class="small" style="display:flex;gap:8px;align-items:center"><input type="checkbox" id="v3Bass"> <span data-t="v3.bass"></span></label>
+    <div class="panel why" id="v3Why"></div>
+    <div class="board" id="v3Board"></div>
+    <div class="chips" id="v3List"></div>
+    <div class="legend" id="v3Legend"></div>
+  </section>
+
+  <!-- CHORDS -->
+  <section class="view" id="v-chords" hidden>
+    <div>
+      <h2 data-t="ch.h">コード</h2>
+      <p class="lead" data-t="ch.lead"></p>
+    </div>
+    <div class="panel controls">
+      <div class="ctl"><span data-t="c.root">ルート</span><div class="chips" id="chRoot"></div></div>
+      <div class="ctl"><span data-t="c.type">タイプ</span><div class="chips" id="chType"></div></div>
+    </div>
+    <div class="row spread">
+      <div class="row"><span class="big" id="chName">C</span><div class="notes" id="chNotes"></div></div>
+      <button class="btn" type="button" id="chPlay" data-t="ch.play"></button>
+    </div>
+    <div>
+      <h3 data-t="c.shapes">押さえ方（タップで鳴らす）</h3>
+      <div class="boxes" id="chBoxes"></div>
+    </div>
+    <div>
+      <h3 data-t="ch.board">指板上の構成音</h3>
+      <div class="board" id="chBoard"></div>
+    </div>
+    <div class="panel" style="display:grid;gap:12px;margin-top:8px">
+      <div class="row spread">
+        <div>
+          <h2 style="font-size:20px" data-t="id.h">コード名判定</h2>
+          <p class="hint" data-t="id.hint"></p>
+        </div>
+        <div class="row">
+          <button class="btn ghost" type="button" id="idPlay" data-t="c.play">▶</button>
+          <button class="btn ghost" type="button" id="idClear" data-t="id.clear">クリア</button>
+        </div>
+      </div>
+      <div class="board" id="idBoard"></div>
+      <div style="display:grid;gap:6px">
+        <div class="row"><span class="big" id="idName" style="font-size:36px">–</span><span class="muted small" id="idNotes"></span></div>
+        <div class="alts" id="idAlts"></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SCALES -->
+  <section class="view" id="v-scales" hidden>
+    <div>
+      <h2 data-t="sc.h">スケール</h2>
+      <p class="lead" data-t="sc.lead"></p>
+    </div>
+    <div class="panel controls">
+      <div class="ctl"><span data-t="c.key">キー</span><div class="chips" id="scRoot"></div></div>
+      <div class="ctl"><span data-t="c.scale">スケール</span><div class="chips" id="scType"></div></div>
+    </div>
+    <div class="row spread">
+      <div class="row"><span class="big" id="scName" style="font-size:32px">A</span><div class="notes" id="scNotes"></div></div>
+      <button class="btn" type="button" id="scPlay" data-t="sc.play"></button>
+    </div>
+    <div class="board" id="scBoard"></div>
+    <div class="legend" id="scLegend"></div>
+    <div id="diatWrap">
+      <h3 data-t="sc.diat"></h3>
+      <div class="diat" id="scDiat"></div>
+    </div>
+  </section>
+</main>
+
+<script>
+(function(){
+/* ================= i18n ================= */
+const ord=n=>n===1?'1st':n===2?'2nd':n===3?'3rd':n+'th';
+const I18N={
+ja:{
+ app:'GuitarDesk',nav:'ツール','pref.acc':'臨時記号','pref.lab':'指板の表示','pref.deg':'度数','pref.name':'音名',
+ 'tab.tuner':'チューナー','tab.triads':'トライアド','tab.tensions':'テンション','tab.voicings':'3音ヴォイシング','tab.chords':'コード','tab.scales':'スケール',
+ 'arr.btn':'並べ替え','arr.title':'タブの並べ替え','arr.hint':'今練習している項目を一番上に置くと、アプリを開いたときにそのタブから始まります。使わないタブは非表示にできます。','arr.reset':'もとに戻す','arr.done':'完了','arr.show':'表示','arr.up':'上へ','arr.down':'下へ','arr.start':'起動時に開く',
+ 'c.root':'ルート','c.quality':'種類','c.set':'弦セット','c.inv':'転回形','c.prev':'前のポジション','c.next':'次のポジション','c.play':'▶ 鳴らす','c.chord':'コード','c.type':'タイプ','c.key':'キー','c.scale':'スケール','c.shapes':'押さえ方（タップで鳴らす）','c.all':'すべて',
+ 'lg.root':'ルート','lg.3':'3度','lg.5':'5度','lg.7':'7度・テンション','lg.other':'その他','lg.omit':'省略した音','lg.tonic':'主音',
+ board:'指板',cell:(s,f)=>`${s}弦 ${f}フレット`,set:(a)=>`${a}弦`,
+ 'tu.h':'チューナー','tu.lead':'マイクで弦の音程を読み取ります。マイクが使えない環境では、基準音を鳴らして耳で合わせられます。','tu.start':'マイクで調弦を始める','tu.stop':'マイクを止める','tu.listen':'聞き取り中…','tu.idle':'弦を1本ずつ鳴らしてください','tu.tuning':'チューニング','tu.ref':'基準音（タップで鳴らす）','tu.pitch':'基準ピッチ',
+ 'tu.str':n=>`${n}弦`,'tu.target':(n,nt)=>`${n}弦 ${nt}：`,'tu.ok':'合っています','tu.low':c=>`低い（${c}¢）→ 締める`,'tu.high':c=>`高い（+${c}¢）→ 緩める`,'tu.out':'チューニング外の音です',
+ 'tu.err':'マイクを使えませんでした。ブラウザでマイクの使用を許可してください。この表示環境ではマイクがブロックされている場合もあります。その場合は基準音を鳴らして耳で合わせられます。',
+ 'tun.std':'スタンダード','tun.dropD':'ドロップD','tun.half':'半音下げ','tun.whole':'全音下げ','tun.dadgad':'DADGAD','tun.openG':'オープンG','tun.openD':'オープンD',paren:x=>`（${x}）`,
+ 'tri.h':'トライアド・ポジション','tri.lead':'隣り合う3本の弦で弾く3和音の形を、転回形ごとに指板上で確認できます。薄い点はその弦セットの構成音です。',
+ 'q.maj':'メジャー','q.min':'マイナー','q.dim':'ディミニッシュ','q.aug':'オーグメント','inv.0':'基本形','inv.1':'第1転回形','inv.2':'第2転回形',
+ 'tn.h':'テンション・ビルダー','tn.lead':'コードは3度ずつ音を積み重ねてできています。R・3・5（三和音）、その上の7th（四和音）、さらに上の9th・11th・13thがテンションです。',
+ 'tn.s1':'ルートを選びます。','tn.s2':'土台のコードを選びます。三和音（R・3・5）か、7thまで積んだ四和音です。','tn.s3':'ハシゴの上の段（9th・11th・13th）でテンションを足します。「なし」を選ぶとその段は使いません。',
+ 'tn.base':'土台のコード','b.maj':'メジャー三和音','b.min':'マイナー三和音','tn.arp':'▶ 下から積み上げて鳴らす','tn.v3':'3音で弾く形を見る →','tn.board':'指板上のコードトーンとテンション',
+ 'tn.rung':(d,p)=>`${d}th ＝ ${p}の1オクターブ上`,'pl.2':'2度','pl.4':'4度','pl.6':'6度','tn.none':'なし','tn.ct':'コードトーン','tn.no7':'三和音なので7thはありません',
+ 'tn.div':b=>`↑ テンション ／ ↓ コードトーン（${b}）`,
+ 'st.o':'使える','st.c':'注意（場面による）','st.a':'アボイド',
+ 'iv.1':'短2度','iv.2':'長2度','iv.3':'短3度','iv.4':'長3度','iv.5':'完全4度','iv.6':'増4度','iv.7':'完全5度',
+ 'tn.sum':(nm,b,n,ts,tot)=>`<b>${nm}</b> は ${b}（${n}音）に ${ts} を足した、${tot}音のコードです。`,'tn.sum0':(nm,n)=>`<b>${nm}</b> はテンションを足していない${n}音のコードです。上の段の「なし」以外を選ぶとテンションが足されます。`,
+ 'tn.many':t=>`ギターで${t}音すべてを押さえるのは難しいので、実際は5度やルートを省いて弾くのが普通です。`,'tn.many13':'13thコードでは11thや9thも省かれがちです。','tn.avoidw':'アボイドノートを含んでいます。和音として鳴らすと濁ります。',
+ 'tn.six':'7thがないときの13thは「6」と書きます（例：C6、C6/9）。','tn.add':'7thがないときの9thは「add9」と書きます。',
+ 'tn.noshape':'音が多く、ルートを最低音にした押さえ方が見つかりませんでした。「3音ヴォイシング」タブで省略形を確認してください。',
+ 'r.d':l=>`コードトーンの${l}と同じ音になるため、テンションとしては使いません。`,'r.a':l=>`コードトーンの${l}のすぐ半音上（♭9度の関係）でぶつかり、濁って聞こえます。メロディで経過的に使うのはOKです。`,'r.a0':'コードの響きと強くぶつかる音です。',
+ 'r.c13b':'短6度の響きが強く、マイナー（エオリアン）寄りの色になります。使う場面を選ぶ音です。','r.c11s':'コードトーンとは衝突しませんが、このコードでは一般的でない響きです。','r.c13':'♭5と組み合わさると響きが不安定になりやすい音です。','r.c':'使えなくはありませんが、コードの性格と衝突しやすい音です。',
+ 'r.alt':'オルタード・テンションです。ドミナント7thだけに使う緊張感の強い音で、次のコードへ進む力を強めます。ブルースやジャズの定番です。','r.o':'コードトーンとぶつからず、響きを豊かにする音です。',
+ 'v3.h':'3音ヴォイシング','v3.lead':'セブンスやテンションコードから音を省いて、隣り合う3本の弦で弾ける形にします。どの音をなぜ省いたのか、残った3音だけだと何に聞こえるのかも表示します。','v3.pats':'省略パターン（上ほど定番）','v3.bass':'鳴らすときにベース音（ルート）を足す',
+ 'g.0':'定番','g.1':'使える','g.2':'響きが曖昧','pn.shell':'シェル','pn.rootless':'ルートレス','v3.omit':'省略：',
+ 'role.R':'ルート','role.P5':'完全5度','role.third':'3度','role.sus':'sus4の4度','role.sev':'7度','role.alt5':'変化した5度','role.T':'テンション',
+ 'v3.play':(k,o)=>`<b>${k}</b> を弾き、<b>${o}</b> を省いています。`,
+ 'w.P5':'完全5度は倍音にも含まれる音なので、省いても響きはほとんど変わりません。最初に省く音です。','w.R':'ルートはベースや前後のコードの流れで補えます（ルートレス）。バンドではベースが弾くことが多い音です。','w.third':'3度はメジャーかマイナーかを決める音です。省くと響きが曖昧になります。','w.sus':'4度はsus4の性格を決める音なので、省くとsus4に聞こえません。',
+ 'w.sev':l=>`${l}はコードの種類（7th・M7・6thなど）を決める音です。省くと別のコードに聞こえやすくなります。`,'w.alt5':l=>`${l}はこのコードの特徴になる音です。省くと別のコードに近づきます。`,'w.T9':'このコードでは13thが主役なので、9thは省いても成り立ちます。','w.T':l=>`${l}はコード名の特徴になる音です。省くとそのテンションの響きが消えます。`,
+ 'v3.omitL':l=>`${l}を省略：`,'v3.eq':e=>`この3音だけを単体で鳴らすと <span class="eq">${e}</span> とも読めます。`,'v3.eqR':(r,n)=>`ルートを省いた形なので、ベースが${r}を弾くと${n}に聞こえます。`,'v3.eqC':n=>`前後の流れやベース音で${n}として聞こえます。`,
+ 'v3.low':b=>`このポジションの最低音は ${b} です。`,'v3.chip':(f,b)=>`${f}fr 最低音${b}`,
+ 'ch.h':'コード','ch.lead':'コード名から押さえ方と構成音を調べられます。下の指板で音を選ぶと、そのコード名を判定します。','ch.play':'▶ 構成音を鳴らす','ch.board':'指板上の構成音','ch.noshape':'この範囲では押さえ方が見つかりませんでした。','ch.playAria':n=>`${n} を鳴らす`,
+ 'id.h':'コード名判定','id.hint':'各弦の押さえるフレットをタップします。左端の列は開放弦です。同じ所をもう一度タップするとミュートになります。','id.clear':'クリア','id.notes':'構成音：','id.pick':'音を選んでください','id.none':'該当なし',
+ 'sc.h':'スケール','sc.lead':'キーとスケールを選ぶと、15フレットまでの音の並びを表示します。7音スケールではダイアトニック・コードも出ます。','sc.play':'▶ 上行で鳴らす','sc.diat':'ダイアトニック・コード（タップでコード表へ）',
+ 'scn.pm':'マイナー・ペンタ','scn.pM':'メジャー・ペンタ','scn.blues':'ブルース','scn.major':'メジャー','scn.minor':'ナチュラル・マイナー','scn.hm':'ハーモニック・マイナー','scn.mm':'メロディック・マイナー','scn.dor':'ドリアン','scn.phr':'フリジアン','scn.lyd':'リディアン','scn.mix':'ミクソリディアン','scn.loc':'ロクリアン',
+},
+en:{
+ app:'GuitarDesk',nav:'Tools','pref.acc':'Accidentals','pref.lab':'Neck labels','pref.deg':'Degrees','pref.name':'Notes',
+ 'tab.tuner':'Tuner','tab.triads':'Triads','tab.tensions':'Tensions','tab.voicings':'3-note voicings','tab.chords':'Chords','tab.scales':'Scales',
+ 'arr.btn':'Arrange','arr.title':'Arrange tabs','arr.hint':'Put what you are practicing at the top and the app will open on that tab. Hide tabs you are not using.','arr.reset':'Reset','arr.done':'Done','arr.show':'Show','arr.up':'Move up','arr.down':'Move down','arr.start':'Opens first',
+ 'c.root':'Root','c.quality':'Quality','c.set':'Strings','c.inv':'Inversion','c.prev':'Previous position','c.next':'Next position','c.play':'▶ Play','c.chord':'Chord','c.type':'Type','c.key':'Key','c.scale':'Scale','c.shapes':'Shapes (tap to play)','c.all':'All',
+ 'lg.root':'Root','lg.3':'3rd','lg.5':'5th','lg.7':'7th & tensions','lg.other':'Other','lg.omit':'Omitted','lg.tonic':'Tonic',
+ board:'Fretboard',cell:(s,f)=>`String ${s}, fret ${f}`,set:a=>`Strings ${a}`,
+ 'tu.h':'Tuner','tu.lead':"Reads each string's pitch through the microphone. Where the mic is unavailable, play the reference tones and tune by ear.",'tu.start':'Start tuning with mic','tu.stop':'Stop mic','tu.listen':'Listening…','tu.idle':'Play one string at a time','tu.tuning':'Tuning','tu.ref':'Reference tones (tap to play)','tu.pitch':'Reference pitch',
+ 'tu.str':n=>ord(n),'tu.target':(n,nt)=>`String ${n} ${nt}: `,'tu.ok':'In tune','tu.low':c=>`Flat (${c}¢) → tighten`,'tu.high':c=>`Sharp (+${c}¢) → loosen`,'tu.out':'Not a string in this tuning',
+ 'tu.err':"Couldn't use the microphone. Allow microphone access in your browser. Some viewers block the mic entirely; if so, play the reference tones and tune by ear.",
+ 'tun.std':'Standard','tun.dropD':'Drop D','tun.half':'Half step down','tun.whole':'Whole step down','tun.dadgad':'DADGAD','tun.openG':'Open G','tun.openD':'Open D',paren:x=>` (${x})`,
+ 'tri.h':'Triad positions','tri.lead':'Three-note chord shapes on three adjacent strings, shown by inversion. Faint dots are the chord tones on that string set.',
+ 'q.maj':'Major','q.min':'Minor','q.dim':'Diminished','q.aug':'Augmented','inv.0':'Root position','inv.1':'1st inversion','inv.2':'2nd inversion',
+ 'tn.h':'Tension builder','tn.lead':'Chords are built by stacking thirds: R-3-5 makes a triad, adding the 7th makes a seventh chord, and the 9th, 11th and 13th stacked above that are the tensions.',
+ 'tn.s1':'Pick a root.','tn.s2':'Pick the base chord: a triad (R-3-5) or a seventh chord (R-3-5-7).','tn.s3':'Add tensions on the upper rungs (9th, 11th, 13th). Choose "None" to leave a rung empty.',
+ 'tn.base':'Base chord','b.maj':'Major triad','b.min':'Minor triad','tn.arp':'▶ Play stacked from the bottom','tn.v3':'See 3-note shapes →','tn.board':'Chord tones and tensions on the neck',
+ 'tn.rung':(d,p)=>`${d}th = the ${p} an octave up`,'pl.2':'2nd','pl.4':'4th','pl.6':'6th','tn.none':'None','tn.ct':'Chord tone','tn.no7':'A triad has no 7th',
+ 'tn.div':b=>`↑ Tensions / ↓ Chord tones (${b})`,
+ 'st.o':'Usable','st.c':'Use with care','st.a':'Avoid note',
+ 'iv.1':'minor 2nd','iv.2':'major 2nd','iv.3':'minor 3rd','iv.4':'major 3rd','iv.5':'perfect 4th','iv.6':'augmented 4th','iv.7':'perfect 5th',
+ 'tn.sum':(nm,b,n,ts,tot)=>`<b>${nm}</b> is ${b} (${n} notes) plus ${ts}: ${tot} notes in all.`,'tn.sum0':(nm,n)=>`<b>${nm}</b> has no tensions added: ${n} notes. Pick anything other than "None" on an upper rung to add one.`,
+ 'tn.many':t=>`Fretting all ${t} notes on guitar is hard, so players usually drop the 5th or the root.`,'tn.many13':' 13th chords often drop the 11th or 9th too.','tn.avoidw':'Contains an avoid note. It will sound muddy as a chord.',
+ 'tn.six':'Without a 7th, the 13th is written as "6" (C6, C6/9).','tn.add':'Without a 7th, the 9th is written as "add9".',
+ 'tn.noshape':'Too many notes to find a shape with the root in the bass. Try the 3-note voicings tab for reduced shapes.',
+ 'r.d':l=>`Same pitch as the chord tone ${l}, so it isn't used as a tension.`,'r.a':l=>`Sits a half step above the chord tone ${l} (a ♭9 interval) and clashes. Fine as a passing note in a melody.`,'r.a0':'Clashes strongly with the chord.',
+ 'r.c13b':'The minor 6th color pulls the chord toward an Aeolian sound. Use it where that fits.','r.c11s':"Doesn't clash with chord tones, but is an uncommon color on this chord.",'r.c13':'Combined with the ♭5 it tends to sound unstable.','r.c':"Usable, but tends to fight the chord's character.",
+ 'r.alt':'An altered tension. Only dominant 7th chords take these; the extra tension pushes harder toward the next chord. A blues and jazz staple.','r.o':"Doesn't clash with any chord tone and enriches the sound.",
+ 'v3.h':'3-note voicings','v3.lead':'Drop notes from seventh and tension chords so they fit on three adjacent strings. See which notes were dropped, why, and what the remaining three notes spell on their own.','v3.pats':'Omission patterns (most common first)','v3.bass':'Add the root in the bass when playing',
+ 'g.0':'Standard','g.1':'Usable','g.2':'Ambiguous','pn.shell':'Shell','pn.rootless':'Rootless','v3.omit':'Omit: ',
+ 'role.R':'root','role.P5':'perfect 5th','role.third':'3rd','role.sus':"sus4's 4th",'role.sev':'7th','role.alt5':'altered 5th','role.T':'tension',
+ 'v3.play':(k,o)=>`Play <b>${k}</b>; omit <b>${o}</b>.`,
+ 'w.P5':'The perfect 5th is already present in the overtones, so dropping it barely changes the sound. It is the first note to omit.','w.R':'The bass or the surrounding chords supply the root (a rootless voicing). In a band the bassist usually plays it.','w.third':'The 3rd decides major or minor. Without it the chord turns ambiguous.','w.sus':'The 4th is what makes it a sus4. Without it, it no longer sounds suspended.',
+ 'w.sev':l=>`${l} sets the chord type (7th, maj7, 6th…). Without it, the chord easily sounds like a different one.`,'w.alt5':l=>`${l} is this chord's signature note. Without it, it drifts toward another chord.`,'w.T9':'In this chord the 13th is the focus, so the 9th can go.','w.T':l=>`${l} gives the chord its name. Without it, that tension's color is gone.`,
+ 'v3.omitL':l=>`Omit ${l}: `,'v3.eq':e=>`On their own, these three notes also spell <span class="eq">${e}</span>.`,'v3.eqR':(r,n)=>` With the root omitted, it sounds like ${n} once the bass plays ${r}.`,'v3.eqC':n=>` Context and the bass make it heard as ${n}.`,
+ 'v3.low':b=>`Lowest note in this position: ${b}.`,'v3.chip':(f,b)=>`${f}fr bass ${b}`,
+ 'ch.h':'Chords','ch.lead':'Look up shapes and chord tones by name. Pick notes on the neck below to identify a chord.','ch.play':'▶ Play chord tones','ch.board':'Chord tones on the neck','ch.noshape':'No shape found in this range.','ch.playAria':n=>`Play ${n}`,
+ 'id.h':'Chord finder','id.hint':'Tap a fret on each string. The leftmost column is the open string. Tap the same spot again to mute it.','id.clear':'Clear','id.notes':'Notes: ','id.pick':'Pick some notes','id.none':'No match',
+ 'sc.h':'Scales','sc.lead':'Pick a key and scale to see every note up to the 15th fret. Seven-note scales also list their diatonic chords.','sc.play':'▶ Play ascending','sc.diat':'Diatonic chords (tap to open in Chords)',
+ 'scn.pm':'Minor pentatonic','scn.pM':'Major pentatonic','scn.blues':'Blues','scn.major':'Major','scn.minor':'Natural minor','scn.hm':'Harmonic minor','scn.mm':'Melodic minor','scn.dor':'Dorian','scn.phr':'Phrygian','scn.lyd':'Lydian','scn.mix':'Mixolydian','scn.loc':'Locrian',
+}};
+const store={get(k,d){try{const v=localStorage.getItem('fn.'+k);return v==null?d:v}catch(e){return d}},set(k,v){try{localStorage.setItem('fn.'+k,v)}catch(e){}}};
+const S={lang:store.get('lang','ja'),acc:store.get('acc','s'),lab:store.get('lab','deg'),
+  tri:{root:0,q:'maj',set:3,inv:'all',idx:0},
+  tn:{root:9,base:'7',sel:{n9:'9',n11:null,n13:null}},
+  v3:{root:9,type:'7',pat:0,set:3,idx:0,bass:true},
+  ch:{root:0,type:'',sel:[-1,3,2,0,1,0]},
+  sc:{root:9,type:'pm'},
+  tu:{tuning:'std',a4:440}};
+function t(k,...a){const d=I18N[S.lang]||I18N.ja;let v=d[k]!==undefined?d[k]:I18N.ja[k];if(v===undefined)return k;return typeof v==='function'?v(...a):v}
+const $=id=>document.getElementById(id);
+function applyStatic(){
+  document.documentElement.lang=S.lang;
+  document.querySelectorAll('[data-t]').forEach(el=>el.textContent=t(el.dataset.t));
+  document.querySelectorAll('[data-ta]').forEach(el=>el.setAttribute('aria-label',t(el.dataset.ta)));
+}
+
+/* ================= theory ================= */
+const NS=['C','C♯','D','D♯','E','F','F♯','G','G♯','A','A♯','B'];
+const NF=['C','D♭','D','E♭','E','F','G♭','G','A♭','A','B♭','B'];
+const STD=[40,45,50,55,59,64];
+const FRETS=15;
+const nn=pc=>(S.acc==='f'?NF:NS)[((pc%12)+12)%12];
+const oct=m=>Math.floor(m/12)-1;
+const QUAL={maj:{s:'',iv:[0,4,7],lab:['R','3','5']},min:{s:'m',iv:[0,3,7],lab:['R','♭3','5']},dim:{s:'dim',iv:[0,3,6],lab:['R','♭3','♭5']},aug:{s:'aug',iv:[0,4,8],lab:['R','3','♯5']}};
+const CHORDS=[
+ {k:'',iv:[0,4,7],lab:['R','3','5']},{k:'m',iv:[0,3,7],lab:['R','♭3','5']},
+ {k:'7',iv:[0,4,7,10],lab:['R','3','5','♭7'],opt:[7]},{k:'M7',iv:[0,4,7,11],lab:['R','3','5','7'],opt:[7]},
+ {k:'m7',iv:[0,3,7,10],lab:['R','♭3','5','♭7'],opt:[7]},{k:'mM7',iv:[0,3,7,11],lab:['R','♭3','5','7'],opt:[7]},
+ {k:'m7♭5',iv:[0,3,6,10],lab:['R','♭3','♭5','♭7']},{k:'dim',iv:[0,3,6],lab:['R','♭3','♭5']},
+ {k:'dim7',iv:[0,3,6,9],lab:['R','♭3','♭5','♭♭7']},{k:'aug',iv:[0,4,8],lab:['R','3','♯5']},
+ {k:'sus4',iv:[0,5,7],lab:['R','4','5']},{k:'sus2',iv:[0,2,7],lab:['R','2','5']},
+ {k:'7sus4',iv:[0,5,7,10],lab:['R','4','5','♭7'],opt:[7]},{k:'6',iv:[0,4,7,9],lab:['R','3','5','6'],opt:[7]},
+ {k:'m6',iv:[0,3,7,9],lab:['R','♭3','5','6'],opt:[7]},{k:'add9',iv:[0,4,7,14],lab:['R','3','5','9']},
+ {k:'9',iv:[0,4,7,10,14],lab:['R','3','5','♭7','9'],opt:[7]},{k:'M9',iv:[0,4,7,11,14],lab:['R','3','5','7','9'],opt:[7]},
+ {k:'m9',iv:[0,3,7,10,14],lab:['R','♭3','5','♭7','9'],opt:[7]},{k:'5',iv:[0,7],lab:['R','5']},
+];
+const chordByK=k=>CHORDS.find(c=>c.k===k);
+const SCALES=[
+ {k:'pm',iv:[0,3,5,7,10]},{k:'pM',iv:[0,2,4,7,9]},{k:'blues',iv:[0,3,5,6,7,10]},
+ {k:'major',iv:[0,2,4,5,7,9,11]},{k:'minor',iv:[0,2,3,5,7,8,10]},{k:'hm',iv:[0,2,3,5,7,8,11]},{k:'mm',iv:[0,2,3,5,7,9,11]},
+ {k:'dor',iv:[0,2,3,5,7,9,10]},{k:'phr',iv:[0,1,3,5,7,8,10]},{k:'lyd',iv:[0,2,4,6,7,9,11]},{k:'mix',iv:[0,2,4,5,7,9,10]},{k:'loc',iv:[0,1,3,5,6,8,10]},
+];
+const DEG=['1','♭2','2','♭3','3','4','♭5','5','♭6','6','♭7','7'];
+const scaleDeg=(sc,i)=>(i===6&&sc.k==='lyd')?'♯4':DEG[i];
+function roleOf(l){if(l==='R'||l==='1')return 'r';if(/^[♭♯]?3$/.test(l))return 't';if(/^[♭♯]?5$/.test(l))return 'f';return 'x'}
+const ROLEC={r:'var(--root)',t:'var(--third)',f:'var(--fifth)',x:'var(--other)'};
+function legend(el,items){el.innerHTML=items.map(([c,k,dash])=>`<span><i style="${dash?'border:1.5px dashed var(--muted);background:transparent':'background:'+c}"></i>${t(k)}</span>`).join('')}
+
+/* ================= audio ================= */
+let AC=null;const bufCache=new Map();
+function ac(){if(!AC)AC=new (window.AudioContext||window.webkitAudioContext)();if(AC.state==='suspended')AC.resume();return AC}
+const mf=m=>S.tu.a4*Math.pow(2,(m-69)/12);
+function ksBuf(f){
+  const key=f.toFixed(2);if(bufCache.has(key))return bufCache.get(key);
+  const ctx=ac(),sr=ctx.sampleRate,len=Math.floor(sr*2.6),N=Math.max(2,Math.round(sr/f));
+  const b=ctx.createBuffer(1,len,sr),o=b.getChannelData(0),d=new Float32Array(N);
+  let prev=0;for(let i=0;i<N;i++){const r=Math.random()*2-1;prev=prev*.5+r*.5;d[i]=prev}
+  const decay=f>500?.990:f>250?.995:.997;
+  for(let i=0;i<len;i++){const j=i%N,y=d[j];o[i]=y;d[j]=.5*(y+d[(j+1)%N])*decay}
+  bufCache.set(key,b);return b}
+function pluck(m,delay=0,vol=.5){const ctx=ac(),src=ctx.createBufferSource(),g=ctx.createGain();src.buffer=ksBuf(mf(m));g.gain.value=vol;src.connect(g).connect(ctx.destination);src.start(ctx.currentTime+delay)}
+const strum=(ms,gap=.035)=>ms.forEach((m,i)=>pluck(m,i*gap,.38));
+const arp=(ms,gap=.32)=>ms.forEach((m,i)=>pluck(m,i*gap,.5));
+
+/* ================= neck drawings ================= */
+const G={padL:30,open:30,fw:50,top:16,sp:24};
+const fx=f=>f===0?G.padL+G.open/2-2:G.padL+G.open+(f-.5)*G.fw;
+const sy=s=>G.top+(5-s)*G.sp;
+function boardSVG(dots,opts={}){
+  const W=G.padL+G.open+FRETS*G.fw+10,H=G.top+5*G.sp+30,nut=G.padL+G.open,bot=G.top+5*G.sp;
+  let h=`<svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" role="img" aria-label="${t('board')}">`;
+  h+=`<rect x="${nut}" y="${G.top-9}" width="${FRETS*G.fw+4}" height="${5*G.sp+18}" rx="3" fill="var(--wood)"/>`;
+  [3,5,7,9,15].forEach(f=>h+=`<circle cx="${nut+(f-.5)*G.fw}" cy="${G.top+2.5*G.sp}" r="5" fill="var(--inlay)" opacity=".55"/>`);
+  [1.5,3.5].forEach(k=>h+=`<circle cx="${nut+11.5*G.fw}" cy="${G.top+k*G.sp}" r="5" fill="var(--inlay)" opacity=".55"/>`);
+  for(let i=1;i<=FRETS;i++)h+=`<line x1="${nut+i*G.fw}" y1="${G.top-9}" x2="${nut+i*G.fw}" y2="${bot+9}" stroke="var(--fretwire)" stroke-width="2"/>`;
+  h+=`<rect x="${nut-4}" y="${G.top-9}" width="6" height="${5*G.sp+18}" fill="var(--nut)"/>`;
+  for(let s=0;s<6;s++){
+    h+=`<line x1="${G.padL+4}" y1="${sy(s)}" x2="${nut+FRETS*G.fw+4}" y2="${sy(s)}" stroke="var(--stringc)" stroke-width="${(2.4-s*.32).toFixed(2)}"/>`;
+    h+=`<text x="8" y="${sy(s)+4}" font-size="11" fill="var(--muted)">${nn(STD[s])}</text>`}
+  for(let i=1;i<=FRETS;i++){const em=[3,5,7,9,12,15].includes(i);h+=`<text x="${nut+(i-.5)*G.fw}" y="${H-6}" text-anchor="middle" font-size="${em?11:10}" fill="${em?'var(--fg)':'var(--muted)'}"${em?' font-weight="600"':''}>${i}</text>`}
+  if(opts.mutes)opts.mutes.forEach(s=>h+=`<text x="${fx(0)}" y="${sy(s)+4}" text-anchor="middle" font-size="13" fill="var(--muted)">×</text>`);
+  dots.forEach(d=>{
+    const x=fx(d.f),y=sy(d.s),c=ROLEC[d.role]||ROLEC.x,fs=d.label.length>2?8.5:10;
+    if(d.hollow){h+=`<g opacity=".9"><circle cx="${x}" cy="${y}" r="10" fill="var(--wood)" stroke="${c}" stroke-width="1.6" stroke-dasharray="3 2"/><text x="${x}" y="${y+3.6}" text-anchor="middle" font-size="${fs}" fill="var(--nut)">${d.label}</text></g>`;return}
+    h+=`<g opacity="${d.faint?.22:1}"><circle cx="${x}" cy="${y}" r="10" fill="${c}"${d.ring?' stroke="var(--fg)" stroke-width="2"':''}/><text x="${x}" y="${y+3.6}" text-anchor="middle" font-size="${fs}" font-weight="600" fill="var(--on-dot)">${d.label}</text></g>`});
+  if(opts.click){for(let s=0;s<6;s++)for(let f=0;f<=FRETS;f++){
+    const x0=f===0?G.padL:nut+(f-1)*G.fw,w=f===0?G.open:G.fw;
+    h+=`<rect data-s="${s}" data-f="${f}" x="${x0}" y="${sy(s)-G.sp/2}" width="${w}" height="${G.sp}" fill="transparent" style="cursor:pointer"><title>${t('cell',6-s,f)}</title></rect>`}}
+  return h+'</svg>'}
+/* horizontal chord box: low frets left, string 1 on top */
+function boxSVG(frets,root,ch){
+  const fr=frets.filter(f=>f>0),mx=fr.length?Math.max(...fr):0,mn=fr.length?Math.min(...fr):0;
+  const base=mx<=4?1:mn,L=22,T=10,cw=26,rs=15,W=L+5*cw+8,H=T+5*rs+20,ry=s=>T+(5-s)*rs;
+  let h=`<svg width="${W}" height="${H}" viewBox="0 0 ${W} ${H}" aria-hidden="true">`;
+  for(let i=0;i<=5;i++)h+=`<line x1="${L+i*cw}" y1="${T}" x2="${L+i*cw}" y2="${T+5*rs}" stroke="var(--muted)" stroke-width="${i===0&&base===1?4:1}"/>`;
+  for(let s=0;s<6;s++)h+=`<line x1="${L}" y1="${ry(s)}" x2="${L+5*cw}" y2="${ry(s)}" stroke="var(--muted)" stroke-width="1"/>`;
+  for(let i=0;i<5;i++)h+=`<text x="${L+(i+.5)*cw}" y="${H-4}" text-anchor="middle" font-size="9.5" fill="var(--muted)"${i===0&&base>1?' font-weight="600"':''}>${base+i}</text>`;
+  const fd=frets.map((f,s)=>({f,s})).filter(o=>o.f>0);
+  if(fd.length>4){const at=fd.filter(o=>o.f===mn);if(at.length>=2){const a=at[0].s,x=L+(mn-base+.5)*cw;h+=`<rect x="${x-8}" y="${ry(5)-8}" width="16" height="${ry(a)-ry(5)+16}" rx="8" fill="var(--fg)" opacity=".18"/>`}}
+  frets.forEach((f,s)=>{
+    const y=ry(s);
+    if(f<0){h+=`<text x="${L-11}" y="${y+4}" text-anchor="middle" font-size="11" fill="var(--muted)">×</text>`;return}
+    const m=STD[s]+f,rel=((m-root)%12+12)%12,idx=ch.iv.findIndex(i=>i%12===rel),lab=idx>=0?ch.lab[idx]:'?',role=roleOf(lab),txt=S.lab==='deg'?lab:nn(m);
+    if(f===0)h+=`<circle cx="${L-11}" cy="${y}" r="5" fill="none" stroke="${ROLEC[role]}" stroke-width="1.6"/>`;
+    else{const x=L+(f-base+.5)*cw;h+=`<circle cx="${x}" cy="${y}" r="7.5" fill="${ROLEC[role]}"/><text x="${x}" y="${y+3}" text-anchor="middle" font-size="${txt.length>2?6.5:8}" font-weight="600" fill="var(--on-dot)">${txt}</text>`}});
+  return h+'</svg>'}
+
+/* ================= helpers ================= */
+function chips(el,items,cur,on,mono){
+  el.innerHTML='';items.forEach(it=>{const b=document.createElement('button');b.type='button';b.className='chip'+(mono?' mono':'');b.textContent=it.t;b.setAttribute('aria-pressed',String(it.v===cur));b.onclick=()=>on(it.v);el.appendChild(b)})}
+const rootItems=()=>Array.from({length:12},(_,i)=>({v:i,t:nn(i)}));
+const noteCells=(el,list)=>el.innerHTML=list.map(o=>`<div class="note${o.omit?' omit':''}"><b>${o.n}</b><small>${o.d}</small></div>`).join('');
+const SETS=()=>[{v:3,t:t('set','1-2-3')},{v:2,t:t('set','2-3-4')},{v:1,t:t('set','3-4-5')},{v:0,t:t('set','4-5-6')}];
+const scrollBoard=(id,f)=>{$(id).scrollTo({left:Math.max(0,fx(Math.max(0,f))-60),behavior:'smooth'})};
+const fretStr=fr=>fr.map(f=>f<0?'x':f).join(' ');
+const LEG_CHORD=[['var(--root)','lg.root'],['var(--third)','lg.3'],['var(--fifth)','lg.5'],['var(--other)','lg.7']];
+
+/* ================= TRIADS ================= */
+function triadVoicings(){
+  const {root,q,set,inv}=S.tri,iv=QUAL[q].iv,strs=[set,set+1,set+2],out=[];
+  for(let a=0;a<=FRETS;a++)for(let b=0;b<=FRETS;b++)for(let c=0;c<=FRETS;c++){
+    const f=[a,b,c];if(Math.max(a,b,c)-Math.min(a,b,c)>4)continue;
+    const idx=f.map((x,k)=>iv.indexOf((((STD[strs[k]]+x-root)%12)+12)%12));
+    if(idx.includes(-1)||new Set(idx).size<3)continue;if(inv!=='all'&&idx[0]!==+inv)continue;
+    out.push({f,inv:idx[0],mn:Math.min(a,b,c),strs})}
+  return out.sort((x,y)=>x.mn-y.mn||x.inv-y.inv)}
+function renderTri(){
+  const c=S.tri,Q=QUAL[c.q];
+  chips($('triRoot'),rootItems(),c.root,v=>{c.root=v;c.idx=0;renderTri()});
+  chips($('triQ'),Object.keys(QUAL).map(k=>({v:k,t:t('q.'+k)})),c.q,v=>{c.q=v;c.idx=0;renderTri()});
+  chips($('triSet'),SETS(),c.set,v=>{c.set=v;c.idx=0;renderTri()});
+  chips($('triInv'),[{v:'all',t:t('c.all')},{v:'0',t:t('inv.0')},{v:'1',t:t('inv.1')},{v:'2',t:t('inv.2')}],c.inv,v=>{c.inv=v;c.idx=0;renderTri()});
+  $('triName').textContent=nn(c.root)+Q.s;
+  noteCells($('triNotes'),Q.iv.map((i,k)=>({n:nn(c.root+i),d:Q.lab[k]})));
+  const vs=triadVoicings();if(c.idx>=vs.length)c.idx=0;const cur=vs[c.idx];
+  $('triCount').textContent=vs.length?`${c.idx+1} / ${vs.length}`:'0 / 0';
+  const dots=[],strs=[c.set,c.set+1,c.set+2];
+  strs.forEach(s=>{for(let f=0;f<=FRETS;f++){const k=Q.iv.indexOf((((STD[s]+f-c.root)%12)+12)%12);if(k<0)continue;
+    const on=cur&&cur.f[strs.indexOf(s)]===f;dots.push({s,f,role:roleOf(Q.lab[k]),label:S.lab==='deg'?Q.lab[k]:nn(STD[s]+f),faint:!on,ring:on})}});
+  dots.sort((a,b)=>(a.faint?0:1)-(b.faint?0:1));
+  $('triBoard').innerHTML=boardSVG(dots);
+  const L=$('triList');L.innerHTML='';
+  vs.forEach((v,i)=>{const b=document.createElement('button');b.type='button';b.className='chip mono';b.setAttribute('aria-pressed',String(i===c.idx));b.textContent=`${v.mn}fr ${t('inv.'+v.inv)}`;b.onclick=()=>{c.idx=i;renderTri();scrollBoard('triBoard',v.mn)};L.appendChild(b)});
+  legend($('triLegend'),LEG_CHORD.slice(0,3));
+}
+function triStep(d){const vs=triadVoicings();if(!vs.length)return;S.tri.idx=(S.tri.idx+d+vs.length)%vs.length;renderTri();scrollBoard('triBoard',vs[S.tri.idx].mn)}
+$('triPrev').onclick=()=>triStep(-1);$('triNext').onclick=()=>triStep(1);
+$('triPlay').onclick=()=>{const v=triadVoicings()[S.tri.idx];if(v)strum(v.strs.map((s,k)=>STD[s]+v.f[k]),.06)};
+
+/* ================= CHORD VOICING SEARCH ================= */
+function chordVoicings(root,ch){
+  const pcs=ch.iv.map(i=>(root+i)%12),set=new Set(pcs),opt=new Set((ch.opt||[]).map(i=>(root+i)%12)),req=pcs.filter(p=>!opt.has(p));
+  const minStr=ch.k==='5'?2:4,best=new Map(),cur=[];
+  const evalV=(fr,w)=>{
+    const snd=[];fr.forEach((f,s)=>{if(f>=0)snd.push(s)});if(snd.length<minStr)return;
+    for(let i=1;i<snd.length;i++)if(snd[i]!==snd[i-1]+1)return;
+    const fd=snd.filter(s=>fr[s]>0),mn=fd.length?Math.min(...fd.map(s=>fr[s])):0;
+    if(fd.length&&mn!==w)return;if(!fd.length&&w!==1)return;
+    if((STD[snd[0]]+fr[snd[0]])%12!==root)return;
+    const have=new Set(snd.map(s=>(STD[s]+fr[s])%12));if(!req.every(p=>have.has(p)))return;
+    let fingers=fd.length,barre=false;const opens=snd.length-fd.length;
+    if(fingers>4){if(opens)return;fingers=fd.length-fd.filter(s=>fr[s]===mn).length+1;barre=true;if(fingers>4)return}
+    let score=-snd.length*1.2+fingers*.4+(barre?.4:0);[...opt].forEach(p=>{if(have.has(p))score-=.5});if(mn>4)score+=opens;
+    const pos=fd.length?mn:0,prev=best.get(pos);if(!prev||score<prev.score)best.set(pos,{frets:fr.slice(),score,pos})};
+  for(let w=1;w<=12;w++){
+    const opts=STD.map(tn=>{const o=[-1];if(set.has(tn%12))o.push(0);for(let f=w;f<=w+3;f++)if(set.has((tn+f)%12))o.push(f);return o});
+    const rec=i=>{if(i===6){evalV(cur,w);return}for(const f of opts[i]){cur[i]=f;rec(i+1)}};rec(0)}
+  return [...best.values()].sort((a,b)=>a.pos-b.pos).slice(0,9)}
+function renderBoxes(el,root,ch,name,emptyKey){
+  const vs=chordVoicings(root,ch);el.innerHTML='';
+  if(!vs.length){el.innerHTML=`<p class="hint">${t(emptyKey)}</p>`;return}
+  vs.forEach(v=>{const b=document.createElement('button');b.type='button';b.className='box';
+    b.innerHTML=boxSVG(v.frets,root,ch)+`<span class="cap">${fretStr(v.frets)}</span>`;
+    b.setAttribute('aria-label',t('ch.playAria',`${name} ${fretStr(v.frets)}`));
+    b.onclick=()=>strum(v.frets.map((f,s)=>f<0?null:STD[s]+f).filter(x=>x!=null));el.appendChild(b)})}
+function neckDots(root,iv,lab){const dots=[];for(let s=0;s<6;s++)for(let f=0;f<=FRETS;f++){const rel=(((STD[s]+f-root)%12)+12)%12,k=iv.findIndex(i=>i%12===rel);if(k<0)continue;dots.push({s,f,role:roleOf(lab[k]),label:S.lab==='deg'?lab[k]:nn(STD[s]+f)})}return dots}
+
+/* ================= TENSIONS ================= */
+const TBASE=[
+ {k:'',n:'b.maj',iv:[0,4,7],lab:['R','3','5'],triad:true},
+ {k:'m',n:'b.min',iv:[0,3,7],lab:['R','♭3','5'],triad:true},
+ {k:'7',iv:[0,4,7,10],lab:['R','3','5','♭7']},{k:'M7',iv:[0,4,7,11],lab:['R','3','5','7']},
+ {k:'m7',iv:[0,3,7,10],lab:['R','♭3','5','♭7']},{k:'mM7',iv:[0,3,7,11],lab:['R','♭3','5','7']},
+ {k:'m7♭5',iv:[0,3,6,10],lab:['R','♭3','♭5','♭7']},{k:'7sus4',iv:[0,5,7,10],lab:['R','4','5','♭7']},
+];
+const TGROUP=[
+ {g:'n13',deg:'13',pl:'pl.6',opts:[{l:'♭13',i:20},{l:'13',i:21}]},
+ {g:'n11',deg:'11',pl:'pl.4',opts:[{l:'11',i:17},{l:'♯11',i:18}]},
+ {g:'n9',deg:'9',pl:'pl.2',opts:[{l:'♭9',i:13},{l:'9',i:14},{l:'♯9',i:15}]},
+];
+const TSTAT={
+ '':{'♭9':'a','9':'o','♯9':'c','11':'a','♯11':'o','♭13':'a','13':'o'},
+ 'm':{'♭9':'a','9':'o','♯9':'d','11':'o','♯11':'c','♭13':'c','13':'o'},
+ '7':{'♭9':'o','9':'o','♯9':'o','11':'a','♯11':'o','♭13':'o','13':'o'},
+ 'M7':{'♭9':'a','9':'o','♯9':'c','11':'a','♯11':'o','♭13':'a','13':'o'},
+ 'm7':{'♭9':'a','9':'o','♯9':'d','11':'o','♯11':'c','♭13':'c','13':'o'},
+ 'mM7':{'♭9':'a','9':'o','♯9':'d','11':'o','♯11':'c','♭13':'c','13':'o'},
+ 'm7♭5':{'♭9':'a','9':'o','♯9':'d','11':'o','♯11':'d','♭13':'o','13':'c'},
+ '7sus4':{'♭9':'o','9':'o','♯9':'c','11':'d','♯11':'c','♭13':'o','13':'o'},
+};
+const STSYM={o:['ok','◎'],c:['caution','△'],a:['avoid','×'],d:['avoid','—']};
+const TORDER=['♭9','9','♯9','11','♯11','♭13','13'];
+const tnBase=()=>TBASE.find(b=>b.k===S.tn.base);
+const baseLabel=b=>b.n?t(b.n):b.k;
+function tnSelected(){const out=[];['n9','n11','n13'].forEach(g=>{const l=S.tn.sel[g];if(!l)return;const o=TGROUP.find(x=>x.g===g).opts.find(x=>x.l===l);if(o)out.push(o)});return out}
+function tnReason(b,o,st){
+  const tpc=o.i%12;
+  if(st==='d'){const k=b.iv.findIndex(i=>i%12===tpc);return t('r.d',b.lab[k])}
+  if(st==='a'){const k=b.iv.findIndex(i=>((tpc-i%12)+12)%12===1);return k>=0?t('r.a',b.lab[k]):t('r.a0')}
+  if(st==='c')return o.l==='♭13'?t('r.c13b'):o.l==='♯11'?t('r.c11s'):o.l==='13'?t('r.c13'):t('r.c');
+  if(b.k==='7'&&['♭9','♯9','♭13','♯11'].includes(o.l))return t('r.alt');
+  return t('r.o')}
+function tnName(){
+  const b=tnBase(),sel=tnSelected().map(o=>o.l),N=sel.filter(l=>['9','11','13'].includes(l));let sym=b.k,implied=[];
+  if(b.triad){
+    if(N.includes('13')){sym=b.k+'6'+(N.includes('9')?'/9':'');implied=N.includes('9')?['13','9']:['13']}
+    else if(N.includes('9')){sym=b.k+'add9';implied=['9']}
+    else if(N.includes('11')){sym=b.k+'add11';implied=['11']}
+  }else if(['7','M7','m7','mM7'].includes(b.k)&&N.includes('9')){
+    const top=N.includes('13')?'13':N.includes('11')?'11':'9';sym=b.k.replace('7',top);implied=['9',top];
+    if(top==='13'&&b.k.startsWith('m')&&N.includes('11'))implied.push('11')}
+  else if(b.k==='7sus4'&&N.includes('9')){const top=N.includes('13')?'13':'9';sym=top+'sus4';implied=['9',top]}
+  const extra=sel.filter(l=>!implied.includes(l)).sort((x,y)=>TORDER.indexOf(x)-TORDER.indexOf(y));
+  const full=sym+(extra.length?'('+extra.join(',')+')':'');
+  return {sym:full,full:nn(S.tn.root)+full}}
+function renderTn(){
+  const c=S.tn,b=tnBase(),st=TSTAT[b.k];
+  chips($('tnRoot'),rootItems(),c.root,v=>{c.root=v;renderTn()});
+  chips($('tnBase'),TBASE.map(x=>({v:x.k,t:baseLabel(x)})),c.base,v=>{c.base=v;['n9','n11','n13'].forEach(g=>{if(c.sel[g]&&TSTAT[v][c.sel[g]]==='d')c.sel[g]=null});renderTn()});
+  // rungs bottom -> top
+  const rungs=b.iv.map((i,k)=>({deg:b.lab[k],i,ct:true}));
+  if(b.triad)rungs.push({deg:'7',i:10,no7:true});
+  [...TGROUP].reverse().forEach(g=>{const l=c.sel[g.g],o=l?g.opts.find(x=>x.l===l):g.opts.find(x=>x.l===g.deg);rungs.push({deg:l||g.deg,i:o.i,g,empty:!l})});
+  const firstT=rungs.findIndex(r=>r.g);let h='';
+  for(let k=rungs.length-1;k>=0;k--){
+    const r=rungs[k];
+    if(r.g){
+      const g=r.g;
+      h+=`<div class="rung tension${r.empty?' empty':''}"><span class="deg">${r.deg}</span><span class="nm">${r.empty?'—':nn(c.root+r.i)}</span><div class="info">${t('tn.rung',g.deg,t(g.pl))}<div class="tsel" role="group">`+
+        `<button type="button" class="tchip none" data-g="${g.g}" data-l="" aria-pressed="${!c.sel[g.g]}">${t('tn.none')}</button>`+
+        g.opts.map(o=>{const s=st[o.l],[cls,sym]=STSYM[s];return `<button type="button" class="tchip" data-g="${g.g}" data-l="${o.l}" aria-pressed="${c.sel[g.g]===o.l}"${s==='d'?' disabled':''} title="${tnReason(b,o,s)}"><b class="st ${cls}">${sym}</b>${o.l}</button>`}).join('')+`</div></div></div>`;
+    }else if(r.no7){
+      h+=`<div class="rung empty"><span class="deg">7</span><span class="nm">—</span><span class="info">${t('tn.no7')}</span></div>`;
+    }else{
+      h+=`<div class="rung"><span class="deg" style="color:${ROLEC[roleOf(r.deg)]}">${r.deg}</span><span class="nm">${nn(c.root+r.i)}</span><span class="info">${t('tn.ct')}</span></div>`;
+    }
+    if(k===firstT)h+=`<div class="divider">${t('tn.div',baseLabel(b))}</div>`;
+    else if(k>0)h+=(r.no7||rungs[k-1].no7)?'<div class="gap"></div>':`<div class="gap">${t('iv.'+(r.i-rungs[k-1].i))}</div>`;
+  }
+  $('tnLadder').innerHTML=h;
+  $('tnLadder').querySelectorAll('.tchip').forEach(btn=>btn.onclick=()=>{c.sel[btn.dataset.g]=btn.dataset.l||null;renderTn()});
+  const sel=tnSelected(),nm=tnName(),n=b.iv.length,tot=n+sel.length;
+  $('tnName').textContent=nm.full;
+  noteCells($('tnNotes'),[...b.iv.map((i,k)=>({n:nn(c.root+i),d:b.lab[k]})),...sel.map(o=>({n:nn(c.root+o.i),d:o.l}))]);
+  const baseName=nn(c.root)+(b.triad?(b.k||''):b.k)+(b.triad?` ${baseLabel(b)}`:'');
+  let w=`<div>${sel.length?t('tn.sum',nm.full,baseName,n,sel.map(o=>o.l).join(' + '),tot):t('tn.sum0',nm.full,n)}</div>`;
+  if(sel.length)w+='<ul>'+sel.map(o=>{const s=st[o.l];return `<li><b class="st ${STSYM[s][0]}">${STSYM[s][1]}</b> <b>${o.l} (${nn(c.root+o.i)})</b>: ${tnReason(b,o,s)}</li>`}).join('')+'</ul>';
+  if(b.triad&&sel.some(o=>o.l==='13'))w+=`<div class="small muted">${t('tn.six')}</div>`;
+  else if(b.triad&&sel.some(o=>o.l==='9'))w+=`<div class="small muted">${t('tn.add')}</div>`;
+  if(tot>=5)w+=`<div class="small muted">${t('tn.many',tot)}${tot>=6?t('tn.many13'):''}</div>`;
+  if(sel.some(o=>st[o.l]==='a'))w+=`<div class="small" style="color:var(--bad)">${t('tn.avoidw')}</div>`;
+  $('tnWhy').innerHTML=w;
+  const v3k=V3CH.find(x=>x.k===nm.sym),vb=$('tnV3');vb.hidden=!v3k;
+  vb.onclick=()=>{Object.assign(S.v3,{root:c.root,type:nm.sym,pat:0,idx:0});location.hash='#voicings'};
+  const iv=[...b.iv,...sel.map(o=>o.i)],lab=[...b.lab,...sel.map(o=>o.l)],L=sel.map(o=>o.l),opt=[7];
+  if((L.includes('13')||L.includes('♭13'))&&L.includes('9'))opt.push(14);
+  if(L.includes('11')&&L.includes('9'))opt.push(14);
+  if((L.includes('13')||L.includes('♭13'))&&L.includes('11'))opt.push(17);
+  const ch={k:'tn',iv,lab,opt};
+  renderBoxes($('tnBoxes'),c.root,ch,nm.full,'tn.noshape');
+  $('tnBoard').innerHTML=boardSVG(neckDots(c.root,iv,lab));
+  legend($('tnLegend'),LEG_CHORD);
+}
+$('tnArp').onclick=()=>{const c=S.tn,b=tnBase(),base=45+((c.root-9+12)%12);const ivs=[...b.iv,...tnSelected().map(o=>o.i)].sort((x,y)=>x-y);arp(ivs.map(i=>base+i),.3);setTimeout(()=>strum(ivs.map(i=>base+i),.02),ivs.length*300+250)};
+
+/* ================= 3-NOTE VOICINGS ================= */
+const V3CH=[
+ {k:'7',iv:[0,4,7,10],lab:['R','3','5','♭7']},{k:'M7',iv:[0,4,7,11],lab:['R','3','5','7']},
+ {k:'m7',iv:[0,3,7,10],lab:['R','♭3','5','♭7']},{k:'mM7',iv:[0,3,7,11],lab:['R','♭3','5','7']},
+ {k:'m7♭5',iv:[0,3,6,10],lab:['R','♭3','♭5','♭7']},{k:'dim7',iv:[0,3,6,9],lab:['R','♭3','♭5','♭♭7']},
+ {k:'6',iv:[0,4,7,9],lab:['R','3','5','6']},{k:'m6',iv:[0,3,7,9],lab:['R','♭3','5','6']},
+ {k:'7sus4',iv:[0,5,7,10],lab:['R','4','5','♭7']},{k:'add9',iv:[0,4,7,14],lab:['R','3','5','9']},
+ {k:'9',iv:[0,4,7,10,14],lab:['R','3','5','♭7','9']},{k:'m9',iv:[0,3,7,10,14],lab:['R','♭3','5','♭7','9']},
+ {k:'M9',iv:[0,4,7,11,14],lab:['R','3','5','7','9']},{k:'7(♭9)',iv:[0,4,7,10,13],lab:['R','3','5','♭7','♭9']},
+ {k:'7(♯9)',iv:[0,4,7,10,15],lab:['R','3','5','♭7','♯9']},{k:'13',iv:[0,4,7,10,14,21],lab:['R','3','5','♭7','9','13']},
+];
+function toneRole(l){if(l==='R')return 'R';if(l==='5')return 'P5';if(l==='3'||l==='♭3')return 'third';if(l==='4')return 'sus';if(l==='♭5'||l==='♯5')return 'alt5';if(['♭7','7','♭♭7','6'].includes(l))return 'sev';return 'T'}
+function toneCost(tn,ch){return {P5:1,R:2,third:6,sus:6,alt5:5,sev:5}[tn.role]??((tn.lab==='9'&&ch.lab.includes('13'))?3:4)}
+function whyText(tn,ch){
+  switch(tn.role){case 'P5':return t('w.P5');case 'R':return t('w.R');case 'third':return t('w.third');case 'sus':return t('w.sus');
+    case 'sev':return t('w.sev',tn.lab);case 'alt5':return t('w.alt5',tn.lab);default:return (tn.lab==='9'&&ch.lab.includes('13'))?t('w.T9'):t('w.T',tn.lab)}}
+function v3Tones(){const c=S.v3,ch=V3CH.find(x=>x.k===c.type);return {ch,tones:ch.iv.map((i,k)=>{const o={pc:(c.root+i)%12,lab:ch.lab[k]};o.role=toneRole(o.lab);o.cost=toneCost(o,ch);return o})}}
+function v3Patterns(){
+  const {tones}=v3Tones(),n=tones.length,out=[];
+  for(let a=0;a<n;a++)for(let b=a+1;b<n;b++)for(let c=b+1;c<n;c++){
+    const keep=[tones[a],tones[b],tones[c]],omit=tones.filter((_,i)=>i!==a&&i!==b&&i!==c);out.push({keep,omit,cost:omit.reduce((s,x)=>s+x.cost,0)})}
+  return out.sort((x,y)=>x.cost-y.cost).slice(0,6)}
+function patName(p){const r=p.omit.map(x=>x.role).sort().join(',');return r==='P5'?t('pn.shell'):(r==='R'||r==='P5,R')?t('pn.rootless'):''}
+const grade=p=>{const per=p.cost/Math.max(1,p.omit.length);return per<=2?0:per<=5?1:2};
+function v3Voicings(p){
+  const strs=[S.v3.set,S.v3.set+1,S.v3.set+2],out=[];
+  for(let a=0;a<=FRETS;a++)for(let b=0;b<=FRETS;b++)for(let c=0;c<=FRETS;c++){
+    const f=[a,b,c],mx=Math.max(a,b,c),mn=Math.min(a,b,c);if(mx-mn>4)continue;
+    const idx=f.map((x,k)=>p.keep.findIndex(o=>o.pc===(STD[strs[k]]+x)%12));
+    if(idx.includes(-1)||new Set(idx).size<3)continue;out.push({f,mn,mx,strs,bass:p.keep[idx[0]].lab})}
+  return out.sort((x,y)=>x.mn-y.mn)}
+function renderV3(){
+  const c=S.v3,{ch,tones}=v3Tones(),name=nn(c.root)+c.type;
+  chips($('v3Root'),rootItems(),c.root,v=>{c.root=v;c.idx=0;renderV3()});
+  chips($('v3Type'),V3CH.map(x=>({v:x.k,t:x.k})),c.type,v=>{c.type=v;c.pat=0;c.idx=0;renderV3()},true);
+  chips($('v3Set'),SETS(),c.set,v=>{c.set=v;c.idx=0;renderV3()});
+  const pats=v3Patterns();if(c.pat>=pats.length)c.pat=0;const p=pats[c.pat],P=$('v3Pats');P.innerHTML='';
+  pats.forEach((q,i)=>{const b=document.createElement('button');b.type='button';b.className='pat';b.setAttribute('aria-pressed',String(i===c.pat));
+    const g=grade(q),nm=patName(q);
+    b.innerHTML=`<span class="tag g${g}">${t('g.'+g)}${nm?' · '+nm:''}</span><span class="keep">${q.keep.map(x=>x.lab).join('・')}</span><span class="om">${t('v3.omit')}${q.omit.map(x=>`<s>${x.lab}</s>`).join(' ')} (${q.omit.map(x=>t('role.'+x.role)).join(', ')})</span>`;
+    b.onclick=()=>{c.pat=i;c.idx=0;renderV3()};P.appendChild(b)});
+  $('v3Name').textContent=name;
+  noteCells($('v3Notes'),tones.map(x=>({n:nn(x.pc),d:x.lab,omit:p.omit.some(o=>o.lab===x.lab)})));
+  const vs=v3Voicings(p);if(c.idx>=vs.length)c.idx=0;const cur=vs[c.idx];
+  $('v3Count').textContent=vs.length?`${c.idx+1} / ${vs.length}`:'0 / 0';
+  const eq=identify(p.keep.map(x=>48+x.pc)).map(x=>x.name).filter(x=>x!==name&&!x.startsWith(name+'/'));
+  let w=`<div>${t('v3.play',p.keep.map(x=>`${nn(x.pc)} (${x.lab})`).join('・'),p.omit.map(x=>`${nn(x.pc)} (${x.lab})`).join('・'))}</div><ul>`;
+  p.omit.forEach(x=>w+=`<li><b>${t('v3.omitL',x.lab)}</b>${whyText(x,ch)}</li>`);w+='</ul>';
+  if(eq.length)w+=`<div class="small">${t('v3.eq',eq.slice(0,3).join(' / '))}${p.omit.some(x=>x.role==='R')?t('v3.eqR',nn(c.root),name):t('v3.eqC',name)}</div>`;
+  if(cur)w+=`<div class="small muted">${t('v3.low',cur.bass)}</div>`;
+  $('v3Why').innerHTML=w;
+  const dots=[],strs=[c.set,c.set+1,c.set+2];
+  strs.forEach(s=>{for(let f=0;f<=FRETS;f++){const x=p.keep.find(k=>k.pc===(STD[s]+f)%12);if(!x)continue;const on=cur&&cur.f[strs.indexOf(s)]===f;dots.push({s,f,role:roleOf(x.lab),label:S.lab==='deg'?x.lab:nn(STD[s]+f),faint:!on,ring:on})}});
+  if(cur)strs.forEach(s=>{for(let f=Math.max(0,cur.mn-1);f<=Math.min(FRETS,cur.mx+1);f++){const x=p.omit.find(k=>k.pc===(STD[s]+f)%12);if(x)dots.push({s,f,role:roleOf(x.lab),label:S.lab==='deg'?x.lab:nn(STD[s]+f),hollow:true})}});
+  dots.sort((a,b)=>(a.faint?0:a.hollow?1:2)-(b.faint?0:b.hollow?1:2));
+  $('v3Board').innerHTML=boardSVG(dots);
+  const L=$('v3List');L.innerHTML='';
+  vs.forEach((v,i)=>{const b=document.createElement('button');b.type='button';b.className='chip mono';b.setAttribute('aria-pressed',String(i===c.idx));b.textContent=t('v3.chip',v.mn,v.bass);b.onclick=()=>{c.idx=i;renderV3();scrollBoard('v3Board',v.mn)};L.appendChild(b)});
+  $('v3Bass').checked=c.bass;
+  legend($('v3Legend'),[...LEG_CHORD,['','lg.omit',true]]);
+}
+function v3Step(d){const vs=v3Voicings(v3Patterns()[S.v3.pat]);if(!vs.length)return;S.v3.idx=(S.v3.idx+d+vs.length)%vs.length;renderV3();scrollBoard('v3Board',vs[S.v3.idx].mn)}
+$('v3Prev').onclick=()=>v3Step(-1);$('v3Next').onclick=()=>v3Step(1);
+$('v3Bass').onchange=e=>{S.v3.bass=e.target.checked};
+$('v3Play').onclick=()=>{const v=v3Voicings(v3Patterns()[S.v3.pat])[S.v3.idx];if(!v)return;
+  if(S.v3.bass)pluck(40+((S.v3.root-4+12)%12),0,.55);
+  v.strs.forEach((s,k)=>pluck(STD[s]+v.f[k],(S.v3.bass?.05:0)+k*.05,.4))};
+
+/* ================= CHORDS ================= */
+function renderChords(){
+  const c=S.ch,ch=chordByK(c.type),name=nn(c.root)+c.type;
+  chips($('chRoot'),rootItems(),c.root,v=>{c.root=v;renderChords()});
+  chips($('chType'),CHORDS.map(x=>({v:x.k,t:x.k===''?'(maj)':x.k})),c.type,v=>{c.type=v;renderChords()},true);
+  $('chName').textContent=name;
+  noteCells($('chNotes'),ch.iv.map((i,k)=>({n:nn(c.root+i),d:ch.lab[k]})));
+  renderBoxes($('chBoxes'),c.root,ch,name,'ch.noshape');
+  $('chBoard').innerHTML=boardSVG(neckDots(c.root,ch.iv,ch.lab));
+}
+$('chPlay').onclick=()=>{const c=S.ch,ch=chordByK(c.type);arp(ch.iv.map(i=>48+c.root+i))};
+function identify(midis){
+  if(midis.length<2)return [];
+  const sorted=[...midis].sort((a,b)=>a-b),bass=sorted[0]%12,pcs=[...new Set(sorted.map(m=>m%12))],res=[];
+  pcs.forEach(r=>{const rel=new Set(pcs.map(p=>(p-r+12)%12));
+    CHORDS.forEach((c,ci)=>{const full=new Set(c.iv.map(i=>i%12)),opt=new Set((c.opt||[]).map(i=>i%12));
+      if(![...rel].every(x=>full.has(x)))return;const missing=[...full].filter(x=>!rel.has(x));if(missing.some(x=>!opt.has(x)))return;
+      if(c.k==='5'&&rel.size!==2)return;
+      res.push({name:nn(r)+c.k+(r!==bass?'/'+nn(bass):''),root:r,score:(r===bass?0:5)+missing.length+ci*.01+c.iv.length*.05})})});
+  res.sort((a,b)=>a.score-b.score);const seen=new Set();return res.filter(x=>!seen.has(x.name)&&seen.add(x.name)).slice(0,5)}
+function renderId(){
+  const sel=S.ch.sel,midis=[],dots=[],mutes=[];
+  sel.forEach((f,s)=>{if(f<0)mutes.push(s);else midis.push(STD[s]+f)});
+  const ids=identify(midis),rootPc=ids.length?ids[0].root:null;
+  sel.forEach((f,s)=>{if(f<0)return;const m=STD[s]+f;let lab=nn(m),role='x';
+    if(rootPc!=null){const rel=((m-rootPc)%12+12)%12,d=rel===0?'R':DEG[rel];role=roleOf(d);if(S.lab==='deg')lab=d}
+    dots.push({s,f,role,label:lab})});
+  $('idBoard').innerHTML=boardSVG(dots,{click:true,mutes});
+  $('idName').textContent=ids.length?ids[0].name:(midis.length<2?'–':t('id.none'));
+  $('idNotes').textContent=midis.length?t('id.notes')+[...midis].sort((a,b)=>a-b).map(nn).join(' '):t('id.pick');
+  $('idAlts').innerHTML=ids.slice(1).map(x=>`<span>${x.name}</span>`).join('');
+}
+$('idBoard').addEventListener('click',e=>{const r=e.target.closest('rect[data-s]');if(!r)return;const s=+r.dataset.s,f=+r.dataset.f;S.ch.sel[s]=S.ch.sel[s]===f?-1:f;pluck(STD[s]+f,0,.4);renderId()});
+$('idClear').onclick=()=>{S.ch.sel=[-1,-1,-1,-1,-1,-1];renderId()};
+$('idPlay').onclick=()=>strum(S.ch.sel.map((f,s)=>f<0?null:STD[s]+f).filter(x=>x!=null));
+
+/* ================= SCALES ================= */
+const ROMAN=['I','II','III','IV','V','VI','VII'],MAJ=[0,2,4,5,7,9,11];
+function renderScales(){
+  const c=S.sc,sc=SCALES.find(x=>x.k===c.type);
+  chips($('scRoot'),rootItems(),c.root,v=>{c.root=v;renderScales()});
+  chips($('scType'),SCALES.map(x=>({v:x.k,t:t('scn.'+x.k)})),c.type,v=>{c.type=v;renderScales()});
+  $('scName').textContent=`${nn(c.root)} ${t('scn.'+sc.k)}`;
+  noteCells($('scNotes'),sc.iv.map(i=>({n:nn(c.root+i),d:scaleDeg(sc,i)})));
+  const dots=[];for(let s=0;s<6;s++)for(let f=0;f<=FRETS;f++){const rel=(((STD[s]+f-c.root)%12)+12)%12;if(!sc.iv.includes(rel))continue;const d=scaleDeg(sc,rel);dots.push({s,f,role:roleOf(d),label:S.lab==='deg'?d:nn(STD[s]+f)})}
+  $('scBoard').innerHTML=boardSVG(dots);
+  legend($('scLegend'),[['var(--root)','lg.tonic'],['var(--third)','lg.3'],['var(--fifth)','lg.5'],['var(--other)','lg.other']]);
+  const D=$('scDiat');D.innerHTML='';$('diatWrap').hidden=sc.iv.length!==7;
+  if(sc.iv.length!==7)return;
+  sc.iv.forEach((iv,i)=>{
+    const tones=[0,2,4,6].map(k=>sc.iv[(i+k)%7]),rp=(c.root+iv)%12,rel=tones.map(x=>((x-iv)%12+12)%12);
+    const m4=CHORDS.find(ch=>ch.iv.length===4&&ch.iv.every((x,k)=>x===rel[k])),m3=CHORDS.find(ch=>ch.iv.length===3&&ch.iv.every((x,k)=>x===rel[k]));
+    let r=ROMAN[i];if(rel[1]===3)r=r.toLowerCase();if(rel[2]===6)r+='°';if(rel[2]===8)r+='+';
+    const diff=iv-MAJ[i];r=(diff<0?'♭':diff>0?'♯':'')+r;
+    const k=m4?m4.k:(m3?m3.k:'');
+    const b=document.createElement('button');b.type='button';b.innerHTML=`<small>${r}</small><b>${nn(rp)}${k}</b>`;
+    b.onclick=()=>{S.ch.root=rp;S.ch.type=k;location.hash='#chords'};D.appendChild(b)});
+}
+$('scPlay').onclick=()=>{const c=S.sc,sc=SCALES.find(x=>x.k===c.type),base=40+((c.root-4+12)%12);arp([...sc.iv.map(i=>base+i),base+12],.26)};
+
+/* ================= TUNER ================= */
+const TUNINGS={std:[40,45,50,55,59,64],dropD:[38,45,50,55,59,64],half:[39,44,49,54,58,63],whole:[38,43,48,53,57,62],dadgad:[38,45,50,55,57,62],openG:[38,43,50,55,59,62],openD:[38,45,50,54,57,62]};
+function renderTuningSel(){const sel=$('tuningSel');sel.innerHTML='';Object.entries(TUNINGS).forEach(([k,m])=>{const o=document.createElement('option');o.value=k;o.textContent=t('tun.'+k)+(k==='dadgad'?'':t('paren',m.map(nn).join(' ')));sel.appendChild(o)});sel.value=S.tu.tuning}
+$('tuningSel').onchange=e=>{S.tu.tuning=e.target.value;renderStrBtns()};
+(function(){let h='';for(let c=-50;c<=50;c+=5){const x=200+c*3.8,big=c%10===0;h+=`<line x1="${x}" y1="${big?6:14}" x2="${x}" y2="${big?42:34}" stroke="#F2EBDD" stroke-opacity="${c===0?1:big?.6:.3}" stroke-width="${c===0?2:1}"/>`;if(big&&c!==0)h+=`<text x="${x}" y="60" text-anchor="middle" font-size="10" fill="#F2EBDD" fill-opacity=".6">${c>0?'+'+c:c}</text>`}$('ticks').innerHTML=h})();
+function renderStrBtns(){const el=$('strBtns');el.innerHTML='';TUNINGS[S.tu.tuning].forEach((m,s)=>{const b=document.createElement('button');b.type='button';b.className='strbtn';b.innerHTML=`<small>${t('tu.str',6-s)}</small><b>${nn(m)}<span style="font-size:10px;opacity:.6">${oct(m)}</span></b>`;b.onclick=()=>pluck(m,0,.6);el.appendChild(b)})}
+function setA4(v){S.tu.a4=Math.min(450,Math.max(430,v));$('a4v').textContent=S.tu.a4;bufCache.clear()}
+$('a4m').onclick=()=>setA4(S.tu.a4-1);$('a4p').onclick=()=>setA4(S.tu.a4+1);
+let micOn=false,analyser=null,buf=null,stream=null,hist=[],frame=0,lastSeen=0;
+function detect(x,sr){
+  let rms=0;for(let i=0;i<x.length;i++)rms+=x[i]*x[i];rms=Math.sqrt(rms/x.length);if(rms<.008)return null;
+  const n=x.length,minL=Math.floor(sr/1100),maxL=Math.min(Math.floor(sr/60),n-2),ns=new Float32Array(maxL+2);
+  for(let l=minL;l<=maxL+1;l++){let r=0,m=0;for(let i=0;i<n-l;i++){const a=x[i],b=x[i+l];r+=a*b;m+=a*a+b*b}ns[l]=m?2*r/m:0}
+  let l=minL;while(l<maxL&&ns[l]>0)l++;
+  const peaks=[];while(l<maxL){while(l<maxL&&ns[l]<=0)l++;let best=-1,bi=-1;while(l<maxL&&ns[l]>0){if(ns[l]>best){best=ns[l];bi=l}l++}if(bi>0)peaks.push(bi)}
+  if(!peaks.length)return null;const mx=Math.max(...peaks.map(p=>ns[p])),p=peaks.find(p=>ns[p]>=.9*mx);if(ns[p]<.6)return null;
+  const a=ns[p-1],b=ns[p],c=ns[p+1],den=a-2*b+c;return sr/(p+(den?(a-c)/(2*den):0))}
+function idleTuner(){hist=[];$('tNote').innerHTML='–';$('tHz').textContent='— Hz';$('tCents').textContent='±0 cent';$('tNeedle').style.left='50%';$('tNeedle').style.background='#F2EBDD';$('tTarget').textContent=t('tu.idle');document.querySelectorAll('.strbtn.hit').forEach(e=>e.classList.remove('hit'))}
+function loop(){
+  if(!micOn)return;requestAnimationFrame(loop);if(++frame%2)return;
+  analyser.getFloatTimeDomainData(buf);const f=detect(buf,AC.sampleRate);
+  if(f&&f>55&&f<1400){hist.push(f);if(hist.length>5)hist.shift();lastSeen=performance.now();show([...hist].sort((a,b)=>a-b)[hist.length>>1])}
+  else if(performance.now()-lastSeen>1500)idleTuner()}
+function show(f){
+  const m=69+12*Math.log2(f/S.tu.a4),r=Math.round(m),cents=Math.round((m-r)*100);
+  $('tNote').innerHTML=`${nn(r)}<sub>${oct(r)}</sub>`;$('tHz').textContent=f.toFixed(1)+' Hz';
+  $('tCents').textContent=(cents>0?'+':cents<0?'−':'±')+Math.abs(cents)+' cent';
+  const nd=$('tNeedle');nd.style.left=(50+Math.max(-50,Math.min(50,cents))*.95)+'%';
+  nd.style.background=Math.abs(cents)<=5?'var(--ok)':Math.abs(cents)<=15?'var(--warn)':'var(--bad)';
+  const T=TUNINGS[S.tu.tuning];let bi=0,bd=1e9;T.forEach((x,i)=>{const d=Math.abs(m-x);if(d<bd){bd=d;bi=i}});
+  document.querySelectorAll('.strbtn').forEach((e,i)=>e.classList.toggle('hit',i===bi&&bd<1.5));
+  if(bd<1.5){const dc=Math.round((m-T[bi])*100);$('tTarget').textContent=t('tu.target',6-bi,nn(T[bi])+oct(T[bi]))+(Math.abs(dc)<=5?t('tu.ok'):dc<0?t('tu.low',dc):t('tu.high',dc))}
+  else $('tTarget').textContent=t('tu.out')}
+function micLabels(){$('micBtn').textContent=micOn?t('tu.stop'):t('tu.start');$('tStatus').textContent=micOn?t('tu.listen'):''}
+async function startMic(){
+  const err=$('micErr');err.hidden=true;
+  try{
+    if(!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia)throw new Error('nomedia');
+    ac();stream=await navigator.mediaDevices.getUserMedia({audio:{echoCancellation:false,noiseSuppression:false,autoGainControl:false}});
+    const src=AC.createMediaStreamSource(stream);analyser=AC.createAnalyser();analyser.fftSize=2048;buf=new Float32Array(analyser.fftSize);src.connect(analyser);
+    micOn=true;micLabels();loop();
+  }catch(e){err.hidden=false;err.textContent=t('tu.err')}}
+function stopMic(){micOn=false;if(stream)stream.getTracks().forEach(x=>x.stop());stream=null;micLabels()}
+$('micBtn').onclick=()=>micOn?stopMic():startMic();
+
+/* ================= TABS: order & visibility ================= */
+const TABDEF=['tuner','triads','tensions','voicings','chords','scales'];
+let order=TABDEF.slice(),hidden=[];
+try{const o=JSON.parse(store.get('order','null'));if(Array.isArray(o)&&o.length===TABDEF.length&&TABDEF.every(x=>o.includes(x)))order=o;
+  const h=JSON.parse(store.get('hidden','[]'));if(Array.isArray(h))hidden=h.filter(x=>TABDEF.includes(x))}catch(e){}
+const visibleTabs=()=>order.filter(x=>!hidden.includes(x));
+function saveTabs(){store.set('order',JSON.stringify(order));store.set('hidden',JSON.stringify(hidden))}
+function currentTab(){const h=location.hash.slice(1);return TABDEF.includes(h)?h:(visibleTabs()[0]||'tuner')}
+function renderNav(){
+  const cur=currentTab();
+  $('tabs').innerHTML=visibleTabs().map(k=>`<a href="#${k}" aria-current="${k===cur?'page':'false'}">${t('tab.'+k)}</a>`).join('');
+}
+function renderArr(){
+  const L=$('arrList'),first=visibleTabs()[0];L.innerHTML='';
+  order.forEach((k,i)=>{const li=document.createElement('li');const off=hidden.includes(k);if(off)li.className='off';
+    li.innerHTML=`<span class="pos">${i+1}</span><span><span class="tname">${t('tab.'+k)}</span>${k===first?`<span class="start">${t('arr.start')}</span>`:''}</span>`+
+      `<span class="tools"><button type="button" data-a="up" aria-label="${t('arr.up')}"${i===0?' disabled':''}>↑</button><button type="button" data-a="down" aria-label="${t('arr.down')}"${i===order.length-1?' disabled':''}>↓</button>`+
+      `<label><input type="checkbox" data-a="show"${off?'':' checked'}${!off&&visibleTabs().length===1?' disabled':''}> ${t('arr.show')}</label></span>`;
+    li.querySelector('[data-a=up]').onclick=()=>{[order[i-1],order[i]]=[order[i],order[i-1]];saveTabs();renderArr();renderNav()};
+    li.querySelector('[data-a=down]').onclick=()=>{[order[i+1],order[i]]=[order[i],order[i+1]];saveTabs();renderArr();renderNav()};
+    li.querySelector('[data-a=show]').onchange=e=>{hidden=e.target.checked?hidden.filter(x=>x!==k):[...hidden,k];saveTabs();renderArr();renderNav();if(hidden.includes(currentTab())&&location.hash.slice(1)===k)location.hash='#'+visibleTabs()[0]};
+    L.appendChild(li)});
+}
+function toggleArr(open){const p=$('arrPanel');p.hidden=!open;$('arrBtn').setAttribute('aria-expanded',String(open));if(open){renderArr();window.scrollTo({top:0,behavior:'smooth'})}}
+$('arrBtn').onclick=()=>toggleArr($('arrPanel').hidden);
+$('arrDone').onclick=()=>toggleArr(false);
+$('arrReset').onclick=()=>{order=TABDEF.slice();hidden=[];saveTabs();renderArr();renderNav()};
+
+/* ================= prefs & routing ================= */
+function syncPrefs(){
+  [['langJa',S.lang==='ja'],['langEn',S.lang==='en'],['accS',S.acc==='s'],['accF',S.acc==='f'],['labD',S.lab==='deg'],['labN',S.lab==='name']].forEach(([id,v])=>$(id).setAttribute('aria-pressed',String(v)))}
+function renderAll(){applyStatic();syncPrefs();renderNav();renderTuningSel();renderStrBtns();micLabels();if(!micOn)idleTuner();renderTri();renderTn();renderV3();renderChords();renderId();renderScales();if(!$('arrPanel').hidden)renderArr()}
+const setPref=(k,v)=>{S[k]=v;store.set(k,v);renderAll()};
+$('langJa').onclick=()=>setPref('lang','ja');$('langEn').onclick=()=>setPref('lang','en');
+$('accS').onclick=()=>setPref('acc','s');$('accF').onclick=()=>setPref('acc','f');
+$('labD').onclick=()=>setPref('lab','deg');$('labN').onclick=()=>setPref('lab','name');
+function route(){const cur=currentTab();TABDEF.forEach(k=>$('v-'+k).hidden=k!==cur);renderNav();
+  if(cur==='chords')renderChords();if(cur==='voicings')renderV3();window.scrollTo({top:0})}
+window.addEventListener('hashchange',route);
+renderAll();route();
+})();
+</script>
+
+<script>
+if('serviceWorker' in navigator){window.addEventListener('load',()=>{navigator.serviceWorker.register('sw.js').catch(()=>{})})}
+</script>
+</body>
+</html>
