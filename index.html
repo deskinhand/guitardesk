@@ -43,6 +43,33 @@ header{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:var
 .brand{font-family:var(--f-display);font-weight:400;font-size:20px;letter-spacing:.02em;margin:0;display:flex;align-items:center;gap:8px}
 .brand svg{flex:none}
 .prefs{margin-left:auto;display:flex;gap:8px;flex-wrap:wrap}
+.brandRow{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.tools{display:flex;align-items:center;gap:6px}
+.hbtn{width:40px;height:40px;border-radius:10px;border:1px solid var(--line);background:var(--sunk);color:var(--fg);display:grid;place-items:center;text-decoration:none}
+.hbtn:hover{border-color:var(--accent);color:var(--accent)}
+.hbtn[aria-current="page"]{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.hbtn.run{border-color:var(--accent);color:var(--accent);box-shadow:inset 0 0 0 1px var(--accent)}
+.hbtn.run[aria-current="page"]{color:var(--accent-ink)}
+.hbtn svg{display:block}
+.tools .mini{margin:0}
+.modeSw{display:inline-flex;border:1px solid var(--line);border-radius:10px;overflow:hidden;justify-self:start;max-width:100%}
+.modeSw a{font-weight:700;font-size:14px;padding:9px 16px;text-decoration:none;color:var(--muted);background:var(--surface)}
+.modeSw a+a{border-left:1px solid var(--line)}
+.modeSw a[aria-current="true"]{background:var(--fg);color:var(--bg)}
+.subview{display:grid;gap:18px;min-width:0}
+.subview>*{min-width:0}
+#rcSection{scroll-margin-top:150px}
+.foot{border-top:1px solid var(--line);background:var(--surface)}
+.footIn{padding-block:18px calc(18px + env(safe-area-inset-bottom,0px));display:flex;gap:10px 24px;flex-wrap:wrap;align-items:center;justify-content:space-between}
+.footNav{display:flex;gap:20px;flex-wrap:wrap}
+.footNav a{color:var(--fg);font-weight:700;text-decoration:none;font-size:14px}
+.footNav a:hover,.footNav a[aria-current="page"]{color:var(--accent)}
+.cfm{display:inline-flex;gap:6px;align-items:center;flex-wrap:wrap}
+.cfm .q{font-size:13px;font-weight:700;color:var(--bad)}
+.meter .cfm .q{color:#F2EBDD}
+.meter .cfm .btn{min-width:0;height:40px;font-size:14px}
+.btn.dangerFill{background:var(--bad);border-color:var(--bad);color:#fff}
+.saved .acts,.goals .acts{flex-wrap:wrap;justify-content:flex-end}
 .navrow{display:flex;align-items:flex-end;gap:6px}
 nav.tabs{display:flex;gap:4px;overflow-x:auto;min-width:0;flex:1}
 nav.tabs a{flex:none;text-decoration:none;color:var(--muted);font-weight:700;padding:8px 14px 10px;border-bottom:3px solid transparent;font-size:14px}
@@ -266,7 +293,7 @@ select{font:inherit;font-size:14px;padding:6px 10px;border-radius:8px;border:1px
 .ib{width:32px;height:26px;border-radius:6px;border:1px solid var(--line);background:var(--sunk);color:var(--fg);cursor:pointer;font:inherit;padding:0}
 .ib:disabled{opacity:.3;cursor:default}
 .mi.edit{grid-template-columns:auto minmax(0,1fr) auto}
-@media (max-width:560px){.mi.edit{grid-template-columns:auto minmax(0,1fr)}.mi.edit>.danger{grid-column:2;justify-self:start}}
+@media (max-width:560px){.mi.edit{grid-template-columns:auto minmax(0,1fr)}.mi.edit>.delc{grid-column:2;justify-self:start}}
 .prGrid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:18px}
 @media (max-width:760px){.prGrid{grid-template-columns:1fr}}
 textarea{font:inherit;font-size:14px;line-height:1.6;width:100%;min-height:150px;padding:10px 12px;border:1px solid var(--line);border-radius:8px;background:var(--sunk);color:var(--fg);resize:vertical}
@@ -305,6 +332,104 @@ textarea{font:inherit;font-size:14px;line-height:1.6;width:100%;min-height:150px
 .tkName{font:inherit;font-weight:700;border:1px solid transparent;background:transparent;color:var(--fg);padding:3px 4px;border-radius:6px;width:100%;min-width:0}
 .tkName:hover,.tkName:focus{border-color:var(--line);background:var(--surface)}
 .wave{width:100%;height:52px;display:block;cursor:pointer;border-radius:6px;background:var(--sunk)}
+/* Theory & guide */
+.thGrid{display:grid;grid-template-columns:230px minmax(0,1fr);gap:18px;align-items:start}
+@media (max-width:820px){.thGrid{grid-template-columns:1fr}}
+.thNav{display:grid;gap:4px;position:sticky;top:calc(env(safe-area-inset-top,0px) + 110px)}
+@media (max-width:820px){.thNav{position:static;display:flex;overflow-x:auto;gap:6px;padding-bottom:4px}}
+.thItem{font:inherit;font-size:13.5px;text-align:left;display:flex;gap:10px;align-items:center;border:1px solid transparent;background:transparent;color:var(--fg);border-radius:8px;padding:7px 10px;cursor:pointer}
+@media (max-width:820px){.thItem{flex:none;border-color:var(--line);background:var(--surface);white-space:nowrap}}
+.thItem:hover{border-color:var(--line)}
+.thItem.cur{background:var(--surface);border-color:var(--accent);font-weight:700}
+.thItem .num{flex:none;width:24px;height:24px;border-radius:50%;display:grid;place-items:center;font-family:var(--f-mono);font-size:12px;background:var(--sunk);border:1px solid var(--line)}
+.thItem.cur .num{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.thBody{display:grid;gap:12px;min-width:0}
+.eyebrow{font-size:12px;letter-spacing:.08em;color:var(--accent);font-weight:700}
+.prose{font-size:15px;line-height:1.75}
+.prose p{margin:0 0 12px;max-width:68ch}
+.prose h4{font-size:16px;margin:20px 0 8px}
+.prose ul{margin:0 0 12px;padding-left:1.2em;display:grid;gap:4px;max-width:68ch}
+.prose .btn{margin:2px 4px 2px 0}
+.analogy{background:var(--accent-soft);border-radius:10px;padding:12px 14px;margin:0 0 12px;max-width:68ch}
+.tlink{color:var(--accent);font-weight:700;text-decoration:none;margin-right:14px;display:inline-block}
+.tlink:hover{text-decoration:underline}
+.noteRow{display:flex;flex-wrap:wrap;gap:6px;margin:0 0 10px}
+.noteRow span{font-family:var(--f-mono);font-weight:600;min-width:40px;text-align:center;padding:6px 4px;border-radius:6px;background:var(--sunk);border:1px solid var(--line)}
+.steps{display:flex;flex-wrap:wrap;align-items:center;gap:4px;margin:0 0 12px}
+.steps .sn{font-family:var(--f-mono);font-weight:600;min-width:40px;text-align:center;padding:6px 4px;border-radius:6px;background:var(--surface);border:1px solid var(--line)}
+.steps .sn.on{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.steps .st2{font-size:11px;color:var(--muted);font-weight:700}
+.tblWrap{overflow-x:auto;margin:0 0 12px}
+.thTbl{border-collapse:collapse;font-size:14px;min-width:100%}
+.thTbl th{text-align:left;font-size:12px;color:var(--muted);font-weight:700;padding:6px 8px;border-bottom:1px solid var(--line);white-space:nowrap}
+.thTbl td{padding:5px 8px;border-bottom:1px solid var(--line);vertical-align:middle}
+.thTbl .btn{margin:0;padding:4px 10px}
+.mono{font-family:var(--f-mono)}
+.fn{font-size:12px;font-weight:700;padding:2px 8px;border-radius:999px;white-space:nowrap;border:1px solid currentColor}
+.fnT{color:var(--fifth)}.fnS{color:var(--third)}.fnD{color:var(--root)}
+.roles{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:0 0 12px}
+@media (max-width:640px){.roles{grid-template-columns:1fr}}
+.role{border:1px solid currentColor;border-radius:10px;padding:10px 12px;display:grid;gap:4px}
+.role b{font-size:14px}.role span{color:var(--fg);font-size:13px}
+.bars{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:4px;margin:0 0 12px;max-width:520px}
+.b12{border:1px solid var(--line);border-radius:8px;padding:6px 8px;background:var(--surface);display:grid;gap:0}
+.b12 small{font-size:10px;color:var(--muted);font-family:var(--f-mono)}
+.b12 b{font-family:var(--f-mono);font-size:16px}
+.b12 span{font-size:11px;color:var(--muted);font-family:var(--f-mono)}
+.b12.now{background:var(--accent);border-color:var(--accent);color:var(--accent-ink)}
+.b12.now small,.b12.now span{color:inherit}
+[data-seq].playing{background:var(--fg);border-color:var(--fg);color:var(--bg)}
+.gloss{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:10px}
+.gItem{border:1px solid var(--line);border-radius:10px;padding:10px 12px;background:var(--surface);display:grid;gap:4px;align-content:start}
+.gItem p{margin:0;font-size:13.5px}
+.gTerm{display:flex;gap:8px;align-items:baseline;flex-wrap:wrap}
+.gTerm .mono{font-size:12px;color:var(--muted)}
+.gItem .tlink{font-size:12.5px}
+.search{font:inherit;font-size:14px;padding:8px 12px;border-radius:8px;border:1px solid var(--line);background:var(--sunk);color:var(--fg);width:100%;max-width:360px}
+.gGrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:10px}
+.gCard{display:grid;gap:6px;align-content:start;padding:14px}
+.gCard p,.gCard ul{margin:0;font-size:13.5px}
+.gCard ul{padding-left:1.1em;display:grid;gap:3px}
+.flow{margin:0;padding-left:1.4em;display:grid;gap:6px;font-size:14px}
+.faq{border:1px solid var(--line);border-radius:8px;background:var(--surface);padding:10px 12px}
+.faq summary{font-weight:700;cursor:pointer}
+.faq p{margin:8px 0 0;font-size:14px}
+/* Blues & tabs */
+.tabIn{font-family:var(--f-mono);font-size:14px;line-height:1.45;white-space:pre;overflow-x:auto;min-height:200px;tab-size:4}
+.tabOut{font-family:var(--f-mono);font-size:14px;line-height:1.45;margin:0;padding:12px 14px;background:var(--sunk);border:1px solid var(--line);border-radius:8px;overflow-x:auto;white-space:pre;color:var(--fg)}
+.tv{display:grid;gap:8px;min-width:0}
+.tvAll{border-top:1px solid var(--line);padding-top:12px}
+.tvKey{font-family:var(--f-display);font-size:20px;line-height:1}
+.turns{display:grid;gap:12px}
+.turn{display:grid;gap:10px;min-width:0}
+.turnHead{display:flex;gap:12px;align-items:flex-start}
+.tnum{flex:none;width:30px;height:30px;border-radius:50%;background:var(--accent);color:var(--accent-ink);display:grid;place-items:center;font-family:var(--f-mono);font-weight:700}
+.tname{margin:0;font-size:17px;letter-spacing:0;color:var(--fg)}
+.btn.playing{background:var(--fg);border-color:var(--fg);color:var(--bg)}
+.modeSw button{font:inherit;font-weight:700;font-size:14px;padding:9px 16px;border:0;color:var(--muted);background:var(--surface);cursor:pointer}
+.modeSw button+button{border-left:1px solid var(--line)}
+.modeSw button[aria-pressed="true"]{background:var(--fg);color:var(--bg)}
+.tgScroll{overflow-x:auto;border:1px solid var(--line);border-radius:10px;background:var(--surface);padding:8px 8px 10px}
+.tg{display:grid;row-gap:2px;width:max-content;font-family:var(--f-mono)}
+.tgL{font-size:12px;color:var(--muted);display:grid;place-items:center;font-weight:600}
+.tgChL{font-size:9.5px;font-family:var(--f-body)}
+.tgC,.tgCh{font:inherit;font-family:var(--f-mono);font-size:14px;font-weight:600;height:32px;min-width:36px;padding:0 3px;border:0;cursor:pointer;color:var(--fg);
+  background:linear-gradient(var(--muted),var(--muted)) center/100% 1px no-repeat;border-radius:0}
+.tgC span{background:var(--surface);padding:0 2px;border-radius:3px}
+.tgCh{background:none;font-size:12.5px;color:var(--accent);height:26px;border-bottom:1px dashed var(--line)}
+.tgC.col{background:linear-gradient(var(--muted),var(--muted)) center/100% 1px no-repeat,var(--accent-soft)}
+.tgC.col span{background:var(--accent-soft)}
+.tgCh.col{background:var(--accent-soft)}
+.tgC.sel{outline:2px solid var(--accent);outline-offset:-2px;border-radius:6px}
+.tgBar{background:linear-gradient(var(--fg),var(--fg)) center/2px 100% no-repeat}
+.tgBar.tgTop{background:none}
+.pad{display:grid;gap:8px}
+.padRow{display:flex;flex-wrap:wrap;gap:6px}
+.pk{font:inherit;font-family:var(--f-mono);font-weight:700;font-size:16px;min-width:42px;height:42px;padding:0 10px;border-radius:8px;border:1px solid var(--line);background:var(--sunk);color:var(--fg);cursor:pointer}
+.pk:hover{border-color:var(--accent)}
+.pk.t{font-size:14px;color:var(--accent)}
+.pk.w{font-family:var(--f-body);font-size:13px}
+.padInfo{font-size:13px;font-weight:700}
 /* Chord namer */
 .nmGrid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:18px}
 @media (max-width:760px){.nmGrid{grid-template-columns:1fr}}
@@ -340,10 +465,17 @@ textarea{font:inherit;font-size:14px;line-height:1.6;width:100%;min-height:150px
 <header>
   <div class="wrap">
     <div class="hrow">
+      <div class="brandRow">
       <h1 class="brand">
         <svg width="26" height="26" viewBox="0 0 26 26" aria-hidden="true"><rect x="1" y="4" width="24" height="18" rx="3" fill="var(--wood)"/><g stroke="var(--fretwire)" stroke-width="1.4"><line x1="9" y1="4" x2="9" y2="22"/><line x1="17" y1="4" x2="17" y2="22"/></g><g stroke="var(--stringc)" stroke-width=".9"><line x1="1" y1="8" x2="25" y2="8"/><line x1="1" y1="13" x2="25" y2="13"/><line x1="1" y1="18" x2="25" y2="18"/></g><circle cx="13" cy="13" r="3.4" fill="var(--accent)"/></svg>
         <span data-t="app">GuitarDesk</span>
       </h1>
+      <div class="tools">
+        <a class="hbtn" href="#tuner" id="hbTuner" data-ta="tab.tuner"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M8.5 2.5v7a3.5 3.5 0 0 0 7 0v-7"/><path d="M12 13v8.5"/><circle cx="12" cy="21" r=".6" fill="currentColor"/></svg></a>
+        <a class="hbtn" href="#metronome" id="hbMetro" data-ta="tab.metronome"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M9.5 3h5l4 18h-13z"/><path d="M5.8 16h12.4"/><path d="M12 16l5-10"/></svg></a>
+        <button class="arrange mini" id="mtMini" type="button" hidden data-ta="mt.mini"><i></i><span id="mtMiniTxt"></span> ■</button>
+      </div>
+      </div>
       <div class="prefs">
         <div class="seg" role="group" aria-label="Language / 言語">
           <button id="langJa" type="button">日本語</button><button id="langEn" type="button">EN</button>
@@ -358,7 +490,6 @@ textarea{font:inherit;font-size:14px;line-height:1.6;width:100%;min-height:150px
     </div>
     <div class="navrow">
       <nav class="tabs" id="tabs" data-ta="nav"></nav>
-      <button class="arrange mini" id="mtMini" type="button" hidden data-ta="mt.mini"><i></i><span id="mtMiniTxt"></span> ■</button>
       <button class="arrange" id="arrBtn" type="button" aria-expanded="false" aria-controls="arrPanel">⇅ <span data-t="arr.btn">並べ替え</span></button>
     </div>
   </div>
@@ -387,10 +518,6 @@ textarea{font:inherit;font-size:14px;line-height:1.6;width:100%;min-height:150px
         <div class="prDate" id="prDate"></div>
         <div class="prStats" id="prStats" style="margin-top:8px"></div>
       </div>
-      <div class="timer">
-        <div style="text-align:right"><div class="small muted" data-t="pr.time"></div><b id="prTime">0:00</b></div>
-        <button class="btn" type="button" id="prTimerBtn"></button>
-      </div>
     </div>
     <p class="lead" data-t="pr.lead" style="margin:0"></p>
     <div class="panel" style="display:grid;gap:12px">
@@ -399,6 +526,33 @@ textarea{font:inherit;font-size:14px;line-height:1.6;width:100%;min-height:150px
       <div class="progress"><i id="prBar"></i></div>
       <ul class="menu" id="prMenu"></ul>
       <div class="savebar"><input type="text" id="prNew" maxlength="60" data-tp="pr.addPh" data-ta="pr.addPh"><button class="btn" type="button" id="prAddBtn" data-t="pr.add"></button></div>
+    </div>
+    <div class="panel" id="rcSection" style="display:grid;gap:14px">
+      <div><h3 data-t="rc.h" style="margin:0"></h3><p class="hint" data-t="rc.lead" style="margin:4px 0 0"></p></div>
+      <div class="tuner">
+        <div class="meter" id="rcPanel" aria-live="polite">
+          <div class="row" style="gap:10px"><span class="recDot" aria-hidden="true"></span><span id="rcStatus" class="small"></span></div>
+          <div class="recBig" id="rcTime">0:00.0</div>
+          <div style="display:grid;gap:4px"><div class="barlab"><span data-t="ls.level"></span></div><div class="bar"><i id="rcLevel"></i></div></div>
+          <div class="row" style="gap:8px"><button class="btn rec" type="button" id="rcBtn"></button><button class="btn ghost" type="button" id="rcRetry" hidden data-t="rc.retry"></button><button class="btn ghost" type="button" id="rcDiscard" hidden data-t="rc.discard"></button><button class="btn ghost" type="button" id="rcRedo" hidden data-t="rc.redo"></button><span id="rcUndoWrap" hidden></span></div>
+          <div class="small" id="rcMsg" style="opacity:.85;min-height:1.4em"></div>
+        </div>
+        <div class="panel controls">
+          <div><h3 data-t="rc.theme"></h3><select id="rcTheme" data-ta="rc.theme"></select></div>
+          <div><h3 data-t="rc.countL"></h3><div class="chips" id="rcCount"></div></div>
+          <div><label class="small" style="display:flex;gap:8px;align-items:center;font-weight:700"><input type="checkbox" id="rcClick"> <span data-t="rc.click"></span></label><p class="hint" data-t="rc.clickHint"></p></div>
+          <div class="row"><span class="small" id="rcBpm"></span><a href="#metronome" class="small" data-t="rc.mtLink" style="color:var(--accent);font-weight:700"></a></div>
+          <div id="rcErr" class="err" hidden></div>
+        </div>
+      </div>
+      <div style="display:grid;gap:10px">
+        <div class="row spread">
+          <h3 data-t="rc.takes" style="margin:0"></h3>
+          <div class="row" style="gap:8px"><span class="small muted" data-t="rc.speed"></span><div class="chips" id="rcSpeed"></div><label class="small" style="display:flex;gap:6px;align-items:center"><input type="checkbox" id="rcLoop"> <span data-t="rc.loop"></span></label></div>
+        </div>
+        <ul class="takes" id="rcTakes"></ul>
+        <p class="hint" id="rcNote" style="margin:0"></p>
+      </div>
     </div>
     <div class="prGrid">
       <div class="panel" style="display:grid;gap:8px;align-content:start">
@@ -424,6 +578,48 @@ textarea{font:inherit;font-size:14px;line-height:1.6;width:100%;min-height:150px
       <h3 data-t="pr.backup" style="margin:0"></h3>
       <p class="hint" data-t="pr.backupHint" style="margin:0"></p>
       <div class="row"><button class="btn ghost sm" type="button" id="prExport" data-t="pr.export"></button><label class="btn ghost sm" style="cursor:pointer"><span data-t="pr.import"></span><input type="file" id="prImportFile" accept="application/json,.json" hidden></label><span class="small muted" id="prBackupMsg" aria-live="polite"></span></div>
+    </div>
+  </section>
+
+  <!-- MY TABS (key change) -->
+  <section class="view" id="v-tabs" hidden>
+    <div>
+      <h2 data-t="tb.h">マイタブ（キー変換）</h2>
+      <p class="lead" data-t="tb.lead"></p>
+    </div>
+    <div class="subview" id="blTabs">
+      <div class="panel" style="display:grid;gap:10px">
+        <div class="row spread"><h3 style="margin:0" data-t="tb.edit"></h3><div class="row" style="gap:6px"><button class="btn ghost sm" type="button" id="tbTpl" data-t="tb.tpl"></button><button class="btn ghost sm" type="button" id="tbNew" data-t="tb.new"></button></div></div>
+        <input type="text" class="tin" id="tbTitle" maxlength="80" data-tp="tb.titlePh" data-ta="tb.titlePh">
+        <div class="ctl"><span data-t="tb.src"></span><div class="chips" id="tbSrc"></div></div>
+        <div class="modeSw" role="group" data-ta="tb.inMode"><button type="button" id="tbModeG" data-t="tb.modeG"></button><button type="button" id="tbModeT" data-t="tb.modeT"></button></div>
+        <div id="tbGridWrap" style="display:grid;gap:10px;min-width:0">
+          <div class="tgScroll"><div class="tg" id="tbGrid"></div></div>
+          <div class="pad" id="tbPad">
+            <div class="padInfo" id="tbSelInfo"></div>
+            <div class="padRow"><button type="button" class="pk" data-k="0">0</button><button type="button" class="pk" data-k="1">1</button><button type="button" class="pk" data-k="2">2</button><button type="button" class="pk" data-k="3">3</button><button type="button" class="pk" data-k="4">4</button><button type="button" class="pk" data-k="5">5</button><button type="button" class="pk" data-k="6">6</button><button type="button" class="pk" data-k="7">7</button><button type="button" class="pk" data-k="8">8</button><button type="button" class="pk" data-k="9">9</button></div>
+            <div class="padRow"><button type="button" class="pk t" data-k="h" data-ta="tb.kh">h</button><button type="button" class="pk t" data-k="p" data-ta="tb.kp">p</button><button type="button" class="pk t" data-k="b" data-ta="tb.kb">b</button><button type="button" class="pk t" data-k="r" data-ta="tb.kr">r</button><button type="button" class="pk t" data-k="/" data-ta="tb.ksu">/</button><button type="button" class="pk t" data-k="\" data-ta="tb.ksd">\</button><button type="button" class="pk t" data-k="~" data-ta="tb.kv">~</button><button type="button" class="pk t" data-k="x" data-ta="tb.kx">x</button><button type="button" class="pk" data-k="bs" data-ta="tb.kbs">⌫</button></div>
+            <div class="padRow"><button type="button" class="pk" data-k="L" data-ta="tb.kL">◀</button><button type="button" class="pk" data-k="U" data-ta="tb.kU">▲</button><button type="button" class="pk" data-k="D" data-ta="tb.kD">▼</button><button type="button" class="pk" data-k="R" data-ta="tb.kR">▶</button><button type="button" class="pk w" data-k="clr" data-t="tb.kclr"></button></div>
+            <div class="padRow"><button type="button" class="pk w" data-k="ins" data-t="tb.kins"></button><button type="button" class="pk w" data-k="del" data-t="tb.kdel"></button><button type="button" class="pk w" data-k="bar" data-t="tb.kbar"></button><button type="button" class="pk w" data-k="add4" data-t="tb.kadd"></button></div>
+            <label class="small" style="display:flex;gap:8px;align-items:center;font-weight:700"><span data-t="tb.chordL"></span><input type="text" class="tin" id="tbChord" maxlength="12" style="max-width:140px" data-tp="tb.chordPh"></label>
+            <p class="hint" data-t="tb.gridHint" style="margin:0"></p>
+          </div>
+        </div>
+        <div id="tbTextWrap" style="display:grid;gap:10px" hidden>
+          <textarea id="tbText" class="tabIn" spellcheck="false" autocapitalize="off" autocomplete="off" rows="9" data-ta="tb.textL"></textarea>
+          <p class="hint" data-t="tb.hint" style="margin:0"></p>
+        </div>
+        <div class="row"><button class="btn" type="button" id="tbSave" data-t="tb.save"></button><span class="small muted" id="tbMsg" aria-live="polite"></span></div>
+      </div>
+      <div class="panel" style="display:grid;gap:10px">
+        <h3 style="margin:0" data-t="tb.out"></h3>
+        <div class="ctl" id="tbDstRow"><span data-t="tb.dst"></span><div class="chips" id="tbDst"></div></div>
+        <div class="ctl"><span data-t="tb.pos"></span><div class="chips" id="tbPos"></div></div>
+        <div class="ctl"><span data-t="bl.speed"></span><div class="chips" id="tbSpeed"></div></div>
+        <label class="small" style="display:flex;gap:8px;align-items:center;font-weight:700"><input type="checkbox" id="tbAll"> <span data-t="tb.all"></span></label>
+        <div id="tbOut" style="display:grid;gap:12px"></div>
+      </div>
+      <div><h3 data-t="tb.lib"></h3><ul class="saved" id="tbLib"></ul></div>
     </div>
   </section>
 
@@ -531,37 +727,6 @@ textarea{font:inherit;font-size:14px;line-height:1.6;width:100%;min-height:150px
     </div>
   </section>
 
-  <!-- RECORDER -->
-  <section class="view" id="v-recorder" hidden>
-    <div>
-      <h2 data-t="rc.h">録音</h2>
-      <p class="lead" data-t="rc.lead"></p>
-    </div>
-    <div class="tuner">
-      <div class="meter" id="rcPanel" aria-live="polite">
-        <div class="row" style="gap:10px"><span class="recDot" aria-hidden="true"></span><span id="rcStatus" class="small"></span></div>
-        <div class="recBig" id="rcTime">0:00.0</div>
-        <div style="display:grid;gap:4px"><div class="barlab"><span data-t="ls.level"></span></div><div class="bar"><i id="rcLevel"></i></div></div>
-        <div class="row" style="gap:8px"><button class="btn rec" type="button" id="rcBtn"></button><button class="btn ghost" type="button" id="rcRetry" hidden data-t="rc.retry"></button><button class="btn ghost" type="button" id="rcDiscard" hidden data-t="rc.discard"></button><button class="btn ghost" type="button" id="rcRedo" hidden data-t="rc.redo"></button><button class="btn ghost" type="button" id="rcUndo" hidden></button></div>
-        <div class="small" id="rcMsg" style="opacity:.85;min-height:1.4em"></div>
-      </div>
-      <div class="panel controls">
-        <div><h3 data-t="rc.theme"></h3><select id="rcTheme" data-ta="rc.theme"></select></div>
-        <div><h3 data-t="rc.countL"></h3><div class="chips" id="rcCount"></div></div>
-        <div><label class="small" style="display:flex;gap:8px;align-items:center;font-weight:700"><input type="checkbox" id="rcClick"> <span data-t="rc.click"></span></label><p class="hint" data-t="rc.clickHint"></p></div>
-        <div class="row"><span class="small" id="rcBpm"></span><a href="#metronome" class="small" data-t="rc.mtLink" style="color:var(--accent);font-weight:700"></a></div>
-        <div id="rcErr" class="err" hidden></div>
-      </div>
-    </div>
-    <div style="display:grid;gap:10px">
-      <div class="row spread">
-        <h3 data-t="rc.takes" style="margin:0"></h3>
-        <div class="row" style="gap:8px"><span class="small muted" data-t="rc.speed"></span><div class="chips" id="rcSpeed"></div><label class="small" style="display:flex;gap:6px;align-items:center"><input type="checkbox" id="rcLoop"> <span data-t="rc.loop"></span></label></div>
-      </div>
-      <ul class="takes" id="rcTakes"></ul>
-      <p class="hint" id="rcNote" style="margin:0"></p>
-    </div>
-  </section>
 
   <!-- LISTENER -->
   <section class="view" id="v-listen" hidden>
@@ -586,6 +751,11 @@ textarea{font:inherit;font-size:14px;line-height:1.6;width:100%;min-height:150px
       </div>
       <div class="panel controls">
         <div>
+          <h3 data-t="ls.range">聴き取る音域</h3>
+          <div class="chips" id="lsRange"></div>
+          <p class="hint" data-t="ls.rangeHint" style="margin:6px 0 0"></p>
+        </div>
+        <div>
           <h3 data-t="ls.vocab">判定するコード</h3>
           <div class="chips" id="lsVocab"></div>
         </div>
@@ -606,7 +776,7 @@ textarea{font:inherit;font-size:14px;line-height:1.6;width:100%;min-height:150px
       <div class="lsShape" id="lsShape"></div>
     </div>
     <div>
-      <div class="row spread"><h3 data-t="ls.hist" style="margin:0">流れ</h3><button class="btn ghost" type="button" id="lsClear" data-t="ls.clear" style="padding:4px 10px;font-size:12px"></button></div>
+      <div class="row spread"><h3 data-t="ls.hist" style="margin:0">コード進行</h3><button class="btn ghost" type="button" id="lsClear" data-t="ls.clear" style="padding:4px 10px;font-size:12px"></button></div>
       <div class="hist" id="lsHist" style="margin-top:8px"></div>
       <div class="savebar" id="lsSaveBar" style="margin-top:10px" hidden>
         <input type="text" id="lsSaveName" maxlength="60" data-ta="sv.nameL">
@@ -739,6 +909,8 @@ textarea{font:inherit;font-size:14px;line-height:1.6;width:100%;min-height:150px
       <h2 data-t="ch.h">コード</h2>
       <p class="lead" data-t="ch.lead"></p>
     </div>
+    <div class="modeSw" role="group" data-ta="ch.mode"><a href="#chords" id="chModeA" data-t="ch.modeA"></a><a href="#namer" id="chModeB" data-t="ch.modeB"></a></div>
+    <div class="subview" id="chLookup">
     <div class="panel controls">
       <div class="ctl"><span data-t="c.root">ルート</span><div class="chips" id="chRoot"></div></div>
       <div class="ctl"><span data-t="c.type">タイプ</span><div class="chips" id="chType"></div></div>
@@ -755,42 +927,38 @@ textarea{font:inherit;font-size:14px;line-height:1.6;width:100%;min-height:150px
       <h3 data-t="ch.board">指板上の構成音</h3>
       <div class="board" id="chBoard"></div>
     </div>
-    <p class="hint" style="margin:0"><a href="#namer" data-t="ch.findLink" style="color:var(--accent);font-weight:700"></a></p>
+    </div>
+    <div class="subview" id="chNamer" hidden>
+      <p class="hint" data-t="nm.lead" style="margin:0;max-width:62ch"></p>
+      <div class="row spread">
+        <p class="hint" data-t="nm.hint" style="margin:0;max-width:62ch"></p>
+        <div class="row">
+          <button class="btn" type="button" id="nmPlay" data-t="c.play"></button>
+          <button class="btn ghost" type="button" id="nmClear" data-t="id.clear"></button>
+        </div>
+      </div>
+      <div class="board" id="nmBoard"></div>
+      <div>
+        <h3 data-t="nm.ex"></h3>
+        <div class="chips" id="nmEx"></div>
+      </div>
+      <div class="nmGrid">
+        <div style="display:grid;gap:10px;align-content:start">
+          <span class="big" id="nmName">–</span>
+          <span class="muted small" id="nmSub"></span>
+          <div class="notes" id="nmTones"></div>
+          <div id="nmAltWrap"><h3 data-t="nm.alt"></h3><div class="chips" id="nmAlts"></div></div>
+          <div class="panel why" id="nmWhy"></div>
+          <div><button class="btn ghost" type="button" id="nmOpen" hidden data-t="nm.open"></button></div>
+        </div>
+        <div>
+          <h3 data-t="nm.strings"></h3>
+          <div class="strTable" id="nmStr"></div>
+        </div>
+      </div>
+    </div>
   </section>
 
-  <!-- CHORD NAMER -->
-  <section class="view" id="v-namer" hidden>
-    <div>
-      <h2 data-t="nm.h">コードネーム</h2>
-      <p class="lead" data-t="nm.lead"></p>
-    </div>
-    <div class="row spread">
-      <p class="hint" data-t="nm.hint" style="margin:0;max-width:62ch"></p>
-      <div class="row">
-        <button class="btn" type="button" id="nmPlay" data-t="c.play"></button>
-        <button class="btn ghost" type="button" id="nmClear" data-t="id.clear"></button>
-      </div>
-    </div>
-    <div class="board" id="nmBoard"></div>
-    <div>
-      <h3 data-t="nm.ex"></h3>
-      <div class="chips" id="nmEx"></div>
-    </div>
-    <div class="nmGrid">
-      <div style="display:grid;gap:10px;align-content:start">
-        <span class="big" id="nmName">–</span>
-        <span class="muted small" id="nmSub"></span>
-        <div class="notes" id="nmTones"></div>
-        <div id="nmAltWrap"><h3 data-t="nm.alt"></h3><div class="chips" id="nmAlts"></div></div>
-        <div class="panel why" id="nmWhy"></div>
-        <div><button class="btn ghost" type="button" id="nmOpen" hidden data-t="nm.open"></button></div>
-      </div>
-      <div>
-        <h3 data-t="nm.strings"></h3>
-        <div class="strTable" id="nmStr"></div>
-      </div>
-    </div>
-  </section>
 
   <!-- SCALES -->
   <section class="view" id="v-scales" hidden>
@@ -811,9 +979,70 @@ textarea{font:inherit;font-size:14px;line-height:1.6;width:100%;min-height:150px
     <div id="diatWrap">
       <h3 data-t="sc.diat"></h3>
       <div class="diat" id="scDiat"></div>
+      <p class="small" style="margin:8px 0 0"><a class="tlink" href="#theory" data-lesson="4" data-t="sc.whatDiat"></a></p>
+    </div>
+  </section>
+
+  <!-- MUSIC THEORY -->
+  <section class="view" id="v-theory" hidden>
+    <div>
+      <h2 data-t="th.h">音楽理論</h2>
+      <p class="lead" data-t="th.lead"></p>
+    </div>
+    <div class="thGrid">
+      <nav class="thNav" id="thNav" data-ta="th.lessons"></nav>
+      <article class="panel thBody">
+        <div class="row spread">
+          <span class="eyebrow" id="thEyebrow"></span>
+          <div class="row" style="gap:8px"><span class="small muted" data-t="th.key"></span><div class="chips" id="thKey"></div></div>
+        </div>
+        <h2 id="thTitle" style="font-size:24px"></h2>
+        <div class="prose" id="thContent"></div>
+        <div class="row spread" style="border-top:1px solid var(--line);padding-top:12px">
+          <button class="btn ghost" type="button" id="thPrev" data-t="th.prev"></button>
+          <label class="small" style="display:flex;gap:8px;align-items:center;font-weight:700"><input type="checkbox" id="thRead"> <span data-t="th.read"></span></label>
+          <button class="btn" type="button" id="thNext" data-t="th.next"></button>
+        </div>
+        <div class="small muted" id="thProgress"></div>
+      </article>
+    </div>
+    <div class="panel" style="display:grid;gap:12px">
+      <div class="row spread"><h2 style="font-size:20px" data-t="th.gloss"></h2><input type="search" class="search" id="thSearch" data-tp="th.search" data-ta="th.search"></div>
+      <div class="gloss" id="thGloss"></div>
+    </div>
+  </section>
+
+  <!-- GUIDE -->
+  <section class="view" id="v-guide" hidden>
+    <div>
+      <h2 data-t="gd.h">使い方</h2>
+      <p class="lead" id="gdIntro"></p>
+    </div>
+    <div class="gGrid" id="gdTips"></div>
+    <div class="panel" style="display:grid;gap:8px">
+      <h3 data-t="gd.basics" style="margin:0"></h3>
+      <ul class="flow" id="gdBasics" style="list-style:disc"></ul>
+    </div>
+    <div>
+      <h3 data-t="gd.tabs"></h3>
+      <div class="gGrid" id="gdTabs"></div>
+    </div>
+    <div class="panel" style="display:grid;gap:8px">
+      <h3 data-t="gd.flow" style="margin:0"></h3>
+      <ol class="flow" id="gdFlow"></ol>
+    </div>
+    <div style="display:grid;gap:8px">
+      <h3 data-t="gd.faq" style="margin:0"></h3>
+      <div style="display:grid;gap:6px" id="gdFaq"></div>
     </div>
   </section>
 </main>
+<footer class="foot">
+  <div class="wrap footIn">
+    <nav class="footNav" data-ta="ft.nav"><a href="#guide" id="ftGuide" data-t="gd.h"></a></nav>
+    <p class="small muted" data-t="ft.note" style="margin:0"></p>
+  </div>
+</footer>
 
 <script>
 (function(){
@@ -822,8 +1051,26 @@ const ord=n=>n===1?'1st':n===2?'2nd':n===3?'3rd':n+'th';
 const I18N={
 ja:{
  app:'GuitarDesk',nav:'ツール','pref.acc':'臨時記号','pref.lab':'指板の表示','pref.deg':'度数','pref.name':'音名',
- 'tab.practice':'練習ノート','tab.recorder':'録音','tab.tuner':'チューナー','tab.metronome':'メトロノーム','tab.listen':'耳コピ','tab.namer':'コードネーム','tab.triads':'トライアド','tab.tensions':'テンション','tab.voicings':'3音ヴォイシング','tab.chords':'コード','tab.scales':'スケール',
- 'arr.btn':'並べ替え','arr.title':'タブの並べ替え','arr.hint':'今練習している項目を一番上に置くと、アプリを開いたときにそのタブから始まります。使わないタブは非表示にできます。','arr.reset':'もとに戻す','arr.done':'完了','arr.show':'表示','arr.up':'上へ','arr.down':'下へ','arr.start':'起動時に開く',
+ 'tab.tabs':'マイタブ（キー変換）','tb.h':'マイタブ（キー変換）','tb.lead':'覚えたいリックやターンアラウンドのタブを打ち込むと、1クリックで別のキーに変換できます。それぞれのキーでのポジションは指板でも確認でき、音を鳴らして確かめられます。',
+ 'bl.h':'ブルース','bl.lead':'ブルースの練習用のページです。キーを選ぶと、12小節の進行とターンアラウンド10選がそのキーに変わります。「マイタブ」では、自分で打ち込んだタブを好きなキーに変換できます。',
+ 'bl.mode':'表示の切り替え','bl.modeA':'ターンアラウンド10選','bl.modeB':'マイタブ（キー変換）','bl.key':'キー','bl.speed':'再生速度',
+ 'bl.12':'12小節ブルース','bl.learn':'しくみを学ぶ →','bl.play12':'12小節を鳴らす','bl.12hint':'最後の2小節（11〜12小節目）がターンアラウンドです。',
+ 'bl.turnH':'ターンアラウンド10選','bl.turnHint':'12小節の最後の2小節で、頭に戻る流れを作るフレーズです。もとはEのキーで書かれたものを、選んだキーに自動で変換しています。',
+ 'tb.pos':'ポジション','tb.near':'元に近い位置','tb.low':'低い位置','tb.high':'高い位置',
+ 'tb.edit':'タブを入力','tb.inMode':'入力方法','tb.modeG':'マス目で入力','tb.modeT':'テキストで入力','tb.chordRow':'コード',
+ 'tb.cellL':(s,c)=>`${s}弦・${c}列目`,'tb.selInfo':(c,s,l)=>`選択中：${c}列目・${s}弦（${l}）`,'tb.selBar':c=>`選択中：${c}列目（小節線）`,
+ 'tb.kh':'ハンマリング','tb.kp':'プリング','tb.kb':'ベンド','tb.kr':'リリース','tb.ksu':'スライド（上）','tb.ksd':'スライド（下）','tb.kv':'ビブラート','tb.kx':'ミュート','tb.kbs':'1文字消す',
+ 'tb.kL':'左へ','tb.kU':'上の弦へ','tb.kD':'下の弦へ','tb.kR':'右へ','tb.kclr':'マスを空にする','tb.kins':'＋列を挿入','tb.kdel':'列を削除','tb.kbar':'｜小節線','tb.kadd':'＋4列追加',
+ 'tb.chordL':'この列のコード名','tb.chordPh':'例：E7',
+ 'tb.gridHint':'マス目をタップして選び、数字ボタン（またはキーボード）でフレット番号を入れます。12のような2桁も続けて押せば入ります。h・p・b・/ などは、数字のあとに押してから次の数字を入れると「5h7」のようになります。空いているマスは、そのまま音と音の間隔になります。','tb.new':'新規','tb.tpl':'空のタブを挿入','tb.titlePh':'タイトル（例：Eのターンアラウンド）','tb.src':'元のキー','tb.textL':'タブの入力欄',
+ 'tb.hint':'6本の弦を1行ずつ、上から1弦（e）〜6弦（E）の順に入力します。横線は半角の「-」ですが、「ー」や「－」で入力しても自動で直ります。数字がフレットです。h・p・b・/・~ などの記号はそのまま残ります。タブのすぐ上の行にコード名（E7 など）を書くと、それも一緒に変換されます。',
+ 'tb.save':'保存','tb.saved':n=>`「${n}」を保存しました。`,'tb.out':'変換結果','tb.dst':'変換先のキー','tb.all':'全12キーを並べて表示',
+ 'tb.lib':'保存したタブ','tb.libEmpty':'まだ保存したタブはありません。','tb.untitled':'無題のタブ',
+ 'tb.empty':'タブが見つかりません。「e|---」のように、弦の名前と「|」で始まる行を6本入力してください。',
+ 'tb.keyOf':k=>`キー ${k}`,'tb.play':'▶ 再生','tb.stop':'■ 停止','tb.board':'指板で見る','tb.copy':'マイタブにコピー',
+ 'tb.noNotes':'フレットの数字がありません','tb.posOpen':'ポジション：開放弦のみ','tb.pos2':(a,b)=>`ポジション：${a}〜${b}フレット`,'tb.withOpen':'（開放弦あり）',
+ 'tab.theory':'音楽理論','tab.guide':'使い方','tab.practice':'練習ノート','tab.recorder':'録音','tab.tuner':'チューナー','tab.metronome':'メトロノーム','tab.listen':'耳コピ','tab.namer':'コードネーム','tab.triads':'トライアド','tab.tensions':'テンション','tab.voicings':'3音ヴォイシング','tab.chords':'コード','tab.scales':'スケール',
+ 'arr.btn':'並べ替え','arr.title':'タブの並べ替え','arr.hint':'今練習している項目を一番上に置くと、アプリを開いたときにそのタブから始まります。使わないタブは非表示にできます。チューナーとメトロノームは、タイトル横のボタンからいつでも開けます。','arr.reset':'もとに戻す','arr.done':'完了','arr.show':'表示','arr.up':'上へ','arr.down':'下へ','arr.start':'起動時に開く',
  'c.root':'ルート','c.quality':'種類','c.set':'弦セット','c.inv':'転回形','c.prev':'前のポジション','c.next':'次のポジション','c.play':'▶ 鳴らす','c.chord':'コード','c.type':'タイプ','c.key':'キー','c.scale':'スケール','c.shapes':'押さえ方（タップで鳴らす）','c.all':'すべて',
  'lg.root':'ルート','lg.3':'3度','lg.5':'5度','lg.7':'7度・テンション','lg.other':'その他','lg.omit':'省略した音','lg.tonic':'主音',
  board:'指板',cell:(s,f)=>`${s}弦 ${f}フレット`,set:(a)=>`${a}弦`,
@@ -850,11 +1097,18 @@ ja:{
  'nm.slash':(b,n)=>`最低音が ${b} なので、${n} の転回形として「/${b}」を付けて書きます（オンコード）。`,'nm.omit5':'5度は省略されています。省いても響きがほとんど変わらないので、ギターではよく省かれます。','nm.omit':l=>`${l} は省略されています。`,
  'nm.complete':'すべての構成音がそろっていて、ルートが最低音の基本形です。','nm.ambig':'同じ音の組み合わせでも、最低音や前後のコードによって呼び方が変わります。「別の読み方」も参考にしてください。',
  'nm.mute':'ミュート','nm.open0':'開放','nm.str':n=>`${n}弦`,'ch.findLink':'押さえた形からコード名を調べるときは「コードネーム」タブへ →',
+ 'cf.del':'削除','cf.q':'削除しますか？','cf.yes':'削除する','cf.no':'キャンセル','rc.undoQ':'直前のテイクを削除しますか？',
+ 'ft.nav':'サイト内リンク','ft.note':'GuitarDesk · 練習ノートと録音は、この端末のブラウザに保存されます。',
+ 'th.h':'音楽理論','th.lead':'ダイアトニックやドミナントなど、音楽理論の言葉をいちばんやさしい言い方で説明します。▶ボタンで音を聴きながら、順番に読み進めてください。','th.lessons':'レッスン一覧',
+ 'th.lessonN':(i,n)=>`レッスン ${i}`,'th.key':'例のキー','th.prev':'← 前へ','th.next':'次へ →','th.read':'理解した','th.progress':(a,n)=>`理解したレッスン：${a} / ${n}`,
+ 'th.gloss':'用語集','th.search':'言葉をさがす（例：ドミナント）','th.noHit':'見つかりませんでした。別の言葉で試してください。','sc.whatDiat':'ダイアトニックコードとは？ →',
+ 'gd.h':'使い方','gd.basics':'画面の基本','gd.tabs':'各タブの使い方','gd.flow':'おすすめの練習の流れ','gd.faq':'困ったとき','gd.open':'開く',
+ 'ls.range':'聴き取る音域','ls.rFull':'全体','ls.rMid':'中低音（〜1kHz）','ls.rLow':'ベース重視（〜400Hz）','ls.rangeHint':'雑音や高い音を拾ってしまうときは、音域を下げてください。「ベース重視」は低い音だけを聴き、ベース音を中心にコードを推定します。',
  'pr.h':'練習ノート','pr.lead':'毎日の練習メニューにチェックを付け、気づいたことや課題を書き留めます。記録はこの端末のブラウザに保存されます。',
  'pr.streak':n=>`${n}日連続`,'pr.month':n=>`今月 ${n}日`,'pr.total':n=>`合計 ${n}日`,'pr.time':'今日の練習時間','pr.tStart':'▶ 練習開始','pr.tPause':'❚❚ 一時停止',
  'pr.menu':'今日の練習メニュー','pr.progress':(a,b)=>`${a} / ${b} 完了`,'pr.allDone':'今日のメニューをすべて終えました！','pr.edit':'メニューを編集','pr.editDone':'編集を終える',
  'pr.add':'追加','pr.addPh':'新しい練習テーマ（例：Chromatic）','pr.notePh':'メモ（目標BPMやポイントなど）','pr.bpmPh':'今日のBPM','pr.link':'開くタブ','pr.linkNone':'なし',
- 'pr.del':'削除','pr.delSure':'本当に削除','pr.up':'上へ','pr.down':'下へ','pr.empty':'メニューがまだありません。下の欄から練習テーマを追加してください。',
+ 'pr.del':'削除','pr.up':'上へ','pr.down':'下へ','pr.empty':'メニューがまだありません。下の欄から練習テーマを追加してください。',
  'pr.memo':'今日のメモ','pr.memoPh':'気づいたこと、うまくいかなかったこと、次に試したいことなど、自由に書けます。','pr.saved':'保存しました',
  'pr.goals':'課題','pr.goalPh':'これから取り組む課題（例：Aマイナーペンタを120 BPMで弾く）','pr.goalAdd':'追加','pr.goalDone':'できた！','pr.goalOpen':n=>`取り組み中 ${n}件`,'pr.goalEmpty':'取り組み中の課題はありません。上の欄から追加できます。',
  'pr.achieved':n=>`達成した課題（${n}件）`,'pr.since':d=>`${d} から取り組み中`,'pr.took':(a,b,n)=>`${a} → ${b} 達成（${n}日）`,'pr.reopen':'戻す','pr.goalText':'課題の内容',
@@ -863,25 +1117,25 @@ ja:{
  'pr.backup':'バックアップ','pr.export':'書き出す','pr.import':'読み込む','pr.backupHint':'記録はこのブラウザにだけ保存されます。機種変更やブラウザのデータ削除に備えて、ときどき書き出しておくと安心です。読み込むと、今の記録はファイルの内容に置き換わります（録音は含まれません）。',
  'pr.imported':'読み込みました。','pr.importErr':'このファイルは読み込めませんでした。GuitarDeskで書き出したファイルを選んでください。','pr.exported':'書き出しました。',
  'rc.h':'録音','rc.lead':'自分の演奏を録音して聴き返せます。録音はこの端末のブラウザに保存され、ファイルとして書き出すこともできます。',
- 'rc.retry':'↺ やり直し','rc.discard':'✕ 破棄','rc.redo':'↺ 録り直す','rc.undo':'✕ 直前のテイクを取り消す','rc.undoSure':'本当に取り消す','rc.undone':'直前のテイクを取り消しました。','rc.discarded':'保存せずに止めました。',
+ 'rc.retry':'↺ やり直し','rc.discard':'✕ 破棄','rc.redo':'↺ 録り直す','rc.undo':'✕ 直前のテイクを削除','rc.undone':'直前のテイクを削除しました。','rc.discarded':'保存せずに止めました。',
  'rc.recHint':'「やり直し」は今の録音を捨てて最初から録り直します。「破棄」は保存せずに止めます。','rc.doneHint':'「録り直す」を押すと新しく録音し、保存した時点で直前のテイクと入れ替わります。','rc.saved':n=>`「${n}」を保存しました。`,
  'rc.rec':'● 録音','rc.stop':'■ 停止','rc.cancel':'中止','rc.ready':'待機中','rc.count':n=>`カウントイン… ${n}`,'rc.recording':'録音中','rc.saving':'保存中…',
  'rc.theme':'練習テーマ','rc.themeNone':'なし','rc.countL':'カウントイン','rc.c0':'なし','rc.c1':'1小節','rc.c2':'2小節',
  'rc.click':'録音中もメトロノームを鳴らす','rc.clickHint':'メトロノームの音もマイクに入るので、ヘッドホンやイヤホンの使用がおすすめです。','rc.bpm':(b,s)=>`メトロノーム：${b} BPM · ${s}`,'rc.mtLink':'メトロノームで変更 →',
  'rc.takes':'録音したテイク','rc.empty':'まだ録音はありません。「● 録音」を押すと始まります。','rc.play':'▶ 再生','rc.pause':'❚❚ 一時停止','rc.dl':'⬇ 保存','rc.wav':'⬇ WAV','rc.convert':'変換中…',
- 'rc.del':'削除','rc.delSure':'本当に削除','rc.speed':'再生速度','rc.loop':'くり返し','rc.def':d=>`テイク ${d}`,'rc.usage':mb=>`使用量：約${mb}MB。`,
+ 'rc.del':'削除','rc.speed':'再生速度','rc.loop':'くり返し','rc.def':d=>`テイク ${d}`,'rc.usage':mb=>`使用量：約${mb}MB。`,
  'rc.note':'録音はこの端末のブラウザの中に保存され、ブラウザのデータを消すと一緒に消えます。残したいテイクは「保存」で書き出してください。「WAV」はほとんどのアプリで再生できる形式です（ファイルは大きくなります）。',
  'rc.err':'マイクを使えませんでした。ブラウザでマイクの使用を許可してください。','rc.noRec':'このブラウザは録音に対応していません。最新のChromeかSafariでお試しください。','rc.memOnly':'このブラウザでは録音を保存できないため、ページを閉じると消えます。','rc.wave':'波形（タップでその位置から再生）',
  'ls.h':'耳コピ','ls.lead':'スピーカーから流れる曲や自分の演奏をマイクで聴き取り、今鳴っているコードを推定します。音声は保存されず、この端末の外にも送られません。',
  'ls.start':'聴き取りを始める','ls.stop':'止める','ls.hold':'ホールド','ls.release':'ホールド解除','ls.waiting':'音を待っています…','ls.listening':'聴き取り中','ls.idle':'ボタンを押すと聴き取りを始めます','ls.held':'表示を止めています',
  'ls.confL':'確からしさ','ls.level':'入力レベル','ls.bass':b=>`ベース ${b}`,'ls.vocab':'判定するコード','ls.simple':'シンプル（メジャー・マイナー）','ls.full':'7th・sus4・dimも',
  'ls.key':'キーの推定','ls.keyWait':'数秒間聴くと表示されます。','ls.keyNote':'曲全体の音の傾向からの推定です。平行調（同じ音を使うメジャーとマイナー）は区別しにくいので、両方を表示しています。','ls.rel':x=>`（平行調：${x}）`,'ls.keyOpen':'スケールで開く →','key.maj':n=>`${n} メジャー`,'key.min':n=>`${n} マイナー`,
- 'ls.shape':'このコードの押さえ方','ls.open':'コード表で開く →','ls.noChord':'コードが表示されると、ここに押さえ方が出ます。','ls.hist':'聴き取ったコードの流れ（タップでコード表へ）','ls.clear':'流れを消す','ls.histEmpty':'まだありません。',
- 'ls.tipsH':'うまく聴き取るコツ','ls.tips':['スマホをスピーカーの近くに置き、話し声などの雑音を減らすと精度が上がります。','伴奏がシンプルな曲ほど当たりやすく、音の厚いバンド曲では「だいたいのコード」になります。','表示は実際の音より少し遅れます。','結果が安定しないときは「シンプル」にしてください。','気になる所で「ホールド」を押すと、表示を止めてじっくり確認できます。','音声は保存されません。流れに残るのはコード名だけで、ページを閉じると消えます。'],
+ 'ls.shape':'このコードの押さえ方','ls.open':'コード表で開く →','ls.noChord':'コードが表示されると、ここに押さえ方が出ます。','ls.hist':'聴き取ったコード進行（タップでコード表へ）','ls.clear':'コード進行を消す','ls.histEmpty':'まだありません。',
+ 'ls.tipsH':'うまく聴き取るコツ','ls.tips':['スマホをスピーカーの近くに置き、話し声などの雑音を減らすと精度が上がります。','伴奏がシンプルな曲ほど当たりやすく、音の厚いバンド曲では「だいたいのコード」になります。','表示は実際の音より少し遅れます。','結果が安定しないときは「シンプル」にしてください。','気になる所で「ホールド」を押すと、表示を止めてじっくり確認できます。','音声は保存されません。コード進行として残るのはコード名だけで、保存しなければページを閉じると消えます。'],
  'ls.err':'マイクを使えませんでした。ブラウザでマイクの使用を許可してください。',
- 'sv.h':'保存したコード進行','sv.save':'この流れを保存','sv.nameL':'名前','sv.def':d=>`メモ ${d}`,'sv.saved':n=>`「${n}」を保存しました。下の一覧から開けます。`,'sv.empty':'まだ保存したコード進行はありません。聴き取ったあとに「この流れを保存」を押すと、ここに並びます。',
+ 'sv.h':'保存したコード進行','sv.save':'このコード進行を保存','sv.nameL':'名前','sv.def':d=>`メモ ${d}`,'sv.saved':n=>`「${n}」を保存しました。下の一覧から開けます。`,'sv.empty':'まだ保存したコード進行はありません。聴き取ったあとに「このコード進行を保存」を押すと、ここに並びます。',
  'sv.note':'保存されるのはコード名とタイミングだけです。音声は保存しません。データはこのブラウザの中にだけ残り、ブラウザのデータを消すと一緒に消えます。',
- 'sv.open':'開く','sv.del':'削除','sv.delSure':'本当に削除','sv.chords':n=>`${n}コード`,'sv.close':'閉じる','sv.play':'▶ 再生','sv.stop':'■ 停止','sv.loop':'くり返し','sv.edit':'誤判定を消す','sv.editDone':'編集を終える',
+ 'sv.open':'開く','sv.del':'削除','sv.chords':n=>`${n}コード`,'sv.close':'閉じる','sv.play':'▶ 再生','sv.stop':'■ 停止','sv.loop':'くり返し','sv.edit':'誤判定を消す','sv.editDone':'編集を終える',
  'sv.hint':'コードをタップすると、その音と押さえ方を確認できます。','sv.hintEdit':'消したいコードをタップしてください。前後の同じコードは1つにまとまります。','sv.speed':x=>`${x}%`,'sv.full':'保存できる上限に達しました。古いものを削除してください。',
  'tri.h':'トライアド・ポジション','tri.lead':'隣り合う3本の弦で弾く3和音の形を、転回形ごとに指板上で確認できます。薄い点はその弦セットの構成音です。',
  'q.maj':'メジャー','q.min':'マイナー','q.dim':'ディミニッシュ','q.aug':'オーグメント','inv.0':'基本形','inv.1':'第1転回形','inv.2':'第2転回形',
@@ -907,15 +1161,33 @@ ja:{
  'w.sev':l=>`${l}はコードの種類（7th・M7・6thなど）を決める音です。省くと別のコードに聞こえやすくなります。`,'w.alt5':l=>`${l}はこのコードの特徴になる音です。省くと別のコードに近づきます。`,'w.T9':'このコードでは13thが主役なので、9thは省いても成り立ちます。','w.T':l=>`${l}はコード名の特徴になる音です。省くとそのテンションの響きが消えます。`,
  'v3.omitL':l=>`${l}を省略：`,'v3.eq':e=>`この3音だけを単体で鳴らすと <span class="eq">${e}</span> とも読めます。`,'v3.eqR':(r,n)=>`ルートを省いた形なので、ベースが${r}を弾くと${n}に聞こえます。`,'v3.eqC':n=>`前後の流れやベース音で${n}として聞こえます。`,
  'v3.low':b=>`このポジションの最低音は ${b} です。`,'v3.chip':(f,b)=>`${f}fr 最低音${b}`,
- 'ch.h':'コード','ch.lead':'コード名から押さえ方と構成音を調べられます。下の指板で音を選ぶと、そのコード名を判定します。','ch.play':'▶ 構成音を鳴らす','ch.board':'指板上の構成音','ch.noshape':'この範囲では押さえ方が見つかりませんでした。','ch.playAria':n=>`${n} を鳴らす`,
+ 'ch.h':'コード','ch.lead':'コード名から押さえ方と構成音を調べられます。押さえた形からコード名を調べることもできます。','ch.mode':'調べ方','ch.modeA':'コード名から調べる','ch.modeB':'押さえた形から調べる','ch.play':'▶ 構成音を鳴らす','ch.board':'指板上の構成音','ch.noshape':'この範囲では押さえ方が見つかりませんでした。','ch.playAria':n=>`${n} を鳴らす`,
  'id.h':'コード名判定','id.hint':'各弦の押さえるフレットをタップします。左端の列は開放弦です。同じ所をもう一度タップするとミュートになります。','id.clear':'クリア','id.notes':'構成音：','id.pick':'音を選んでください','id.none':'該当なし',
  'sc.h':'スケール','sc.lead':'キーとスケールを選ぶと、15フレットまでの音の並びを表示します。7音スケールではダイアトニック・コードも出ます。','sc.play':'▶ 上行で鳴らす','sc.diat':'ダイアトニック・コード（タップでコード表へ）',
  'scn.pm':'マイナー・ペンタ','scn.pM':'メジャー・ペンタ','scn.blues':'ブルース','scn.major':'メジャー','scn.minor':'ナチュラル・マイナー','scn.hm':'ハーモニック・マイナー','scn.mm':'メロディック・マイナー','scn.pelog':'ペロッグ（バリ）','scn.dor':'ドリアン','scn.phr':'フリジアン','scn.lyd':'リディアン','scn.mix':'ミクソリディアン','scn.loc':'ロクリアン',
 },
 en:{
  app:'GuitarDesk',nav:'Tools','pref.acc':'Accidentals','pref.lab':'Neck labels','pref.deg':'Degrees','pref.name':'Notes',
- 'tab.practice':'Practice log','tab.recorder':'Recorder','tab.tuner':'Tuner','tab.metronome':'Metronome','tab.listen':'Listen','tab.namer':'Chord namer','tab.triads':'Triads','tab.tensions':'Tensions','tab.voicings':'3-note voicings','tab.chords':'Chords','tab.scales':'Scales',
- 'arr.btn':'Arrange','arr.title':'Arrange tabs','arr.hint':'Put what you are practicing at the top and the app will open on that tab. Hide tabs you are not using.','arr.reset':'Reset','arr.done':'Done','arr.show':'Show','arr.up':'Move up','arr.down':'Move down','arr.start':'Opens first',
+ 'tab.tabs':'My tabs (key change)','tb.h':'My tabs (key change)','tb.lead':'Type in a lick or turnaround and convert it to any other key with one click. See each key\'s position on the neck and play it back to check.',
+ 'bl.h':'Blues','bl.lead':'A page for blues practice. Pick a key and the 12-bar progression and the ten turnarounds switch to it. In "My tabs" you can convert any tab you type in to another key.',
+ 'bl.mode':'View','bl.modeA':'10 turnarounds','bl.modeB':'My tabs (key change)','bl.key':'Key','bl.speed':'Playback speed',
+ 'bl.12':'12-bar blues','bl.learn':'How it works →','bl.play12':'Play the 12 bars','bl.12hint':'The last two bars (bars 11 and 12) are the turnaround.',
+ 'bl.turnH':'10 turnarounds','bl.turnHint':'Phrases for the last two bars of the 12-bar form that lead back to the top. They are written in E and converted to the key you pick.',
+ 'tb.pos':'Position','tb.near':'Near the original','tb.low':'Lower','tb.high':'Higher',
+ 'tb.edit':'Enter a tab','tb.inMode':'Input mode','tb.modeG':'Grid','tb.modeT':'Text','tb.chordRow':'Chord',
+ 'tb.cellL':(s,c)=>`String ${s}, column ${c}`,'tb.selInfo':(c,s,l)=>`Selected: column ${c}, string ${s} (${l})`,'tb.selBar':c=>`Selected: column ${c} (bar line)`,
+ 'tb.kh':'Hammer-on','tb.kp':'Pull-off','tb.kb':'Bend','tb.kr':'Release','tb.ksu':'Slide up','tb.ksd':'Slide down','tb.kv':'Vibrato','tb.kx':'Mute','tb.kbs':'Delete one character',
+ 'tb.kL':'Left','tb.kU':'Up a string','tb.kD':'Down a string','tb.kR':'Right','tb.kclr':'Clear cell','tb.kins':'+ Insert column','tb.kdel':'Delete column','tb.kbar':'| Bar line','tb.kadd':'+ 4 columns',
+ 'tb.chordL':'Chord for this column','tb.chordPh':'e.g. E7',
+ 'tb.gridHint':'Tap a cell, then enter the fret with the number buttons (or your keyboard). Type two digits in a row for frets like 12. For h, p, b, / and so on, press it after a number and then type the next number to get "5h7". Empty cells become the space between notes.','tb.new':'New','tb.tpl':'Insert blank tab','tb.titlePh':'Title (e.g. Turnaround in E)','tb.src':'Original key','tb.textL':'Tab input',
+ 'tb.hint':'Type one line per string, from the 1st string (e) at the top to the 6th (E) at the bottom. Lines use the ASCII hyphen "-"; full-width dashes are converted automatically. Numbers are frets; symbols like h, p, b, / and ~ are kept as they are. Chord names (E7, etc.) on the line just above the tab are converted too.',
+ 'tb.save':'Save','tb.saved':n=>`Saved "${n}".`,'tb.out':'Converted','tb.dst':'Convert to key','tb.all':'Show all 12 keys',
+ 'tb.lib':'Saved tabs','tb.libEmpty':'No saved tabs yet.','tb.untitled':'Untitled tab',
+ 'tb.empty':'No tab found. Enter six lines that start with a string name and "|", like "e|---".',
+ 'tb.keyOf':k=>`Key of ${k}`,'tb.play':'▶ Play','tb.stop':'■ Stop','tb.board':'Show on neck','tb.copy':'Copy to My tabs',
+ 'tb.noNotes':'No fret numbers','tb.posOpen':'Position: open strings only','tb.pos2':(a,b)=>`Position: frets ${a}–${b}`,'tb.withOpen':' (with open strings)',
+ 'tab.theory':'Music theory','tab.guide':'How to use','tab.practice':'Practice log','tab.recorder':'Recorder','tab.tuner':'Tuner','tab.metronome':'Metronome','tab.listen':'Listen','tab.namer':'Chord namer','tab.triads':'Triads','tab.tensions':'Tensions','tab.voicings':'3-note voicings','tab.chords':'Chords','tab.scales':'Scales',
+ 'arr.btn':'Arrange','arr.title':'Arrange tabs','arr.hint':'Put what you are practicing at the top and the app will open on that tab. Hide tabs you are not using. The tuner and metronome are always one tap away from the buttons next to the title.','arr.reset':'Reset','arr.done':'Done','arr.show':'Show','arr.up':'Move up','arr.down':'Move down','arr.start':'Opens first',
  'c.root':'Root','c.quality':'Quality','c.set':'Strings','c.inv':'Inversion','c.prev':'Previous position','c.next':'Next position','c.play':'▶ Play','c.chord':'Chord','c.type':'Type','c.key':'Key','c.scale':'Scale','c.shapes':'Shapes (tap to play)','c.all':'All',
  'lg.root':'Root','lg.3':'3rd','lg.5':'5th','lg.7':'7th & tensions','lg.other':'Other','lg.omit':'Omitted','lg.tonic':'Tonic',
  board:'Fretboard',cell:(s,f)=>`String ${s}, fret ${f}`,set:a=>`Strings ${a}`,
@@ -942,11 +1214,18 @@ en:{
  'nm.slash':(b,n)=>`The lowest note is ${b}, so it is written as an inversion of ${n} with "/${b}" (a slash chord).`,'nm.omit5':'The 5th is omitted. It barely changes the sound, so guitarists often leave it out.','nm.omit':l=>`The ${l} is omitted.`,
  'nm.complete':'Every chord tone is present, with the root in the bass.','nm.ambig':'The same notes can take different names depending on the bass note and the surrounding chords. See "Other names" too.',
  'nm.mute':'muted','nm.open0':'open','nm.str':n=>`String ${n}`,'ch.findLink':'To name a shape you are holding, use the Chord namer tab →',
+ 'cf.del':'Delete','cf.q':'Delete this?','cf.yes':'Delete','cf.no':'Cancel','rc.undoQ':'Delete the last take?',
+ 'ft.nav':'Site links','ft.note':'GuitarDesk · Your practice log and recordings are saved in this browser.',
+ 'th.h':'Music theory','th.lead':'Words like diatonic and dominant, explained as simply as possible. Read the lessons in order and press ▶ to hear each idea.','th.lessons':'Lessons',
+ 'th.lessonN':(i,n)=>`Lesson ${i}`,'th.key':'Example key','th.prev':'← Previous','th.next':'Next →','th.read':'Got it','th.progress':(a,n)=>`Lessons understood: ${a} / ${n}`,
+ 'th.gloss':'Glossary','th.search':'Search a word (e.g. dominant)','th.noHit':'No matches. Try another word.','sc.whatDiat':'What are diatonic chords? →',
+ 'gd.h':'How to use','gd.basics':'Basics','gd.tabs':'What each tab does','gd.flow':'A suggested practice routine','gd.faq':'Troubleshooting','gd.open':'Open',
+ 'ls.range':'Listening range','ls.rFull':'Full','ls.rMid':'Low-mid (up to 1 kHz)','ls.rLow':'Bass focus (up to 400 Hz)','ls.rangeHint':'If it picks up noise or high sounds, lower the range. "Bass focus" listens only to low notes and builds the chord around the bass.',
  'pr.h':'Practice log','pr.lead':'Tick off your daily practice menu and jot down what you noticed and what to work on next. Everything is saved in this browser.',
  'pr.streak':n=>`${n}-day streak`,'pr.month':n=>`${n} days this month`,'pr.total':n=>`${n} days total`,'pr.time':'Practice time today','pr.tStart':'▶ Start practice','pr.tPause':'❚❚ Pause',
  'pr.menu':"Today's practice menu",'pr.progress':(a,b)=>`${a} of ${b} done`,'pr.allDone':"You finished today's menu!",'pr.edit':'Edit menu','pr.editDone':'Done editing',
  'pr.add':'Add','pr.addPh':'New practice topic (e.g. Chromatic)','pr.notePh':'Note (target BPM, focus points…)','pr.bpmPh':"Today's BPM",'pr.link':'Opens tab','pr.linkNone':'None',
- 'pr.del':'Delete','pr.delSure':'Really delete','pr.up':'Move up','pr.down':'Move down','pr.empty':'No menu items yet. Add a practice topic below.',
+ 'pr.del':'Delete','pr.up':'Move up','pr.down':'Move down','pr.empty':'No menu items yet. Add a practice topic below.',
  'pr.memo':"Today's notes",'pr.memoPh':"Write anything: what you noticed, what didn't work, what to try next.",'pr.saved':'Saved',
  'pr.goals':'Goals','pr.goalPh':'Something to work on (e.g. A minor pentatonic at 120 BPM)','pr.goalAdd':'Add','pr.goalDone':'Done!','pr.goalOpen':n=>`${n} in progress`,'pr.goalEmpty':'No goals in progress. Add one above.',
  'pr.achieved':n=>`Achieved (${n})`,'pr.since':d=>`Since ${d}`,'pr.took':(a,b,n)=>`${a} → ${b} (${n} day${n===1?'':'s'})`,'pr.reopen':'Reopen','pr.goalText':'Goal',
@@ -955,25 +1234,25 @@ en:{
  'pr.backup':'Backup','pr.export':'Export','pr.import':'Import','pr.backupHint':'Your log lives only in this browser. Export it now and then in case you change phones or clear browser data. Importing replaces the current log with the file (recordings are not included).',
  'pr.imported':'Imported.','pr.importErr':"Couldn't read this file. Choose a file exported from GuitarDesk.",'pr.exported':'Exported.',
  'rc.h':'Recorder','rc.lead':'Record your playing and listen back. Takes are saved in this browser, and you can export them as files.',
- 'rc.retry':'↺ Restart','rc.discard':'✕ Discard','rc.redo':'↺ Record again','rc.undo':'✕ Remove last take','rc.undoSure':'Really remove','rc.undone':'Last take removed.','rc.discarded':'Stopped without saving.',
+ 'rc.retry':'↺ Restart','rc.discard':'✕ Discard','rc.redo':'↺ Record again','rc.undo':'✕ Delete last take','rc.undone':'Last take deleted.','rc.discarded':'Stopped without saving.',
  'rc.recHint':'"Restart" throws away this recording and starts over. "Discard" stops without saving.','rc.doneHint':'"Record again" makes a new recording that replaces the last take once it is saved.','rc.saved':n=>`Saved "${n}".`,
  'rc.rec':'● Record','rc.stop':'■ Stop','rc.cancel':'Cancel','rc.ready':'Ready','rc.count':n=>`Count-in… ${n}`,'rc.recording':'Recording','rc.saving':'Saving…',
  'rc.theme':'Practice topic','rc.themeNone':'None','rc.countL':'Count-in','rc.c0':'Off','rc.c1':'1 bar','rc.c2':'2 bars',
  'rc.click':'Keep the metronome on while recording','rc.clickHint':'The microphone will pick up the click too, so headphones or earphones are recommended.','rc.bpm':(b,s)=>`Metronome: ${b} BPM · ${s}`,'rc.mtLink':'Change in Metronome →',
  'rc.takes':'Takes','rc.empty':'No recordings yet. Press "● Record" to start.','rc.play':'▶ Play','rc.pause':'❚❚ Pause','rc.dl':'⬇ Save','rc.wav':'⬇ WAV','rc.convert':'Converting…',
- 'rc.del':'Delete','rc.delSure':'Really delete','rc.speed':'Speed','rc.loop':'Loop','rc.def':d=>`Take ${d}`,'rc.usage':mb=>`Storage used: about ${mb} MB.`,
+ 'rc.del':'Delete','rc.speed':'Speed','rc.loop':'Loop','rc.def':d=>`Take ${d}`,'rc.usage':mb=>`Storage used: about ${mb} MB.`,
  'rc.note':'Takes are stored in this browser and disappear if you clear its data. Use "Save" to export the ones you want to keep. "WAV" plays in almost any app (the file is larger).',
  'rc.err':"Couldn't use the microphone. Allow microphone access in your browser.",'rc.noRec':"This browser can't record audio. Try the latest Chrome or Safari.",'rc.memOnly':"This browser can't store recordings, so they disappear when you close the page.",'rc.wave':'Waveform (tap to play from there)',
  'ls.h':'Chord listener','ls.lead':'Listens through the microphone to a song on a speaker or to your own playing, and estimates the chord sounding right now. Audio is never saved or sent off this device.',
  'ls.start':'Start listening','ls.stop':'Stop','ls.hold':'Hold','ls.release':'Release','ls.waiting':'Waiting for sound…','ls.listening':'Listening','ls.idle':'Press start to listen','ls.held':'Display held',
  'ls.confL':'Confidence','ls.level':'Input level','ls.bass':b=>`Bass ${b}`,'ls.vocab':'Chords to detect','ls.simple':'Simple (major/minor)','ls.full':'Also 7th, sus4, dim',
  'ls.key':'Estimated key','ls.keyWait':'Shows after a few seconds of listening.','ls.keyNote':'Estimated from the overall balance of notes. Relative major and minor keys share the same notes and are hard to tell apart, so both are shown.','ls.rel':x=>` (relative: ${x})`,'ls.keyOpen':'Open in Scales →','key.maj':n=>`${n} major`,'key.min':n=>`${n} minor`,
- 'ls.shape':'How to play this chord','ls.open':'Open in Chords →','ls.noChord':'A shape appears here once a chord is detected.','ls.hist':'Chord history (tap to open in Chords)','ls.clear':'Clear history','ls.histEmpty':'Nothing yet.',
- 'ls.tipsH':'Tips for better results','ls.tips':['Put the phone near the speaker and keep talking and other noise down.','Songs with simple accompaniment work best; dense band mixes give a rough idea of the chord.','The display lags the music slightly.','If results jump around, switch to "Simple".','Press "Hold" at a tricky spot to freeze the display and study it.','Audio is never saved. The history keeps only chord names and clears when you close the page.'],
+ 'ls.shape':'How to play this chord','ls.open':'Open in Chords →','ls.noChord':'A shape appears here once a chord is detected.','ls.hist':'Chord progression (tap to open in Chords)','ls.clear':'Clear progression','ls.histEmpty':'Nothing yet.',
+ 'ls.tipsH':'Tips for better results','ls.tips':['Put the phone near the speaker and keep talking and other noise down.','Songs with simple accompaniment work best; dense band mixes give a rough idea of the chord.','The display lags the music slightly.','If results jump around, switch to "Simple".','Press "Hold" at a tricky spot to freeze the display and study it.','Audio is never saved. Only chord names are kept as a progression, and they clear when you close the page unless you save them.'],
  'ls.err':"Couldn't use the microphone. Allow microphone access in your browser.",
  'sv.h':'Saved progressions','sv.save':'Save this progression','sv.nameL':'Name','sv.def':d=>`Note ${d}`,'sv.saved':n=>`Saved "${n}". Open it from the list below.`,'sv.empty':'No saved progressions yet. After listening, press "Save this progression" and it will appear here.',
  'sv.note':'Only chord names and timing are saved, never audio. The data stays in this browser and is removed if you clear its site data.',
- 'sv.open':'Open','sv.del':'Delete','sv.delSure':'Really delete','sv.chords':n=>`${n} chords`,'sv.close':'Close','sv.play':'▶ Play','sv.stop':'■ Stop','sv.loop':'Loop','sv.edit':'Remove wrong chords','sv.editDone':'Done editing',
+ 'sv.open':'Open','sv.del':'Delete','sv.chords':n=>`${n} chords`,'sv.close':'Close','sv.play':'▶ Play','sv.stop':'■ Stop','sv.loop':'Loop','sv.edit':'Remove wrong chords','sv.editDone':'Done editing',
  'sv.hint':'Tap a chord to hear it and see how to play it.','sv.hintEdit':'Tap a chord to remove it. Identical neighbors are merged.','sv.speed':x=>`${x}%`,'sv.full':'Storage limit reached. Delete an older progression first.',
  'tri.h':'Triad positions','tri.lead':'Three-note chord shapes on three adjacent strings, shown by inversion. Faint dots are the chord tones on that string set.',
  'q.maj':'Major','q.min':'Minor','q.dim':'Diminished','q.aug':'Augmented','inv.0':'Root position','inv.1':'1st inversion','inv.2':'2nd inversion',
@@ -999,7 +1278,7 @@ en:{
  'w.sev':l=>`${l} sets the chord type (7th, maj7, 6th…). Without it, the chord easily sounds like a different one.`,'w.alt5':l=>`${l} is this chord's signature note. Without it, it drifts toward another chord.`,'w.T9':'In this chord the 13th is the focus, so the 9th can go.','w.T':l=>`${l} gives the chord its name. Without it, that tension's color is gone.`,
  'v3.omitL':l=>`Omit ${l}: `,'v3.eq':e=>`On their own, these three notes also spell <span class="eq">${e}</span>.`,'v3.eqR':(r,n)=>` With the root omitted, it sounds like ${n} once the bass plays ${r}.`,'v3.eqC':n=>` Context and the bass make it heard as ${n}.`,
  'v3.low':b=>`Lowest note in this position: ${b}.`,'v3.chip':(f,b)=>`${f}fr bass ${b}`,
- 'ch.h':'Chords','ch.lead':'Look up shapes and chord tones by name. Pick notes on the neck below to identify a chord.','ch.play':'▶ Play chord tones','ch.board':'Chord tones on the neck','ch.noshape':'No shape found in this range.','ch.playAria':n=>`Play ${n}`,
+ 'ch.h':'Chords','ch.lead':'Look up shapes and chord tones by name, or name a shape you are holding.','ch.mode':'Lookup mode','ch.modeA':'Look up by name','ch.modeB':'Name a shape','ch.play':'▶ Play chord tones','ch.board':'Chord tones on the neck','ch.noshape':'No shape found in this range.','ch.playAria':n=>`Play ${n}`,
  'id.h':'Chord finder','id.hint':'Tap a fret on each string. The leftmost column is the open string. Tap the same spot again to mute it.','id.clear':'Clear','id.notes':'Notes: ','id.pick':'Pick some notes','id.none':'No match',
  'sc.h':'Scales','sc.lead':'Pick a key and scale to see every note up to the 15th fret. Seven-note scales also list their diatonic chords.','sc.play':'▶ Play ascending','sc.diat':'Diatonic chords (tap to open in Chords)',
  'scn.pm':'Minor pentatonic','scn.pM':'Major pentatonic','scn.blues':'Blues','scn.major':'Major','scn.minor':'Natural minor','scn.hm':'Harmonic minor','scn.mm':'Melodic minor','scn.pelog':'Pelog (Balinese)','scn.dor':'Dorian','scn.phr':'Phrygian','scn.lyd':'Lydian','scn.mix':'Mixolydian','scn.loc':'Locrian',
@@ -1012,7 +1291,7 @@ const S={lang:store.get('lang','ja'),acc:store.get('acc','s'),lab:store.get('lab
   ch:{root:0,type:'',sel:[-1,3,2,0,1,0]},
   sc:{root:9,type:'pm'},
   tu:{tuning:'std',a4:440},
-  ls:{vocab:store.get('lsVocab','simple')}};
+  ls:{vocab:store.get('lsVocab','simple'),range:store.get('lsRange','full')}};
 function t(k,...a){const d=I18N[S.lang]||I18N.ja;let v=d[k]!==undefined?d[k]:I18N.ja[k];if(v===undefined)return k;return typeof v==='function'?v(...a):v}
 const $=id=>document.getElementById(id);
 function applyStatic(){
@@ -1500,7 +1779,7 @@ function mtStop(){
   document.querySelectorAll('#mtBeats .beat.now').forEach(b=>b.classList.remove('now'));$('mtPanel').classList.remove('silent','pulse','pulseA');mtLabels()}
 function mtLabels(){
   const g=$('mtGo');g.textContent=MT.on?t('mt.stop'):t('mt.start');g.classList.toggle('on',MT.on);
-  $('mtMini').hidden=!MT.on;$('mtMiniTxt').textContent=MT.bpm;
+  $('mtMini').hidden=!MT.on;$('mtMiniTxt').textContent=MT.bpm;$('hbMetro').classList.toggle('run',MT.on);
   if(!MT.on){$('mtPos').textContent=t('mt.ready');$('mtTr').textContent=''}}
 function tempoMark(b){return b<40?'Grave':b<60?'Largo':b<66?'Larghetto':b<76?'Adagio':b<108?'Andante':b<120?'Moderato':b<156?'Allegro':b<176?'Vivace':b<200?'Presto':'Prestissimo'}
 function mtTempoUI(){
@@ -1615,6 +1894,7 @@ function stopMic(){micOn=false;if(stream)stream.getTracks().forEach(x=>x.stop())
 $('micBtn').onclick=()=>micOn?stopMic():startMic();
 
 /* ================= LISTENER (live chord estimate) ================= */
+const LS_RANGE={full:{hz:8000,lo:36,hi:84,bassHi:64,bw:.16},mid:{hz:1100,lo:30,hi:79,bassHi:60,bw:.2},low:{hz:420,lo:28,hi:67,bassHi:52,bw:.32}};
 const LS_TYPES={simple:['','m'],full:['','m','7','M7','m7','sus4','dim']};
 const KPROF={maj:[6.35,2.23,3.48,2.33,4.38,4.09,2.52,5.19,2.39,3.66,2.29,2.88],min:[6.33,2.68,3.52,5.38,2.60,3.53,2.54,4.75,3.98,2.69,3.34,3.17]};
 const LS={on:false,held:false,stream:null,an:null,fbuf:null,tbuf:null,timer:null,
@@ -1635,15 +1915,15 @@ function lsFrame(){
   if(rms<.006){LS.cand=null;LS.candN=0;if(!LS.held){$('lsStatus').textContent=t('ls.waiting')}return}
   if(!LS.held)$('lsStatus').textContent=t('ls.listening');
   an.getFloatFrequencyData(LS.fbuf);
-  // semitone spectrum (MIDI 36..96), then remove the strongest overtones of lower notes
-  const sp=new Float32Array(100);
-  for(let k=Math.ceil(62/bin);k<=Math.floor(2100/bin);k++){
+  // semitone spectrum, then remove the strongest overtones of lower notes. Range limits which notes are heard.
+  const RG=LS_RANGE[S.ls.range]||LS_RANGE.mid,sp=new Float32Array(110);
+  for(let k=Math.ceil(38/bin);k<=Math.floor(Math.min(2100,RG.hz*1.1)/bin);k++){
     const db=LS.fbuf[k];if(!(db>-95))continue;const f=k*bin,m=69+12*Math.log2(f/S.tu.a4),r=Math.round(m),dev=m-r;
-    if(r<36||r>96)continue;const w=Math.exp(-(dev*dev)/(2*.12*.12));if(w<.05)continue;sp[r]+=Math.sqrt(Math.pow(10,db/20))*w}
+    if(r<RG.lo||r>96)continue;const w=Math.exp(-(dev*dev)/(2*.12*.12));if(w<.05)continue;sp[r]+=Math.sqrt(Math.pow(10,db/20))*w}
   const cl=Float32Array.from(sp);
-  for(let m=36;m<=96;m++){const e=cl[m];if(e<=0)continue;[[12,.6],[19,.5],[24,.4],[28,.35],[31,.3]].forEach(([d,g])=>{if(m+d<100)cl[m+d]=Math.max(0,cl[m+d]-e*g)})}
+  for(let m=RG.lo;m<=96;m++){const e=cl[m];if(e<=0)continue;[[12,.6],[19,.5],[24,.4],[28,.35],[31,.3]].forEach(([d,g])=>{if(m+d<110)cl[m+d]=Math.max(0,cl[m+d]-e*g)})}
   const c=new Float32Array(12),b=new Float32Array(12);
-  for(let m=36;m<=84;m++){const pc=m%12;c[pc]+=cl[m];if(m<=64)b[pc]+=cl[m]*Math.pow(1.12,40-m)}
+  for(let m=RG.lo;m<=RG.hi;m++){const pc=m%12;c[pc]+=cl[m];if(m<=RG.bassHi)b[pc]+=cl[m]*Math.pow(1.12,40-m)}
   const cs=c.reduce((a,x)=>a+x,0)||1,bs=Math.max(...b)||1;
   for(let j=0;j<12;j++){LS.chroma[j]=LS.chroma[j]*.6+(c[j]/cs)*.4;LS.bass[j]=LS.bass[j]*.6+(b[j]/bs)*.4;LS.keyAcc[j]=LS.keyAcc[j]*.997+c[j]/cs}
   LS.keyFrames++;
@@ -1652,13 +1932,13 @@ function lsFrame(){
   if(!LS_T)LS_T=lsTemplates();
   let best=null,second=-9;
   const cmax=Math.max(...LS.chroma)||1;
-  LS_T.forEach(tp=>{if(tp.pcs.length>3||tp.pen){const lo=Math.min(...tp.pcs.map(q=>LS.chroma[q]));if(lo<.4*cmax)return}let sc=0;for(let j=0;j<12;j++)sc+=x[j]*tp.v[j];sc=sc/nx-tp.pen+.16*LS.bass[tp.r];
+  LS_T.forEach(tp=>{if(tp.pcs.length>3||tp.pen){const lo=Math.min(...tp.pcs.map(q=>LS.chroma[q]));if(lo<.4*cmax)return}let sc=0;for(let j=0;j<12;j++)sc+=x[j]*tp.v[j];sc=sc/nx-tp.pen+(LS_RANGE[S.ls.range]||LS_RANGE.mid).bw*LS.bass[tp.r];
     if(!best||sc>best.sc){if(best)second=Math.max(second,best.sc);best={...tp,sc}}else if(sc>second)second=sc});
   const conf=Math.max(0,Math.min(1,(best.sc-.35)/.45*.6+(best.sc-second)*4));
   LS.conf=LS.conf*.7+conf*.3;
   const key=best.r+'|'+best.k;
   if(key===LS.cand)LS.candN++;else{LS.cand=key;LS.candN=1}
-  if(!LS.held&&LS.candN>=4&&best.sc>.42&&(!LS.shown||LS.shown.key!==key)){
+  if(!LS.held&&LS.candN>=5&&best.sc>.42&&(!LS.shown||LS.shown.key!==key)){
     LS.shown={key,r:best.r,k:best.k};
     {const last=LS.hist[LS.hist.length-1];if(!last||last.key!==key){LS.hist.push({key,r:best.r,k:best.k,t:(performance.now()-LS.t0)/1000});if(LS.hist.length>60)LS.hist.shift()}
       lsShowChord();lsRenderHist()}}
@@ -1702,7 +1982,8 @@ LS.start=async function(){
     if(micOn)stopMic();
     ac();LS.stream=await navigator.mediaDevices.getUserMedia({audio:{echoCancellation:false,noiseSuppression:false,autoGainControl:false}});
     const src=AC.createMediaStreamSource(LS.stream);LS.an=AC.createAnalyser();LS.an.fftSize=16384;LS.an.smoothingTimeConstant=0;
-    LS.fbuf=new Float32Array(LS.an.frequencyBinCount);LS.tbuf=new Float32Array(4096);src.connect(LS.an);
+    LS.hp=AC.createBiquadFilter();LS.hp.type='highpass';LS.hp.frequency.value=35;LS.lp=AC.createBiquadFilter();LS.lp.type='lowpass';LS.lp.Q.value=.7;LS.lp.frequency.value=(LS_RANGE[S.ls.range]||LS_RANGE.mid).hz;src.connect(LS.hp);LS.hp.connect(LS.lp);
+    LS.fbuf=new Float32Array(LS.an.frequencyBinCount);LS.tbuf=new Float32Array(4096);LS.lp.connect(LS.an);
     LS.on=true;LS.held=false;LS.t0=performance.now();LS.chroma.fill(0);LS.bass.fill(0);LS.keyAcc.fill(0);LS.keyFrames=0;LS.cand=null;LS.conf=0;
     LS.timer=setInterval(lsFrame,100);lsLabels();
   }catch(e){err.hidden=false;err.textContent=t('ls.err')}};
@@ -1727,19 +2008,17 @@ $('lsSaveBtn').onclick=()=>{
     key:LS.key?{r:LS.key.r,q:LS.key.q}:null,prog:LS.hist.map(h=>({r:h.r,k:h.k,t:Math.round(h.t*10)/10}))};
   a.unshift(item);if(!svStore(a)){$('lsSaveMsg').textContent=t('sv.full');return}
   $('lsSaveMsg').textContent=t('sv.saved',name);$('lsSaveName').value='';lsRenderSaved()};
-let svArm=null;
+const svS={arm:null};
 function lsRenderSaved(){
   const L=$('lsSaved'),a=svLoad();L.innerHTML='';
   if(!a.length){L.innerHTML=`<li style="display:block"><span class="hint">${t('sv.empty')}</span></li>`;return}
   a.forEach(it=>{const li=document.createElement('li');
     const keyTxt=it.key?' · '+t(it.key.q==='maj'?'key.maj':'key.min',nn(it.key.r)):'';
     li.innerHTML=`<div style="min-width:0;display:grid;gap:2px"><span class="nm"></span><span class="meta">${fmtDate(it.at)} · ${t('sv.chords',it.prog.length)}${keyTxt}</span><span class="prog">${it.prog.map(chName).join(' → ')}</span></div>`+
-      `<div class="acts"><button type="button" class="btn sm" data-a="open">${t('sv.open')}</button><button type="button" class="btn ghost sm danger${svArm===it.id?' armed':''}" data-a="del">${svArm===it.id?t('sv.delSure'):t('sv.del')}</button></div>`;
+      `<div class="acts"><button type="button" class="btn sm" data-a="open">${t('sv.open')}</button>${delCtl(svS.arm===it.id)}</div>`;
     li.querySelector('.nm').textContent=it.name;
     li.querySelector('[data-a=open]').onclick=()=>plOpen(it.id);
-    li.querySelector('[data-a=del]').onclick=()=>{
-      if(svArm!==it.id){svArm=it.id;lsRenderSaved();setTimeout(()=>{if(svArm===it.id){svArm=null;lsRenderSaved()}},4000);return}
-      svArm=null;svStore(svLoad().filter(x=>x.id!==it.id));if(PL.id===it.id)plClose();lsRenderSaved()};
+    wireDel(li,svS,'arm',it.id,lsRenderSaved,()=>{svStore(svLoad().filter(x=>x.id!==it.id));if(PL.id===it.id)plClose();lsRenderSaved()});
     L.appendChild(li)})}
 /* player */
 const PL={id:null,playing:false,timer:null,idx:-1,speed:100,edit:false};
@@ -1784,6 +2063,7 @@ $('plEdit').onclick=()=>{PL.edit=!PL.edit;if(PL.edit)plStop();renderPl()};
 $('plName').addEventListener('change',e=>{const v=e.target.value.trim();if(!v)return;plUpdate(x=>{x.name=v});lsRenderSaved()});
 
 function renderLs(){
+  chips($('lsRange'),['full','mid','low'].map(v=>({v,t:t(v==='full'?'ls.rFull':v==='mid'?'ls.rMid':'ls.rLow')})),S.ls.range,v=>{S.ls.range=v;store.set('lsRange',v);if(LS.lp)LS.lp.frequency.value=LS_RANGE[v].hz;renderLs()});
   chips($('lsVocab'),[{v:'simple',t:t('ls.simple')},{v:'full',t:t('ls.full')}],S.ls.vocab,v=>{S.ls.vocab=v;store.set('lsVocab',v);LS_T=null;renderLs()});
   $('lsTips').innerHTML=t('ls.tips').map(x=>`<li>${x}</li>`).join('');
   lsLabels();lsShowChord();lsRenderHist();lsRenderKey();lsRenderSaved();if(PL.id)renderPl()}
@@ -1795,6 +2075,9 @@ const dkey=(d=new Date())=>`${d.getFullYear()}-${pad2(d.getMonth()+1)}-${pad2(d.
 const LOC=()=>S.lang==='ja'?'ja-JP':'en-US';
 const fmtDur=x=>{x=Math.floor(x||0);const h=Math.floor(x/3600),m=Math.floor(x%3600/60),c=x%60;return h?`${h}:${pad2(m)}:${pad2(c)}`:`${m}:${pad2(c)}`};
 function saveBlob(blob,name){const u=URL.createObjectURL(blob),a=document.createElement('a');a.href=u;a.download=name;a.rel='noopener';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),8000)}
+function delCtl(armed,lab,q,yes){return armed?`<span class="cfm" role="group"><span class="q">${q||t('cf.q')}</span><button type="button" class="btn sm dangerFill" data-a="yes">${yes||t('cf.yes')}</button><button type="button" class="btn ghost sm" data-a="no">${t('cf.no')}</button></span>`:`<button type="button" class="btn ghost sm danger" data-a="del">${lab||t('cf.del')}</button>`}
+function wireDel(el,state,key,id,render,doIt){const d=el.querySelector('[data-a=del]');if(d)d.onclick=()=>{state[key]=id;render();const y=el.querySelector('[data-a=yes]');if(y)y.focus()};
+  const y=el.querySelector('[data-a=yes]');if(y)y.onclick=()=>{state[key]=null;doIt()};const n=el.querySelector('[data-a=no]');if(n)n.onclick=()=>{state[key]=null;render()}}
 function armBtn(state,key,id,render){if(state[key]!==id){state[key]=id;render();setTimeout(()=>{if(state[key]===id){state[key]=null;render()}},4000);return false}state[key]=null;return true}
 const CHK='<svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>';
 
@@ -1809,8 +2092,8 @@ function prActive(k){const d=PR.log[k];return !!d&&((d.done||[]).length>0||(d.me
 function prStreak(){let n=0;const d=new Date();if(!prActive(dkey(d)))d.setDate(d.getDate()-1);while(prActive(dkey(d))){n++;d.setDate(d.getDate()-1)}return n}
 const prTodaySec=()=>((PR.log[dkey()]||{}).sec||0)+(PRS.timer?(performance.now()-PRS.tStart)/1000:0);
 function prFlush(){if(!PRS.timer)return;const now=performance.now();prDay().sec+=(now-PRS.tStart)/1000;PRS.tStart=now;prSave()}
-function prTimerUI(){$('prTime').textContent=fmtDur(prTodaySec());const b=$('prTimerBtn');b.textContent=PRS.timer?t('pr.tPause'):t('pr.tStart');b.classList.toggle('ghost',!!PRS.timer)}
-$('prTimerBtn').onclick=()=>{if(PRS.timer){prFlush();clearInterval(PRS.timer);PRS.timer=null;renderPr()}else{PRS.tStart=performance.now();PRS.timer=setInterval(()=>{$('prTime').textContent=fmtDur(prTodaySec());if(++PRS.n%15===0)prFlush()},1000)}prTimerUI()};
+function prTimerUI(){}
+
 window.addEventListener('pagehide',prFlush);document.addEventListener('visibilitychange',()=>{if(document.hidden)prFlush()});
 function renderPr(){
   const now=new Date();
@@ -1831,16 +2114,16 @@ function prRenderMenu(){
     if(PRS.edit){
       li.innerHTML=`<div class="ord"><button type="button" class="ib" data-a="up" aria-label="${t('pr.up')}"${i===0?' disabled':''}>↑</button><button type="button" class="ib" data-a="down" aria-label="${t('pr.down')}"${i===n-1?' disabled':''}>↓</button></div>`+
         `<div class="ef"><input type="text" class="tin" data-f="name" maxlength="60" aria-label="${t('pr.menu')}"><input type="text" class="tin sm" data-f="note" maxlength="140" placeholder="${esc(t('pr.notePh'))}" aria-label="${esc(t('pr.notePh'))}"><label class="small muted" style="display:flex;gap:6px;align-items:center">${t('pr.link')} <select data-f="link"></select></label></div>`+
-        `<button type="button" class="btn ghost sm danger${PRS.armed===it.id?' armed':''}" data-a="del">${PRS.armed===it.id?t('pr.delSure'):t('pr.del')}</button>`;
+        `<div class="delc">${delCtl(PRS.armed===it.id)}</div>`;
       const nm=li.querySelector('[data-f=name]'),nt=li.querySelector('[data-f=note]'),sel=li.querySelector('select');
       nm.value=it.name;nt.value=it.note||'';
-      sel.innerHTML=`<option value="">${t('pr.linkNone')}</option>`+TABDEF.filter(x=>x!=='practice').map(x=>`<option value="${x}"${x===it.link?' selected':''}>${t('tab.'+x)}</option>`).join('');
+      sel.innerHTML=`<option value="">${t('pr.linkNone')}</option>`+LINKABLE.map(x=>`<option value="${x}"${x===it.link?' selected':''}>${t('tab.'+x)}</option>`).join('');
       nm.onchange=()=>{const v=nm.value.trim();if(v){it.name=v;prSave()}else nm.value=it.name};
       nt.onchange=()=>{it.note=nt.value.trim();prSave()};
       sel.onchange=()=>{it.link=sel.value;prSave()};
       li.querySelector('[data-a=up]').onclick=()=>{[PR.items[i-1],PR.items[i]]=[PR.items[i],PR.items[i-1]];prSave();prRenderMenu()};
       li.querySelector('[data-a=down]').onclick=()=>{[PR.items[i+1],PR.items[i]]=[PR.items[i],PR.items[i+1]];prSave();prRenderMenu()};
-      li.querySelector('[data-a=del]').onclick=()=>{if(!armBtn(PRS,'armed',it.id,prRenderMenu))return;PR.items.splice(i,1);prSave();renderPr()};
+      wireDel(li,PRS,'armed',it.id,prRenderMenu,()=>{PR.items.splice(i,1);prSave();renderPr()});
     }else{
       li.innerHTML=`<button type="button" class="chk" role="checkbox" aria-checked="${isD}">${CHK}</button><div style="min-width:0"><div class="mname"></div><div class="mnote"></div></div>`+
         `<div class="mside"><input type="text" inputmode="numeric" class="bpmIn" maxlength="4" placeholder="BPM" aria-label="${esc(t('pr.bpmPh'))}">${it.link?`<button type="button" class="btn ghost sm" data-a="go">${t('tab.'+it.link)} →</button>`:''}</div>`;
@@ -1864,11 +2147,11 @@ function prRenderGoals(){
   const row=(g,isAch)=>{const li=document.createElement('li');if(isAch)li.className='ach';
     const days=isAch?Math.max(1,Math.round((new Date(dkey(new Date(g.doneAt))+'T00:00')-new Date(dkey(new Date(g.at))+'T00:00'))/864e5)+1):0;
     li.innerHTML=`<div style="min-width:0"><input type="text" class="tkName" maxlength="140" aria-label="${esc(t('pr.goalText'))}"><div class="meta">${isAch?t('pr.took',shortDate(g.at),shortDate(g.doneAt),days):t('pr.since',shortDate(g.at))}</div></div>`+
-      `<div class="acts">${isAch?`<button type="button" class="btn ghost sm" data-a="re">${t('pr.reopen')}</button>`:`<button type="button" class="btn sm okb" data-a="ok">${t('pr.goalDone')}</button>`}<button type="button" class="btn ghost sm danger${PRS.armed===g.id?' armed':''}" data-a="del">${PRS.armed===g.id?t('pr.delSure'):t('pr.del')}</button></div>`;
+      `<div class="acts">${PRS.armed===g.id?delCtl(true):(isAch?`<button type="button" class="btn ghost sm" data-a="re">${t('pr.reopen')}</button>`:`<button type="button" class="btn sm okb" data-a="ok">${t('pr.goalDone')}</button>`)+delCtl(false)}</div>`;
     const inp=li.querySelector('.tkName');inp.value=g.text;inp.onchange=()=>{const v=inp.value.trim();if(v){g.text=v;prSave()}else inp.value=g.text};
     const ok=li.querySelector('[data-a=ok]');if(ok)ok.onclick=()=>{g.doneAt=Date.now();prSave();prRenderGoals()};
     const re=li.querySelector('[data-a=re]');if(re)re.onclick=()=>{g.doneAt=null;prSave();prRenderGoals()};
-    li.querySelector('[data-a=del]').onclick=()=>{if(!armBtn(PRS,'armed',g.id,prRenderGoals))return;PR.goals=PR.goals.filter(x=>x.id!==g.id);prSave();prRenderGoals()};
+    wireDel(li,PRS,'armed',g.id,prRenderGoals,()=>{PR.goals=PR.goals.filter(x=>x.id!==g.id);prSave();prRenderGoals()});
     return li};
   open.forEach(g=>G.appendChild(row(g,false)));
   const A=$('prAch'),ab=$('prAchBtn');ab.hidden=!ach.length;ab.textContent=(PRS.showAch?'▾ ':'▸ ')+t('pr.achieved',ach.length);ab.setAttribute('aria-expanded',String(PRS.showAch));
@@ -1894,7 +2177,6 @@ function prRenderDay(){
   else{
     if(x&&x.done&&x.done.length){const names=x.done.map(id=>{const it=PR.items.find(i=>i.id===id);if(!it)return null;const b=x.bpm&&x.bpm[id];return esc(it.name)+(b?` <span class="muted">(${esc(b)} BPM)</span>`:'')}).filter(Boolean);
       if(names.length)h+=`<div><span class="small muted">${t('pr.dayDone')}</span><ul>${names.map(z=>`<li>${z}</li>`).join('')}</ul></div>`}
-    if(x&&(x.sec||0)>=60)h+=`<div class="small">${t('pr.dayTime',fmtDur(x.sec))}</div>`;
     if(x&&(x.memo||'').trim())h+=`<div><span class="small muted">${t('pr.dayMemo')}</span><div class="memo">${esc(x.memo)}</div></div>`;
     if(takes.length)h+=`<div><span class="small muted">${t('pr.dayTakes')}</span><ul>${takes.map(tk=>`<li><a href="#recorder" style="color:var(--accent)">${esc(tk.name)}</a> <span class="muted small">${fmtDur(tk.dur)}</span></li>`).join('')}</ul></div>`}
   D.innerHTML=h}
@@ -1922,8 +2204,8 @@ function recUI(){
   $('rcTime').textContent=fmtDur(el)+'.'+Math.floor((el%1)*10);
   $('rcStatus').textContent=s==='rec'?t('rc.recording'):s==='count'?t('rc.count',Math.max(1,Math.ceil((REC.countEnd-performance.now())/1000*MT.bpm/60))):s==='saving'?t('rc.saving'):t('rc.ready');
   const hasLast=s==='idle'&&REC.lastId&&REC.takes.some(x=>x.id===REC.lastId);if(!hasLast&&s==='idle')REC.lastId=null;
-  $('rcRetry').hidden=$('rcDiscard').hidden=s!=='rec';$('rcRedo').hidden=$('rcUndo').hidden=!hasLast;
-  $('rcUndo').textContent=REC.undoArm?t('rc.undoSure'):t('rc.undo');$('rcUndo').classList.toggle('armed',REC.undoArm);
+  $('rcRetry').hidden=$('rcDiscard').hidden=s!=='rec';$('rcRedo').hidden=REC.undoArm||!hasLast;
+  const uw=$('rcUndoWrap');uw.hidden=!hasLast;if(hasLast){uw.innerHTML=delCtl(REC.undoArm,t('rc.undo'),t('rc.undoQ'));wireDel(uw,REC,'undoArm',true,recUI,recUndo)}else{uw.innerHTML='';REC.undoArm=false}
   $('rcMsg').textContent=s==='rec'?t('rc.recHint'):(REC.msg||(hasLast?t('rc.doneHint'):''));
   b.textContent=s==='idle'?t('rc.rec'):s==='count'?t('rc.cancel'):t('rc.stop');b.disabled=s==='saving'||s==='starting';b.classList.toggle('rec',s==='idle');b.classList.toggle('ghost',s!=='idle');
   if(s==='rec'&&el>900)recStop()}
@@ -1970,10 +2252,9 @@ function recAbort(restart){if(REC.state!=='rec')return;REC.discard=true;REC.rest
 $('rcRetry').onclick=()=>recAbort(true);
 $('rcDiscard').onclick=()=>recAbort(false);
 $('rcRedo').onclick=()=>{if(!REC.lastId)return;REC.replaceId=REC.lastId;recStart()};
-$('rcUndo').onclick=()=>{const id=REC.lastId;if(!id)return;
-  if(!REC.undoArm){REC.undoArm=true;recUI();setTimeout(()=>{if(REC.undoArm){REC.undoArm=false;recUI()}},4000);return}
+function recUndo(){const id=REC.lastId;if(!id)return;
   REC.undoArm=false;if(REC.playId===id){REC.audio.pause();REC.playId=null}REC.takes=REC.takes.filter(x=>x.id!==id);if(!REC.mem)idbDel(id).catch(()=>{});
-  REC.lastId=null;REC.msg=t('rc.undone');recRenderList();recUI();prRenderDay()};
+  REC.lastId=null;REC.msg=t('rc.undone');recRenderList();recUI();prRenderDay()}
 const extOf=m=>/mp4|aac|m4a/.test(m)?'m4a':/webm/.test(m)?'webm':/ogg/.test(m)?'ogg':/wav/.test(m)?'wav':'audio';
 const fileBase=n=>(n||'take').replace(/[\\/:*?"<>|]+/g,'_').trim()||'take';
 function wavEncode(buf){
@@ -2007,14 +2288,13 @@ function recRenderList(){
     const li=document.createElement('li');li.className='take';li.dataset.id=tk.id;const th=PR.items.find(i=>i.id===tk.theme);
     li.innerHTML=`<input type="text" class="tkName" maxlength="60" aria-label="${esc(t('sv.nameL'))}"><div class="meta">${fmtDate(tk.at)} · ${fmtDur(tk.dur)} · ${tk.size<1048576?Math.max(1,Math.round(tk.size/1024))+'KB':(tk.size/1048576).toFixed(1)+'MB'}${th?' · '+esc(th.name):''}</div>`+
       `<canvas class="wave" role="img" aria-label="${esc(t('rc.wave'))}"></canvas>`+
-      `<div class="row" style="gap:6px"><button type="button" class="btn sm" data-a="play"></button><button type="button" class="btn ghost sm" data-a="dl">${t('rc.dl')}</button><button type="button" class="btn ghost sm" data-a="wav">${t('rc.wav')}</button><button type="button" class="btn ghost sm danger${REC.armed===tk.id?' armed':''}" data-a="del">${REC.armed===tk.id?t('rc.delSure'):t('rc.del')}</button></div>`;
+      `<div class="row" style="gap:6px"><button type="button" class="btn sm" data-a="play"></button><button type="button" class="btn ghost sm" data-a="dl">${t('rc.dl')}</button><button type="button" class="btn ghost sm" data-a="wav">${t('rc.wav')}</button>${delCtl(REC.armed===tk.id)}</div>`;
     const nm=li.querySelector('.tkName');nm.value=tk.name;nm.onchange=()=>{const v=nm.value.trim();if(!v){nm.value=tk.name;return}tk.name=v;if(!REC.mem)idbPut(tk).catch(()=>{});prRenderDay()};
     li.querySelector('[data-a=play]').onclick=()=>recPlay(tk.id);
     li.querySelector('canvas').onclick=e=>{const r=e.currentTarget.getBoundingClientRect();recPlay(tk.id,Math.max(0,Math.min(.999,(e.clientX-r.left)/r.width)))};
     li.querySelector('[data-a=dl]').onclick=()=>saveBlob(tk.blob,`${fileBase(tk.name)}.${extOf(tk.mime)}`);
     li.querySelector('[data-a=wav]').onclick=async e=>{const b=e.currentTarget;b.disabled=true;b.textContent=t('rc.convert');try{ac();const buf=await AC.decodeAudioData(await tk.blob.arrayBuffer());saveBlob(wavEncode(buf),`${fileBase(tk.name)}.wav`)}catch(err){}b.disabled=false;b.textContent=t('rc.wav')};
-    li.querySelector('[data-a=del]').onclick=()=>{if(!armBtn(REC,'armed',tk.id,recRenderList))return;
-      if(REC.playId===tk.id){REC.audio.pause();REC.playId=null}REC.takes=REC.takes.filter(x=>x.id!==tk.id);if(!REC.mem)idbDel(tk.id).catch(()=>{});recRenderList();prRenderDay()};
+    wireDel(li,REC,'armed',tk.id,recRenderList,()=>{if(REC.playId===tk.id){REC.audio.pause();REC.playId=null}REC.takes=REC.takes.filter(x=>x.id!==tk.id);if(!REC.mem)idbDel(tk.id).catch(()=>{});if(REC.lastId===tk.id)REC.msg='';recRenderList();prRenderDay()});
     L.appendChild(li)});
   recButtons();requestAnimationFrame(recDrawAll);if(REC.state==='idle')recUI();
   let note=t('rc.note');if(REC.mem)note=t('rc.memOnly')+' '+note;$('rcNote').textContent=note;
@@ -2028,20 +2308,567 @@ function renderRec(){
 $('rcTheme').onchange=e=>{REC.theme=e.target.value;store.set('rc.theme',REC.theme)};
 $('rcClick').onchange=e=>{REC.click=e.target.checked;store.set('rc.click',REC.click?'1':'0')};
 $('rcLoop').onchange=e=>{REC.loop=e.target.checked;REC.audio.loop=REC.loop};
-window.addEventListener('resize',()=>{if(currentTab()==='recorder')recDrawAll()});
+window.addEventListener('resize',()=>{if(currentTab()==='practice')recDrawAll()});
 (async()=>{try{const all=await idbAll();REC.takes=all.sort((a,b)=>b.at-a.at)}catch(e){REC.mem=true}recRenderList();prRenderDay()})();
 
+/* ================= MUSIC THEORY ================= */
+const TH={lesson:Math.max(0,+store.get('th.lesson',0)||0),key:+store.get('th.key',0)||0,read:jget('th.read',[]),q:'',seqT:[]};
+if(!Array.isArray(TH.read))TH.read=[];
+const TH_KEYS=[0,7,2,9,4,5];
+const thCh=(r,k)=>{r=((r%12)+12)%12;const c=chordByK(k)||chordByK('');const v=chordVoicings(r,c)[0];return v?v.frets.map((f,s)=>f<0?null:STD[s]+f).filter(x=>x!=null):c.iv.map(i=>48+r+i)};
+const pb=(lab,ms,mode)=>`<button type="button" class="btn ghost sm" data-play="${ms.join(',')}" data-mode="${mode||'arp'}">▶ ${lab}</button>`;
+const sq=(lab,chs,gap,beats,hl)=>`<button type="button" class="btn sm" data-seq='${JSON.stringify(chs)}' data-gap="${gap||1.3}" data-beats="${beats||1}"${hl?` data-hl="${hl}"`:''}>▶ ${lab}</button>`;
+const tl=tab=>`<a class="tlink" href="#${tab}">${t('tab.'+tab)} →</a>`;
+const ll=(i,lab)=>`<a class="tlink" href="#theory" data-lesson="${i}">${lab} →</a>`;
+const MAJ7=[0,2,4,5,7,9,11],DQ=['','m','m','','','m','dim'],D7=['M7','m7','m7','M7','7','m7','m7♭5'],RN=['I','ii','iii','IV','V','vi','vii°'],FN=['T','S','T','S','D','T','D'];
+const bar12=k=>[0,0,0,0,5,5,0,0,7,5,0,7].map(x=>(k+x)%12);
+const IVROWS=[[0,'R'],[1,'♭2'],[2,'2'],[3,'♭3'],[4,'3'],[5,'4'],[6,'♭5'],[7,'5'],[8,'♭6'],[9,'6'],[10,'♭7'],[11,'7'],[12,'8']];
+const IVFEEL={ja:['同じ音（基準）','ぶつかる・不安','となりの音','暗い（マイナー）','明るい（メジャー）','開けた感じ','不安定（トライトーン）','力強く安定（パワーコード）','切ない','やわらかい','ブルージー','おしゃれ・浮遊感','同じ名前の音'],
+  en:['the same note (reference)','clashing, uneasy','the next note up','dark (minor)','bright (major)','open','unstable (the tritone)','strong and stable (power chord)','bittersweet','soft','bluesy','dreamy, jazzy','the same note name']};
+const IVNAME={ja:['ルート','短2度','長2度','短3度','長3度','完全4度','増4度／減5度','完全5度','短6度','長6度','短7度','長7度','オクターブ'],
+  en:['root','minor 2nd','major 2nd','minor 3rd','major 3rd','perfect 4th','tritone','perfect 5th','minor 6th','major 6th','minor 7th','major 7th','octave']};
+function thFnName(f,L){return L==='ja'?{T:'トニック（家）',S:'サブドミナント（おでかけ）',D:'ドミナント（帰り道）'}[f]:{T:'Tonic (home)',S:'Subdominant (going out)',D:'Dominant (heading home)'}[f]}
+function thDiatTable(k,L){
+  let h=`<div class="tblWrap"><table class="thTbl"><thead><tr><th>${L==='ja'?'番号':'No.'}</th><th>${L==='ja'?'コード':'Chord'}</th><th>${L==='ja'?'セブンス':'Seventh'}</th><th>${L==='ja'?'役割':'Role'}</th><th></th></tr></thead><tbody>`;
+  MAJ7.forEach((iv,i)=>{const r=(k+iv)%12;h+=`<tr><td class="mono">${RN[i]}</td><td class="mono"><b>${nn(r)}${DQ[i]}</b></td><td class="mono">${nn(r)}${D7[i]}</td><td><span class="fn fn${FN[i]}">${thFnName(FN[i],L)}</span></td><td>${pb('',thCh(r,DQ[i]),'strum')}</td></tr>`});
+  return h+'</tbody></table></div>'}
+const LESSONS=[
+{ja:{t:'音の名前と半音・全音',b:k=>`
+<p>音の名前は<b>12個</b>しかありません。Cから半音ずつ上がっていくと、12個目の次はまたCに戻ります。これが<b>1オクターブ</b>です。</p>
+<div class="noteRow">${[...Array(12)].map((_,i)=>`<span>${nn(i)}</span>`).join('')}</div>
+<p>${pb('Cから半音ずつ鳴らす',[...Array(13)].map((_,i)=>48+i),'fast')}</p>
+<div class="analogy"><b>ドレミとの対応</b>　C＝ド、D＝レ、E＝ミ、F＝ファ、G＝ソ、A＝ラ、B＝シ</div>
+<h4>ギターでは「1フレット＝半音」</h4>
+<ul><li><b>半音</b>は、となりのフレット（1フレット分）の距離です。</li><li><b>全音</b>は、2フレット分の距離です。</li><li><b>♯（シャープ）</b>は半音上げる、<b>♭（フラット）</b>は半音下げる記号です。C♯ と D♭ は書き方が違うだけで同じ音です。</li><li>E と F、B と C の間だけは、もともと半音しか離れていません。ピアノで黒鍵がない所です。</li></ul>
+<p>${pb('半音（C → C♯）',[48,49])} ${pb('全音（C → D）',[48,50])}</p>
+<p class="small muted">開放弦は6弦から E・A・D・G・B・E です。5弦の3フレットが C になります。</p>`},
+ en:{t:'Note names, half and whole steps',b:k=>`
+<p>There are only <b>12 note names</b>. Start on C and go up one half step at a time, and after the 12th note you are back on C. That distance is one <b>octave</b>.</p>
+<div class="noteRow">${[...Array(12)].map((_,i)=>`<span>${nn(i)}</span>`).join('')}</div>
+<p>${pb('Play from C, one half step at a time',[...Array(13)].map((_,i)=>48+i),'fast')}</p>
+<div class="analogy"><b>Do-re-mi</b>　C = do, D = re, E = mi, F = fa, G = sol, A = la, B = ti</div>
+<h4>On guitar, one fret = one half step</h4>
+<ul><li>A <b>half step</b> is the distance to the next fret.</li><li>A <b>whole step</b> is two frets.</li><li><b>♯ (sharp)</b> raises a note a half step and <b>♭ (flat)</b> lowers it. C♯ and D♭ are the same note with two spellings.</li><li>E to F and B to C are only a half step apart. On a piano, those are the places with no black key.</li></ul>
+<p>${pb('Half step (C → C♯)',[48,49])} ${pb('Whole step (C → D)',[48,50])}</p>
+<p class="small muted">The open strings, from the 6th string up, are E, A, D, G, B, E. The 5th string at the 3rd fret is C.</p>`}},
+{ja:{t:'音程と度数',b:k=>`
+<p><b>音程（インターバル）</b>は2つの音の距離です。ギターでは、フレットをいくつ離れているか数えるだけで分かります。</p>
+<p><b>度数</b>は、基準の音（<b>ルート</b>）を1として「何番目の音か」を表す番号です。このアプリの指板に出る R・3・5 はこの度数です。「短」は少し狭い、「長」は少し広いという意味です。</p>
+<div class="tblWrap"><table class="thTbl"><thead><tr><th>フレット数</th><th>度数</th><th>名前</th><th>響きのイメージ</th><th></th></tr></thead><tbody>
+${IVROWS.map(([n,d],i)=>`<tr><td class="mono">${n}</td><td class="mono"><b>${d}</b></td><td>${IVNAME.ja[i]}</td><td>${IVFEEL.ja[i]}</td><td>${pb('',[48+k,48+k+n],'both')}</td></tr>`).join('')}
+</tbody></table></div>
+<div class="analogy"><b>覚えておきたいのは3つ</b>　3（長3度）＝明るい、♭3（短3度）＝暗い、5（完全5度）＝安定。コードの性格はほぼこの3つで決まります。</div>`},
+ en:{t:'Intervals and degrees',b:k=>`
+<p>An <b>interval</b> is the distance between two notes. On guitar you can measure it by counting frets.</p>
+<p>A <b>degree</b> numbers each note by its distance from the reference note, the <b>root</b>, which counts as 1. The R, 3 and 5 on this app's fretboard are degrees. "Minor" means slightly narrower and "major" slightly wider.</p>
+<div class="tblWrap"><table class="thTbl"><thead><tr><th>Frets</th><th>Degree</th><th>Name</th><th>How it sounds</th><th></th></tr></thead><tbody>
+${IVROWS.map(([n,d],i)=>`<tr><td class="mono">${n}</td><td class="mono"><b>${d}</b></td><td>${IVNAME.en[i]}</td><td>${IVFEEL.en[i]}</td><td>${pb('',[48+k,48+k+n],'both')}</td></tr>`).join('')}
+</tbody></table></div>
+<div class="analogy"><b>The three to remember</b>　3 (major 3rd) = bright, ♭3 (minor 3rd) = dark, 5 (perfect 5th) = stable. Those three decide most of a chord's character.</div>`}},
+{ja:{t:'メジャースケールとキー',b:k=>{const sc=MAJ7.map(i=>(k+i)%12);return `
+<p>12個の音から<b>「全・全・半・全・全・全・半」</b>の順に7つを選ぶと、<b>メジャースケール</b>（ドレミファソラシ）になります。</p>
+<div class="steps">${sc.map((p,i)=>`<span class="sn">${nn(p)}</span>${i<6?`<span class="st2">${[1,1,0,1,1,1][i]?'全':'半'}</span>`:''}`).join('')}<span class="st2">半</span><span class="sn">${nn(k)}</span></div>
+<p>${pb(`${nn(k)} メジャースケール`,[...MAJ7.map(i=>48+k+i),60+k],'fast')}</p>
+<h4>キー（調）とは</h4>
+<p><b>キー</b>は「曲の中心になる音」と「その曲で使う7つの音のセット」のことです。キーが ${nn(k)} なら、曲はだいたい上の7音でできていて、${nn(k)} に戻ると落ち着きます。</p>
+<div class="analogy"><b>たとえ</b>　キーは「家族」。7つの音はその家族のメンバーで、中心の音は家族が帰る「家」です。</div>
+<h4>マイナーはどこから来る？</h4>
+<p>同じ7音を6番目の音（ラ）から並べると、<b>ナチュラル・マイナースケール</b>になります。${nn(k)} メジャーと ${nn(k+9)} マイナーは同じ音を使う兄弟のキーで、これを<b>平行調</b>といいます。</p>
+<p>${pb(`${nn(k+9)} マイナースケール`,[0,2,3,5,7,8,10,12].map(i=>45+k+i),'fast')}</p>
+<p>${tl('scales')}</p>`}},
+ en:{t:'The major scale and keys',b:k=>{const sc=MAJ7.map(i=>(k+i)%12);return `
+<p>Pick 7 of the 12 notes using the pattern <b>whole, whole, half, whole, whole, whole, half</b> and you get the <b>major scale</b> (do re mi fa sol la ti).</p>
+<div class="steps">${sc.map((p,i)=>`<span class="sn">${nn(p)}</span>${i<6?`<span class="st2">${[1,1,0,1,1,1][i]?'W':'H'}</span>`:''}`).join('')}<span class="st2">H</span><span class="sn">${nn(k)}</span></div>
+<p>${pb(`${nn(k)} major scale`,[...MAJ7.map(i=>48+k+i),60+k],'fast')}</p>
+<h4>What is a key?</h4>
+<p>A <b>key</b> is the note a song centers on, plus the set of 7 notes the song uses. In the key of ${nn(k)}, the song is built mostly from the notes above and feels settled when it lands on ${nn(k)}.</p>
+<div class="analogy"><b>Think of it as</b>　a family. The 7 notes are the family members, and the center note is the home they return to.</div>
+<h4>Where does minor come from?</h4>
+<p>Line up the same 7 notes starting from the 6th note (la) and you get the <b>natural minor scale</b>. ${nn(k)} major and ${nn(k+9)} minor share the same notes. They are called <b>relative keys</b>.</p>
+<p>${pb(`${nn(k+9)} minor scale`,[0,2,3,5,7,8,10,12].map(i=>45+k+i),'fast')}</p>
+<p>${tl('scales')}</p>`}}},
+{ja:{t:'コードの作り方',b:k=>`
+<p><b>コード</b>は、3つ以上の音を同時に鳴らしたものです。スケールの音を<b>1つ飛ばし</b>で重ねると作れます。</p>
+<div class="steps"><span class="sn on">${nn(k)}</span><span class="st2">×</span><span class="sn on">${nn(k+4)}</span><span class="st2">×</span><span class="sn on">${nn(k+7)}</span></div>
+<p>ルート（R）・3度・5度の3音でできたコードを<b>トライアド</b>（3和音）といいます。</p>
+<h4>メジャーとマイナーの違いは真ん中の1音だけ</h4>
+<ul><li>3度が<b>長3度</b>（ルートから4フレット）なら<b>メジャー</b>。明るい響きです。</li><li>3度が<b>短3度</b>（ルートから3フレット）なら<b>マイナー</b>。暗い・切ない響きです。</li></ul>
+<p>${pb(`${nn(k)}（メジャー）`,thCh(k,''),'strum')} ${pb(`${nn(k)}m（マイナー）`,thCh(k,'m'),'strum')}</p>
+<h4>もう1つ重ねるとセブンス</h4>
+<p>トライアドの上にもう1つ重ねた4和音が<b>セブンスコード</b>です。重ねる7度の種類で響きが変わります。</p>
+<ul><li><b>${nn(k)}7</b>（R・3・5・♭7）：ブルースやロックの「ザラッとした」響き</li><li><b>${nn(k)}M7</b>（R・3・5・7）：おしゃれで浮遊感のある響き</li><li><b>${nn(k)}m7</b>（R・♭3・5・♭7）：落ち着いた大人っぽい響き</li></ul>
+<p>${pb(`${nn(k)}7`,thCh(k,'7'),'strum')} ${pb(`${nn(k)}M7`,thCh(k,'M7'),'strum')} ${pb(`${nn(k)}m7`,thCh(k,'m7'),'strum')}</p>
+<p>${tl('triads')} ${tl('chords')}</p>`},
+ en:{t:'How chords are built',b:k=>`
+<p>A <b>chord</b> is three or more notes played together. You build one by stacking scale notes, <b>skipping every other note</b>.</p>
+<div class="steps"><span class="sn on">${nn(k)}</span><span class="st2">×</span><span class="sn on">${nn(k+4)}</span><span class="st2">×</span><span class="sn on">${nn(k+7)}</span></div>
+<p>A chord made of the root (R), 3rd and 5th is called a <b>triad</b>.</p>
+<h4>Major and minor differ by one note</h4>
+<ul><li>If the 3rd is a <b>major 3rd</b> (4 frets above the root), the chord is <b>major</b>: bright.</li><li>If the 3rd is a <b>minor 3rd</b> (3 frets above the root), the chord is <b>minor</b>: dark or sad.</li></ul>
+<p>${pb(`${nn(k)} (major)`,thCh(k,''),'strum')} ${pb(`${nn(k)}m (minor)`,thCh(k,'m'),'strum')}</p>
+<h4>Stack one more for a seventh chord</h4>
+<p>Add one more note on top of a triad and you get a four-note <b>seventh chord</b>. Which 7th you add changes the color.</p>
+<ul><li><b>${nn(k)}7</b> (R, 3, 5, ♭7): the gritty sound of blues and rock</li><li><b>${nn(k)}M7</b> (R, 3, 5, 7): smooth and dreamy</li><li><b>${nn(k)}m7</b> (R, ♭3, 5, ♭7): mellow and grown-up</li></ul>
+<p>${pb(`${nn(k)}7`,thCh(k,'7'),'strum')} ${pb(`${nn(k)}M7`,thCh(k,'M7'),'strum')} ${pb(`${nn(k)}m7`,thCh(k,'m7'),'strum')}</p>
+<p>${tl('triads')} ${tl('chords')}</p>`}},
+{ja:{t:'ダイアトニックコード',b:k=>`
+<p><b>ダイアトニック</b>は「<b>そのキーのスケールの音だけでできた</b>」という意味です。</p>
+<p>キーの7つの音それぞれをルートにして、1つ飛ばしでコードを作ると、7つのコードができます。これが<b>ダイアトニックコード</b>です。キー ${nn(k)} なら次の7つです。</p>
+${thDiatTable(k,'ja')}
+<p><b>ローマ数字</b>（I〜VII）は「キーの何番目の音から作ったコードか」を表します。大文字はメジャー、小文字はマイナーです。キーが変わっても同じ書き方ができるので、「I → V → vi → IV」のように進行を覚えておけば、どのキーでも弾けます。</p>
+<div class="analogy"><b>なぜ役に立つ？</b>　曲のコードの多くはこの7つから選ばれています。キーが分かれば「次はたぶんこのどれか」と予想できるので、耳コピや作曲がぐっと楽になります。</div>
+<p>${sq('I → V → vi → IV（定番の進行）',[0,4,5,3].map(i=>thCh((k+MAJ7[i])%12,DQ[i])),1.4)}</p>
+<p>${tl('scales')} ${tl('listen')}</p>`},
+ en:{t:'Diatonic chords',b:k=>`
+<p><b>Diatonic</b> simply means <b>"made only from the notes of the key's scale."</b></p>
+<p>Use each of the key's 7 notes as a root and stack every other note, and you get 7 chords. Those are the <b>diatonic chords</b>. In the key of ${nn(k)} they are:</p>
+${thDiatTable(k,'en')}
+<p><b>Roman numerals</b> (I to VII) say which note of the key a chord is built on. Uppercase means major and lowercase means minor. They work in every key, so once you know a progression like "I → V → vi → IV", you can play it in any key.</p>
+<div class="analogy"><b>Why it helps</b>　Most songs pick their chords from these 7. Once you know the key, you can guess what is likely to come next, which makes learning songs by ear and writing your own much easier.</div>
+<p>${sq('I → V → vi → IV (a classic progression)',[0,4,5,3].map(i=>thCh((k+MAJ7[i])%12,DQ[i])),1.4)}</p>
+<p>${tl('scales')} ${tl('listen')}</p>`}},
+{ja:{t:'トニック・ドミナント・サブドミナント',b:k=>{const I=k,IV=(k+5)%12,V=(k+7)%12;return `
+<p>コードには、曲の中での<b>役割</b>があります。いちばん大事なのは3つです。家にたとえると分かりやすくなります。</p>
+<div class="roles"><div class="role fnT"><b>トニック（I）＝家</b><span>落ち着く。ここで曲を終われる。<br>キー ${nn(k)} なら ${nn(I)}</span></div>
+<div class="role fnS"><b>サブドミナント（IV）＝おでかけ</b><span>家から少し離れて、広がる感じ。<br>キー ${nn(k)} なら ${nn(IV)}</span></div>
+<div class="role fnD"><b>ドミナント（V）＝帰り道</b><span>「早く家に帰りたい」緊張感。次にトニックへ行きたくなる。<br>キー ${nn(k)} なら ${nn(V)}</span></div></div>
+<p>${sq('家 → おでかけ → 帰り道 → 家（I → IV → V7 → I）',[thCh(I,''),thCh(IV,''),thCh(V,'7'),thCh(I,'')],1.5)}</p>
+<p>${sq('帰り道で止めてみる（I → IV → V7）',[thCh(I,''),thCh(IV,''),thCh(V,'7')],1.5)}　←「終わってない」感じがするはずです。</p>
+<h4>ドミナントセブンスはなぜ「帰りたい」のか</h4>
+<p>V にセブンスを足した <b>${nn(V)}7</b> を<b>ドミナントセブンス</b>といいます。この中の2つの音 ${nn(V+4)} と ${nn(V+10)} は、ちょうど6フレット離れた不安定な音程（<b>トライトーン</b>）です。この2音がそれぞれ半音動くと、${nn(I)} の ${nn(I+12)} と ${nn(I+4)} にぴったり着地します。この「ぶつかり → すっきり」が<b>解決</b>です。</p>
+<p>${pb('トライトーン',[48+((V+4)%12),48+((V+4)%12)+6],'strum')} ${pb('解決先',[48+((V+4)%12)+1,48+((V+4)%12)+5],'strum')}</p>
+<div class="analogy"><b>まとめ</b>　「家を出て、帰り道でそわそわして、家に帰って落ち着く」。多くの曲はこの流れのくり返しでできています。この決まった流れを<b>ケーデンス（終止）</b>といいます。</div>`}},
+ en:{t:'Tonic, dominant and subdominant',b:k=>{const I=k,IV=(k+5)%12,V=(k+7)%12;return `
+<p>Chords play <b>roles</b> in a song. The three most important ones are easiest to understand as parts of a trip from home.</p>
+<div class="roles"><div class="role fnT"><b>Tonic (I) = home</b><span>Settled. A song can end here.<br>In ${nn(k)}: ${nn(I)}</span></div>
+<div class="role fnS"><b>Subdominant (IV) = going out</b><span>A step away from home, an open feeling.<br>In ${nn(k)}: ${nn(IV)}</span></div>
+<div class="role fnD"><b>Dominant (V) = heading home</b><span>Tension that wants to get home. It pulls toward the tonic.<br>In ${nn(k)}: ${nn(V)}</span></div></div>
+<p>${sq('Home → out → heading home → home (I → IV → V7 → I)',[thCh(I,''),thCh(IV,''),thCh(V,'7'),thCh(I,'')],1.5)}</p>
+<p>${sq('Stop on the way home (I → IV → V7)',[thCh(I,''),thCh(IV,''),thCh(V,'7')],1.5)}　It should feel unfinished.</p>
+<h4>Why a dominant 7th wants to go home</h4>
+<p>Adding a 7th to V gives <b>${nn(V)}7</b>, the <b>dominant seventh</b>. Two of its notes, ${nn(V+4)} and ${nn(V+10)}, are exactly 6 frets apart, an unstable interval called the <b>tritone</b>. When each of them moves by one half step, they land right on ${nn(I+12)} and ${nn(I+4)} of the ${nn(I)} chord. That move from clash to calm is called <b>resolution</b>.</p>
+<p>${pb('Tritone',[48+((V+4)%12),48+((V+4)%12)+6],'strum')} ${pb('Where it resolves',[48+((V+4)%12)+1,48+((V+4)%12)+5],'strum')}</p>
+<div class="analogy"><b>In short</b>　Leave home, get restless on the way back, arrive and relax. A huge number of songs repeat this journey. A standard way of ending a phrase like this is called a <b>cadence</b>.</div>`}}},
+{ja:{t:'ブルースの仕組み',b:k=>{const bars=bar12(k);return `
+<p>ブルースの基本形は<b>12小節ブルース</b>です。使うコードは I・IV・V の3つだけで、12小節をくり返します。</p>
+<div class="bars" id="thBlues">${bars.map((r,i)=>`<div class="b12" data-i="${i}"><small>${i+1}</small><b>${nn(r)}7</b><span>${RN[[0,0,0,0,3,3,0,0,4,3,0,4][i]].toUpperCase()}</span></div>`).join('')}</div>
+<p>${sq('12小節を鳴らす',bars.map(r=>thCh(r,'7')),1.6,2,'thBlues')}</p>
+<h4>なぜブルースは「ブルースっぽい」のか</h4>
+<ul><li>ふつうの曲ではドミナントセブンス（7）を使うのは V だけです。ブルースでは <b>I も IV も V もすべて「7」</b>にします。全部のコードが「帰りたい」緊張を持ったまま進むので、あのザラッとした独特の響きになります。</li>
+<li>ソロでは、メジャーのコードの上で<b>マイナー・ペンタトニック</b>を弾くのが定番です。コードの明るい3度と、スケールの暗い♭3がぶつかるのがブルースらしさです。</li>
+<li>♭3・♭5・♭7 のように、少し外れた音を<b>ブルーノート</b>といいます。マイナー・ペンタに♭5を足すと<b>ブルース・スケール</b>です。</li></ul>
+<div class="analogy"><b>練習のヒント</b>　メトロノームを「シャッフル」にして12小節をくり返し、録音して聴き返すと、コードチェンジのタイミングがよく分かります。</div>
+<p>${tl('metronome')} ${tl('scales')} ${tl('recorder')}</p>`}},
+ en:{t:'How the blues works',b:k=>{const bars=bar12(k);return `
+<p>The basic blues form is the <b>12-bar blues</b>. It uses only three chords, I, IV and V, and repeats every 12 bars.</p>
+<div class="bars" id="thBlues">${bars.map((r,i)=>`<div class="b12" data-i="${i}"><small>${i+1}</small><b>${nn(r)}7</b><span>${RN[[0,0,0,0,3,3,0,0,4,3,0,4][i]].toUpperCase()}</span></div>`).join('')}</div>
+<p>${sq('Play the 12 bars',bars.map(r=>thCh(r,'7')),1.6,2,'thBlues')}</p>
+<h4>Why the blues sounds bluesy</h4>
+<ul><li>In most songs only V is a dominant 7th. In the blues, <b>I, IV and V are all "7" chords</b>. Every chord carries that "want to go home" tension, which gives the blues its gritty sound.</li>
+<li>For solos, the standard move is to play the <b>minor pentatonic</b> over major chords. The clash between the chord's bright 3rd and the scale's dark ♭3 is a big part of the blues sound.</li>
+<li>Slightly "off" notes like ♭3, ♭5 and ♭7 are called <b>blue notes</b>. Add the ♭5 to the minor pentatonic and you get the <b>blues scale</b>.</li></ul>
+<div class="analogy"><b>Practice tip</b>　Set the metronome to "Shuffle", loop the 12 bars, then record yourself and listen back. You will hear exactly where your chord changes land.</div>
+<p>${tl('metronome')} ${tl('scales')} ${tl('recorder')}</p>`}}},
+{ja:{t:'ペンタトニック',b:k=>`
+<p><b>ペンタ</b>は「5」という意味です。7音のスケールから、ぶつかりやすい2音を抜いた<b>5音のスケール</b>がペンタトニックです。</p>
+<ul><li><b>メジャー・ペンタ</b>＝メジャースケールから4と7を抜いたもの（1・2・3・5・6）。明るく、カントリーやポップス向き。</li><li><b>マイナー・ペンタ</b>＝1・♭3・4・5・♭7。ロックやブルースのソロの定番。</li></ul>
+<p>${pb(`${nn(k)} メジャー・ペンタ`,[0,2,4,7,9,12].map(i=>48+k+i),'fast')} ${pb(`${nn(k+9)} マイナー・ペンタ`,[0,3,5,7,10,12].map(i=>45+k+i),'fast')}</p>
+<div class="analogy"><b>じつは同じ5音</b>　${nn(k)} メジャー・ペンタと ${nn(k+9)} マイナー・ペンタは、使う音がまったく同じです（平行調）。どの音を「家」として扱うかで、明るくも暗くも聴こえます。</div>
+<p>抜いた2音は半音でぶつかりやすい音なので、ペンタだけを使えば<b>外れた音が出にくい</b>のが特長です。アドリブの最初の一歩に最適です。</p>
+<p>${tl('scales')}</p>`},
+ en:{t:'Pentatonic scales',b:k=>`
+<p><b>Penta</b> means five. A pentatonic scale is a <b>five-note scale</b>: a seven-note scale with the two notes most likely to clash taken out.</p>
+<ul><li><b>Major pentatonic</b> = the major scale without the 4th and 7th (1, 2, 3, 5, 6). Bright, great for country and pop.</li><li><b>Minor pentatonic</b> = 1, ♭3, 4, 5, ♭7. The go-to scale for rock and blues solos.</li></ul>
+<p>${pb(`${nn(k)} major pentatonic`,[0,2,4,7,9,12].map(i=>48+k+i),'fast')} ${pb(`${nn(k+9)} minor pentatonic`,[0,3,5,7,10,12].map(i=>45+k+i),'fast')}</p>
+<div class="analogy"><b>Same five notes</b>　${nn(k)} major pentatonic and ${nn(k+9)} minor pentatonic use exactly the same notes (they are relative scales). Whichever note you treat as home makes it sound bright or dark.</div>
+<p>The two notes removed are the ones that tend to rub a half step against the chord, so with the pentatonic alone it is <b>hard to hit a wrong note</b>. That makes it the best first step into improvising.</p>
+<p>${tl('scales')}</p>`}},
+{ja:{t:'テンションとヴォイシング',b:k=>`
+<p><b>テンション</b>は、セブンスのさらに上に3度ずつ積んだ音（9・11・13）です。コードに色どりを足します。9は2の、11は4の、13は6のそれぞれ1オクターブ上の音です。</p>
+<p>${pb(`${nn(k)}7`,thCh(k,'7'),'strum')} ${pb(`${nn(k)}9`,[0,4,10,14,19].map(i=>48+k+i),'strum')} ${pb(`${nn(k)}13`,[0,4,10,14,21].map(i=>48+k+i),'strum')}</p>
+<p>コードの音と半音でぶつかって濁ってしまう音は<b>アボイドノート</b>（避けたい音）と呼ばれます。</p>
+<h4>ヴォイシング＝音の並べ方</h4>
+<p>同じコードでも、どの音を、どの順番で、どの弦で鳴らすかで響きが変わります。これを<b>ヴォイシング</b>といいます。ギターは弦が6本しかないので、5度やルートを省くのが普通です。</p>
+<ul><li><b>転回形</b>：ルート以外の音がいちばん低い形。</li><li><b>オンコード</b>（分数コード）：最低音を「/」のあとに書く書き方。${nn(k)}/${nn(k+4)} は「最低音が ${nn(k+4)} の ${nn(k)}」です。</li></ul>
+<p>${pb(`${nn(k)}（基本形）`,[0,4,7].map(i=>48+k+i),'strum')} ${pb(`${nn(k)}/${nn(k+4)}`,[4,7,12].map(i=>48+k+i),'strum')} ${pb(`${nn(k)}/${nn(k+7)}`,[7,12,16].map(i=>48+k+i),'strum')}</p>
+<p>${tl('tensions')} ${tl('voicings')} ${tl('namer')}</p>`},
+ en:{t:'Tensions and voicings',b:k=>`
+<p><b>Tensions</b> are notes stacked in thirds above the 7th: the 9th, 11th and 13th. They add color. The 9th is the 2nd an octave up, the 11th is the 4th and the 13th is the 6th.</p>
+<p>${pb(`${nn(k)}7`,thCh(k,'7'),'strum')} ${pb(`${nn(k)}9`,[0,4,10,14,19].map(i=>48+k+i),'strum')} ${pb(`${nn(k)}13`,[0,4,10,14,21].map(i=>48+k+i),'strum')}</p>
+<p>A note that rubs a half step against a chord tone and muddies the sound is called an <b>avoid note</b>.</p>
+<h4>Voicing = how the notes are arranged</h4>
+<p>The same chord sounds different depending on which notes you play, in what order and on which strings. That arrangement is the <b>voicing</b>. A guitar only has six strings, so leaving out the 5th or the root is normal.</p>
+<ul><li><b>Inversion</b>: a shape where a note other than the root is lowest.</li><li><b>Slash chord</b>: the bass note is written after "/". ${nn(k)}/${nn(k+4)} means "${nn(k)} with ${nn(k+4)} in the bass."</li></ul>
+<p>${pb(`${nn(k)} (root position)`,[0,4,7].map(i=>48+k+i),'strum')} ${pb(`${nn(k)}/${nn(k+4)}`,[4,7,12].map(i=>48+k+i),'strum')} ${pb(`${nn(k)}/${nn(k+7)}`,[7,12,16].map(i=>48+k+i),'strum')}</p>
+<p>${tl('tensions')} ${tl('voicings')} ${tl('namer')}</p>`}},
+];
+// glossary: [ja term, en term, ja text, en text, lesson index or tab]
+const GLOSS=[
+['ルート','Root','コードやスケールの基準になる音。Cコードなら C。度数では R（1度）と書きます。','The reference note of a chord or scale. For a C chord, it is C. Written R (or 1) as a degree.',1],
+['半音・全音','Half step / whole step','半音＝1フレット、全音＝2フレットの距離。','A half step is 1 fret; a whole step is 2 frets.',0],
+['オクターブ','Octave','12フレット上（または下）の、同じ名前の音。','The note with the same name 12 frets higher (or lower).',0],
+['異名同音','Enharmonic','C♯ と D♭ のように、書き方が違うだけで同じ高さの音。','Two spellings of the same pitch, like C♯ and D♭.',0],
+['音程（インターバル）','Interval','2つの音の距離。ギターではフレットの数で数えられます。','The distance between two notes. On guitar, count the frets.',1],
+['度数','Degree','ルートを1として、何番目の音かを表す番号（R・2・3・4・5・6・7）。♭は半音低いという意味。','A number for each note counted from the root as 1 (R, 2, 3, 4, 5, 6, 7). ♭ means a half step lower.',1],
+['スケール','Scale','音を高さの順に並べた「音の階段」。','A set of notes arranged in order of pitch, like a staircase of notes.',2],
+['キー（調）','Key','曲の中心になる音と、その曲で使う7つの音のセット。','The note a song centers on, plus the set of 7 notes it uses.',2],
+['メジャー','Major','3度が長3度のもの。明るい響き。','Built with a major 3rd. Sounds bright.',3],
+['マイナー','Minor','3度が短3度のもの。暗い・切ない響き。','Built with a minor 3rd. Sounds dark or sad.',3],
+['平行調','Relative key','同じ7音を使うメジャーとマイナーの組み合わせ（C と Am など）。','A major and a minor key that share the same 7 notes (C and Am, for example).',2],
+['トライアド','Triad','R・3・5の3つの音でできたコード（3和音）。','A three-note chord made of R, 3 and 5.',3],
+['セブンス','Seventh chord','トライアドに7度を足した4和音。7・M7・m7など。','A triad plus a 7th: a four-note chord such as 7, M7 or m7.',3],
+['ダイアトニック','Diatonic','「そのキーのスケールの音だけでできた」という意味。','"Made only from the notes of the key\'s scale."',4],
+['ダイアトニックコード','Diatonic chords','キーの7つの音それぞれをルートにして作った7つのコード。','The 7 chords built on each note of a key.',4],
+['ローマ数字','Roman numerals','I〜VII で「キーの何番目のコードか」を表す書き方。キーが変わっても同じに書けます。','I to VII show which note of the key a chord is built on, so the same progression can be written for any key.',4],
+['トニック','Tonic','I のコード。「家」。落ち着き、曲を終われる。','The I chord. "Home." Settled; a song can end here.',5],
+['サブドミナント','Subdominant','IV のコード。「おでかけ」。家から少し離れて広がる感じ。','The IV chord. "Going out." A step away from home.',5],
+['ドミナント','Dominant','V のコード。「帰り道」。トニックへ戻りたくなる緊張感。','The V chord. "Heading home." Tension that pulls back to the tonic.',5],
+['ドミナントセブンス','Dominant seventh','R・3・5・♭7 の形のコード。「7」と書きます（C7 など）。ブルースの基本の響き。','A chord with R, 3, 5 and ♭7, written "7" (C7, for example). The core sound of the blues.',5],
+['解決','Resolution','緊張した響きが、落ち着いた響きに移ること（G7 → C など）。','Moving from a tense sound to a settled one (G7 → C, for example).',5],
+['ケーデンス（終止）','Cadence','フレーズや曲の終わり方の決まった流れ（V → I など）。','A standard chord move that ends a phrase or song (V → I, for example).',5],
+['トライトーン','Tritone','6フレット分（全音3つ）の音程。不安定で、ドミナントの緊張の正体。','An interval of 6 frets (three whole steps). Unstable; the source of the dominant\'s tension.',5],
+['コード進行','Chord progression','コードの並び。','The order of chords in a song.',4],
+['12小節ブルース','12-bar blues','I・IV・V の3つのセブンスコードで12小節をくり返す形式。','A 12-bar form that repeats using three seventh chords: I, IV and V.',6],
+['ブルーノート','Blue notes','♭3・♭5・♭7 のような、ブルースらしい少し外れた音。','Slightly "off" notes such as ♭3, ♭5 and ♭7 that give the blues its sound.',6],
+['シャッフル','Shuffle','「タッカ・タッカ」と跳ねる3連符のリズム。ブルースの定番。','A bouncing triplet rhythm ("da-ga da-ga"). A blues staple.','metronome'],
+['ペンタトニック','Pentatonic','5音のスケール。外れた音が出にくく、アドリブの定番。','A five-note scale. Hard to hit wrong notes with; the standard for improvising.',7],
+['モード','Mode','同じ7音を別の音から並べたスケール（ドリアン、ミクソリディアンなど）。それぞれ違う色を持ちます。','The same 7 notes started from a different note (Dorian, Mixolydian…). Each has its own color.','scales'],
+['テンション','Tension','セブンスより上に積んだ 9・11・13 の音。','Notes stacked above the 7th: the 9th, 11th and 13th.',8],
+['アボイドノート','Avoid note','コードの音と半音でぶつかって濁る音。','A note that clashes a half step against a chord tone and muddies the sound.',8],
+['ヴォイシング','Voicing','コードの音の並べ方。どの音をどの弦で鳴らすか。','How a chord\'s notes are arranged: which notes, on which strings.',8],
+['転回形','Inversion','ルート以外の音がいちばん低い形。','A shape where a note other than the root is lowest.',8],
+['オンコード（分数コード）','Slash chord','C/E のように、最低音を「/」のあとに書くコード。','A chord like C/E, with the bass note written after "/".',8],
+['sus4','Suspended 4th','3度の代わりに4度を使ったコード。メジャーでもマイナーでもない、浮いた響き。','A chord with a 4th instead of a 3rd. Neither major nor minor; it sounds suspended.','chords'],
+['パワーコード','Power chord','R と 5 だけの2音のコード。「5」と書きます（E5 など）。ロックの定番。','A two-note chord of just R and 5, written "5" (E5, for example). A rock staple.','namer'],
+['BPM','BPM','1分間の拍の数。テンポの単位。','Beats per minute. The unit of tempo.','metronome'],
+['拍子','Time signature','1小節に何拍あるか。4/4 なら4拍。','How many beats are in a bar. 4/4 has four.','metronome'],
+['カウントイン','Count-in','演奏の前の「1・2・3・4」。','The "1, 2, 3, 4" before you start playing.','recorder'],
+['ドロップD','Drop D','6弦だけを全音下げて D にするチューニング。','A tuning with only the 6th string lowered a whole step to D.','tuner'],
+];
+function thStopSeq(){TH.seqT.forEach(clearTimeout);TH.seqT=[];document.querySelectorAll('[data-seq].playing').forEach(b=>b.classList.remove('playing'));document.querySelectorAll('.b12.now').forEach(b=>b.classList.remove('now'))}
+function renderTheory(){
+  const L=S.lang==='en'?'en':'ja',n=LESSONS.length;if(TH.lesson>=n)TH.lesson=0;const les=LESSONS[TH.lesson][L];
+  const N=$('thNav');N.innerHTML='';
+  LESSONS.forEach((x,i)=>{const b=document.createElement('button');b.type='button';b.className='thItem'+(i===TH.lesson?' cur':'');b.setAttribute('aria-current',String(i===TH.lesson));
+    b.innerHTML=`<span class="num">${TH.read.includes(i)?'✓':i+1}</span><span>${esc(x[L].t)}</span>`;b.onclick=()=>{TH.lesson=i;store.set('th.lesson',i);thStopSeq();renderTheory();$('thTitle').scrollIntoView({behavior:'smooth',block:'nearest'})};N.appendChild(b)});
+  $('thEyebrow').textContent=t('th.lessonN',TH.lesson+1,n);
+  chips($('thKey'),TH_KEYS.map(v=>({v,t:nn(v)})),TH.key,v=>{TH.key=v;store.set('th.key',v);thStopSeq();renderTheory()},true);
+  $('thTitle').textContent=les.t;$('thContent').innerHTML=les.b(TH.key);
+  $('thRead').checked=TH.read.includes(TH.lesson);
+  $('thPrev').disabled=TH.lesson===0;$('thNext').disabled=TH.lesson===n-1;
+  $('thProgress').textContent=t('th.progress',TH.read.length,n);
+  renderGloss()}
+function renderGloss(){
+  const L=S.lang==='en'?'en':'ja',q=TH.q.trim().toLowerCase(),G=$('thGloss');G.innerHTML='';
+  const items=GLOSS.filter(g=>!q||(g[0]+' '+g[1]+' '+g[2]+' '+g[3]).toLowerCase().includes(q));
+  if(!items.length){G.innerHTML=`<p class="hint">${t('th.noHit')}</p>`;return}
+  items.forEach(g=>{const d=document.createElement('div');d.className='gItem';const lk=g[4];
+    const link=typeof lk==='number'?`<a class="tlink" href="#theory" data-lesson="${lk}">${t('th.lessonN',lk+1,LESSONS.length)}: ${esc(LESSONS[lk][L].t)} →</a>`:`<a class="tlink" href="#${lk}">${t('tab.'+lk)} →</a>`;
+    d.innerHTML=`<div class="gTerm"><b>${esc(L==='ja'?g[0]:g[1])}</b><span class="mono">${esc(L==='ja'?g[1]:g[0])}</span></div><p>${esc(L==='ja'?g[2]:g[3])}</p>${link}`;G.appendChild(d)})}
+$('thPrev').onclick=()=>{if(TH.lesson>0){TH.lesson--;store.set('th.lesson',TH.lesson);thStopSeq();renderTheory();$('thTitle').scrollIntoView({behavior:'smooth',block:'start'})}};
+$('thNext').onclick=()=>{if(TH.lesson<LESSONS.length-1){TH.lesson++;store.set('th.lesson',TH.lesson);thStopSeq();renderTheory();$('thTitle').scrollIntoView({behavior:'smooth',block:'start'})}};
+$('thRead').onchange=e=>{TH.read=TH.read.filter(x=>x!==TH.lesson);if(e.target.checked)TH.read.push(TH.lesson);store.set('th.read',JSON.stringify(TH.read));renderTheory()};
+$('thSearch').addEventListener('input',e=>{TH.q=e.target.value;renderGloss()});
+document.addEventListener('click',e=>{
+  const a=e.target.closest('a[data-lesson]');if(a){TH.lesson=+a.dataset.lesson;store.set('th.lesson',TH.lesson);thStopSeq();if(currentTab()==='theory'){e.preventDefault();renderTheory();$('thTitle').scrollIntoView({behavior:'smooth',block:'start'})}return}
+  const p=e.target.closest('[data-play]');
+  if(p){thStopSeq();ac();const ms=p.dataset.play.split(',').map(Number),m=p.dataset.mode;
+    if(m==='strum')strum(ms,.035);else if(m==='fast')arp(ms,.2);else if(m==='both'){arp(ms,.45);TH.seqT.push(setTimeout(()=>strum(ms,.02),ms.length*450+250))}else arp(ms,.38);return}
+  const sb=e.target.closest('[data-seq]');
+  if(sb){const was=sb.classList.contains('playing');thStopSeq();if(was)return;ac();
+    const chs=JSON.parse(sb.dataset.seq),gap=+sb.dataset.gap||1.3,beats=+sb.dataset.beats||1,hl=sb.dataset.hl?$(sb.dataset.hl):null;sb.classList.add('playing');
+    chs.forEach((c,i)=>{for(let b=0;b<beats;b++)TH.seqT.push(setTimeout(()=>{strum(c,.03);if(hl&&b===0)hl.querySelectorAll('.b12').forEach((x,j)=>x.classList.toggle('now',j===i))},(i*gap+b*gap/beats)*1000))});
+    TH.seqT.push(setTimeout(thStopSeq,chs.length*gap*1000+400))}});
+
+/* ================= GUIDE ================= */
+const GUIDE={
+ja:{intro:'GuitarDeskは、ギターの練習に使う道具を1か所にまとめたアプリです。インストールは不要です。スマホのホーム画面に追加すると、アプリのように使えます。',
+ tips:[['ホーム画面に追加する','iPhoneはSafariの共有ボタンから「ホーム画面に追加」、AndroidはChromeのメニューから「アプリをインストール」を選びます。一度開けば、電波がなくても使えます。'],
+  ['マイクを許可する','チューナー・録音・耳コピはマイクを使います。初めて使うときに許可を求められたら「許可」を選んでください。'],
+  ['データはこの端末に保存','練習ノートや録音は、このブラウザの中に保存されます。練習ノートの「バックアップ」で、ときどき書き出しておくと安心です。']],
+ basics:['チューナーとメトロノームは、タイトル「GuitarDesk」の横のボタン（音叉とメトロノームの形）からいつでも開けます。メトロノームが鳴っている間は、横にテンポと「■」が出て、すぐ止められます。','録音は「練習ノート」の中にあります。','コードタブ上部の切り替えで、「コード名から調べる」と「押さえた形から調べる」を選べます。','右上の「日本語／EN」で言語を切り替えます。','「♯／♭」で、音名を♯と♭のどちらで書くかを選びます。','「度数／音名」で、指板の丸の中を度数（R・3・5）にするか音名（C・E・G）にするかを選びます。','「並べ替え」で、タブの順番と表示・非表示を変えられます。いちばん上のタブが起動時に開きます。','指板の色は、赤＝ルート、青＝3度、緑＝5度、紫＝7度やテンションなどです。'],
+ tabs:{practice:['今日の練習メニューにチェックを付け、BPMを記録します。','「録音」で自分の演奏を録って、聴き返せます。','メモと課題を書き、達成したら「できた！」を押します。'],
+  tabs:['タブを打ち込み、「元のキー」を選びます。','「変換先のキー」を押すと、そのキーのタブになります。ポジションは指板で確認でき、保存もできます。'],
+  tuner:['タイトル横の音叉ボタンで開き、「マイクで調弦を始める」を押して弦を1本ずつ鳴らします。','針が真ん中の緑の範囲に入ればOKです。','マイクが使えないときは、基準音ボタンを鳴らして耳で合わせます。'],
+  metronome:['タイトル横のメトロノームボタンで開き、テンポ・拍子・細分・音色を選んで「スタート」。','拍の丸をタップすると、アクセントが変わります。','ほかのタブを見ている間も鳴り続けます。止めるときはタイトル横の「■」を押します。'],
+  recorder:['練習ノートの「録音」で練習テーマを選び、「● 録音」を押します。','うまくいかなければ「やり直し」や「録り直す」。','波形をタップするとその位置から再生できます。「保存」でファイルに書き出せます。'],
+  listen:['スマホをスピーカーの近くに置き、「聴き取りを始める」。','今鳴っているコードと、キーの推定が出ます。雑音を拾うときは「聴き取る音域」を下げます。','コード進行は保存して、あとでテンポを変えて鳴らせます。'],
+  triads:['ルート・種類・弦セットを選びます。','◀ ▶ でポジションを移動し、「鳴らす」で音を確認します。'],
+  tensions:['土台のコードを選び、ハシゴの上の段でテンションを足します。','◎ は使える音、× はアボイドノートです。'],
+  voicings:['コードを選ぶと、3本の弦で弾くための省略パターンが出ます。','何をなぜ省いたかの説明も表示されます。'],
+  chords:['ルートとタイプを選ぶと、押さえ方と構成音が出ます。','押さえ方の図をタップすると音が鳴ります。'],
+  namer:['コードタブで「押さえた形から調べる」に切り替え、指板をタップして押さえる場所を選びます。','その形のコード名、別の読み方、弦ごとの度数が出ます。'],
+  scales:['キーとスケールを選ぶと、指板全体の音が出ます。','7音のスケールでは、ダイアトニックコードも表示されます。'],
+  theory:['レッスンを順番に読み、▶ボタンで音を聴いて確かめます。','分からない言葉は用語集で検索できます。']},
+ flow:['練習ノートを開いて、今日のメニューを確認する','チューナーで調弦する','メトロノームを鳴らしながらメニューをこなし、チェックとBPMを記録する','録音して聴き返す','気づいたことをメモし、課題を更新する'],
+ faq:[['音が鳴らない','iPhoneはマナーモードだと音が出ないことがあります。本体のスイッチと音量を確認してください。'],
+  ['マイクが使えない','ブラウザの設定でマイクの使用が許可されているか確認してください。マイクは https のページでだけ使えます。'],
+  ['新しい機能が表示されない','アプリを一度完全に閉じて開き直すか、ページを再読み込みしてください。'],
+  ['記録が消えた','ブラウザのデータを消したときや、iPhoneで長く使わなかったときに消えることがあります。練習ノートの「バックアップ」から「読み込む」で戻せます。']]},
+en:{intro:'GuitarDesk puts the tools you use for guitar practice in one place. There is nothing to install. Add it to your phone\'s home screen and it works like an app.',
+ tips:[['Add it to your home screen','On iPhone, tap Share in Safari and choose "Add to Home Screen". On Android, open the Chrome menu and choose "Install app". After the first visit it works offline too.'],
+  ['Allow the microphone','The tuner, recorder and chord listener use the microphone. When your browser asks the first time, choose "Allow".'],
+  ['Your data stays on this device','Your practice log and recordings are saved in this browser. Use "Backup" in the practice log to export them now and then.']],
+ basics:['The tuner and metronome are always one tap away from the buttons next to the "GuitarDesk" title (a tuning fork and a metronome). While the metronome runs, its tempo and a "■" stop button appear beside them.','Recording lives inside the practice log.','In the Chords tab, the switch at the top chooses between "Look up by name" and "Name a shape".','Switch the language with "日本語 / EN" at the top right.','"♯ / ♭" chooses whether notes are spelled with sharps or flats.','"Degrees / Notes" chooses whether fretboard dots show degrees (R, 3, 5) or note names (C, E, G).','"Arrange" changes the order of the tabs and hides the ones you don\'t use. The top tab opens first.','Fretboard colors: red = root, blue = 3rd, green = 5th, purple = 7th, tensions and others.'],
+ tabs:{practice:['Tick off today\'s menu and note the BPM you reached.','Record yourself in the Recording section and listen back.','Write notes and goals, and press "Done!" when you reach a goal.'],
+  tabs:['Type in a tab and choose its original key.','Tap a target key to get the tab in that key. Check the position on the neck, and save it for later.'],
+  tuner:['Open it with the tuning-fork button next to the title, press "Start tuning with mic" and play one string at a time.','You are in tune when the needle sits in the green zone.','If the mic is unavailable, play the reference tones and tune by ear.'],
+  metronome:['Open it with the metronome button next to the title, choose tempo, time signature, subdivision and sound, then press Start.','Tap a beat circle to change its accent.','It keeps playing on other tabs. Tap "■" next to the title to stop it.'],
+  recorder:['In the Recording section of the practice log, pick a topic and press "● Record".','Not happy? Use "Restart" or "Record again".','Tap the waveform to play from that spot. "Save" exports a file.'],
+  listen:['Put your phone near the speaker and press "Start listening".','You will see the current chord and the estimated key.','Save the chord progression and play it back later at a slower tempo. If it picks up noise, lower the listening range.'],
+  triads:['Choose a root, quality and string set.','Use ◀ ▶ to move between positions and "Play" to hear them.'],
+  tensions:['Pick a base chord, then add tensions on the upper rungs.','◎ marks a usable note; × marks an avoid note.'],
+  voicings:['Pick a chord to see ways to reduce it to three strings.','It explains which notes were dropped and why.'],
+  chords:['Choose a root and type to see shapes and chord tones.','Tap a shape to hear it.'],
+  namer:['In the Chords tab, switch to "Name a shape" and tap the fretboard to place notes.','You get the chord name, other names and the degree on each string.'],
+  scales:['Choose a key and scale to see every note on the neck.','Seven-note scales also list their diatonic chords.'],
+  theory:['Work through the lessons in order and press ▶ to hear each idea.','Search the glossary for any word you don\'t know.']},
+ flow:['Open the practice log and check today\'s menu','Tune up with the tuner','Work through your menu with the metronome, ticking items and noting the BPM','Record yourself and listen back','Write down what you noticed and update your goals'],
+ faq:[['No sound','On iPhone, silent mode can mute the app. Check the side switch and the volume.'],
+  ['The microphone doesn\'t work','Check that microphone access is allowed in your browser settings. The mic only works on https pages.'],
+  ['New features don\'t show up','Close the app completely and open it again, or reload the page.'],
+  ['My log disappeared','Clearing browser data, or not using it on iPhone for a long time, can erase it. Restore it with "Import" under Backup in the practice log.']]}};
+function renderGuide(){
+  const G=GUIDE[S.lang==='en'?'en':'ja'];
+  $('gdIntro').textContent=G.intro;
+  $('gdTips').innerHTML=G.tips.map(([h,p])=>`<div class="panel gCard"><b>${esc(h)}</b><p>${esc(p)}</p></div>`).join('');
+  $('gdBasics').innerHTML=G.basics.map(x=>`<li>${esc(x)}</li>`).join('');
+  $('gdTabs').innerHTML=Object.keys(G.tabs).map(k=>`<div class="panel gCard"><b>${t('tab.'+k)}</b><ul>${G.tabs[k].map(x=>`<li>${esc(x)}</li>`).join('')}</ul><a class="tlink" href="#${k}">${t('gd.open')} →</a></div>`).join('');
+  $('gdFlow').innerHTML=G.flow.map(x=>`<li>${esc(x)}</li>`).join('');
+  $('gdFaq').innerHTML=G.faq.map(([q,a])=>`<details class="faq"><summary>${esc(q)}</summary><p>${esc(a)}</p></details>`).join('')}
+
+
+/* ================= BLUES & TAB TRANSPOSER ================= */
+const NOTE_PC={C:0,D:2,E:4,F:5,G:7,A:9,B:11};
+const pcOf=(l,a)=>(NOTE_PC[l]+(a==='#'||a==='♯'?1:a==='b'||a==='♭'?-1:0)+12)%12;
+const CH_RE=/^([A-G])([#b♯♭]?)((?:maj|min|dim|aug|sus|add|m|M|[0-9]|[()♭♯#b+\-°ø,])*)(?:\/([A-G])([#b♯♭]?))?$/;
+function trChord(tok,d){const m=tok.match(CH_RE);if(!m)return null;return nn(pcOf(m[1],m[2])+d)+m[3]+(m[4]?'/'+nn(pcOf(m[4],m[5])+d):'')}
+const isChordLine=line=>{const toks=[...line.matchAll(/\S+/g)];return toks.length>0&&toks.every(x=>CH_RE.test(x[0]))};
+function trTextLine(line,d,mapCol){if(!isChordLine(line))return line;
+  let out='';[...line.matchAll(/\S+/g)].forEach(x=>{const nm=trChord(x[0],d),c=mapCol?mapCol(x.index):x.index;if(out.length<c)out+=' '.repeat(c-out.length);else if(out.length)out+=' ';out+=nm});return out}
+function tabLineSplit(l){
+  const m=l.match(/^(\s*(?:[A-Ga-g][#b♯♭]?\d?)?\s*)[|:]/);if(!m)return null;
+  const pre=l.slice(0,m[0].length);let body=l.slice(m[0].length),tail='';
+  const tm=body.match(/\|(\s*[x×]\s*\d+\s*)$/);if(tm){tail=tm[1];body=body.slice(0,body.length-tail.length)}
+  if(!/^[-0-9|:hpbrxtsvHPBRX\/\\~().^<>*=\s]*$/.test(body)||!/-/.test(body))return null;
+  return {pre,body,tail}}
+function tabParse(text){
+  const lines=normTab(text).replace(/\t/g,'    ').replace(/\r/g,'').split('\n'),items=[];let i=0;
+  while(i<lines.length){if(tabLineSplit(lines[i])){const blk=[];while(i<lines.length){const x=tabLineSplit(lines[i]);if(!x)break;blk.push(x);i++}items.push({tab:blk})}else{items.push({text:lines[i]});i++}}
+  return items}
+function tabDelta(frets,src,dst,mode){
+  const d0=((dst-src)%12+12)%12;if(!frets.length)return d0;
+  const mn=Math.min(...frets),mx=Math.max(...frets);
+  const cands=[d0,d0-12].map(d=>({d,mn:mn+d,mx:mx+d})),ok=cands.filter(c=>c.mn>=0&&c.mx<=24),pool=ok.length?ok:cands;
+  if(mode==='low')return pool.reduce((a,b)=>a.mn<=b.mn?a:b).d;
+  if(mode==='high')return pool.reduce((a,b)=>a.mx>=b.mx?a:b).d;
+  return pool.reduce((a,b)=>Math.abs(a.d)<=Math.abs(b.d)?a:b).d}
+function trBodies(bodies,d){
+  // A "group" is a run of non-dash characters (e.g. 10b12, 5/7, (3), |). Groups are aligned by their start column;
+  // padding goes at the end of each segment, so "10b12" becomes "5b7" instead of "5-b7".
+  const maxLen=Math.max(0,...bodies.map(b=>b.length)),trN=g=>g.replace(/\d+/g,n=>{let v=+n+d;if(v<0)v+=12;if(v>24)v-=12;return String(v)});
+  const G=bodies.map(b=>{const gs=[],re=/\|+|[^-\s|]+/g;let m;while((m=re.exec(b)))gs.push({c:m.index,e:m.index+m[0].length,s:m[0][0]==='|'?m[0]:trN(m[0])});return gs});
+  const anc=new Set([0]);G.forEach(gs=>gs.forEach(g=>anc.add(g.c)));const A=[...anc].filter(x=>x<maxLen).sort((a,b)=>a-b);A.push(maxLen);
+  const segs=bodies.map(()=>[]),used=bodies.map(()=>0);
+  for(let k=0;k<A.length-1;k++){const a=A[k],b=A[k+1];
+    bodies.forEach((body,li)=>{let txt='',fill='-';for(let c=Math.max(a,used[li]);c<b;){const g=G[li].find(x=>x.c===c);
+        if(g){txt+=g.s;c=g.e;used[li]=g.e}else{const ch=c<body.length?body[c]:' ';txt+=ch;fill=ch===' '?' ':'-';c++;used[li]=c}}
+      segs[li].push({txt,fill})})}
+  const W=[],pre=[0];for(let k=0;k<A.length-1;k++){W[k]=Math.max(0,...segs.map(sg=>sg[k].txt.length));pre[k+1]=pre[k]+W[k]}
+  const map=c=>{if(c>=maxLen)return pre[A.length-1]+(c-maxLen);let k=0;while(k<A.length-2&&A[k+1]<=c)k++;return pre[k]+Math.min(c-A[k],W[k])};
+  return {lines:segs.map(sg=>sg.map((x,k)=>x.txt+x.fill.repeat(W[k]-x.txt.length)).join('').replace(/\s+$/,'')),map}}
+function tabTranspose(text,src,dst,mode){
+  const items=tabParse(text),fr=[];
+  items.forEach(it=>{if(it.tab)it.tab.forEach(l=>{(l.body.match(/\d+/g)||[]).forEach(n=>fr.push(+n))})});
+  const d=tabDelta(fr,src,dst,mode),out=[],notes=[],tb={};let blk=0;
+  items.forEach((it,i)=>{if(it.tab)tb[i]=trBodies(it.tab.map(l=>l.body),d)});
+  items.forEach((it,i)=>{
+    if(it.text!=null){const nx=tb[i+1],pl=nx?items[i+1].tab[0].pre.length:0;out.push(trTextLine(it.text,d,nx?(c=>c<pl?c:pl+nx.map(c-pl)):null));return}
+    const nb=tb[i].lines,n=it.tab.length;
+    it.tab.forEach((l,k)=>out.push(l.pre+nb[k]+(l.tail||'')));
+    nb.forEach((b,k)=>{const str=n<=6?k+1:0;let m;const re=/\d+/g;while((m=re.exec(b)))if(str>=1&&str<=6)notes.push({blk,col:m.index,str,f:+m[0]})});
+    blk++});
+  const fs=notes.map(n=>n.f),fretted=fs.filter(f=>f>0);
+  return {text:out.join('\n'),d,notes,min:fretted.length?Math.min(...fretted):0,max:fs.length?Math.max(...fs):0,open:fs.includes(0),has:fs.length>0}}
+function tabPosText(r){if(!r.has)return t('tb.noNotes');if(!r.max)return t('tb.posOpen');return t('tb.pos2',r.min,r.max)+(r.open?t('tb.withOpen'):'')}
+const TBP={timers:[],btn:null,speed:100};
+function tbStop(){TBP.timers.forEach(clearTimeout);TBP.timers=[];if(TBP.btn){TBP.btn.classList.remove('playing');TBP.btn.textContent=t('tb.play')}TBP.btn=null}
+function tbPlay(res,btn){
+  const was=TBP.btn===btn;tbStop();if(was||!res.notes.length)return;ac();TBP.btn=btn;btn.classList.add('playing');btn.textContent=t('tb.stop');
+  const ev=new Map();res.notes.forEach(n=>{const k=n.blk*100000+n.col;if(!ev.has(k))ev.set(k,[]);ev.get(k).push(n)});
+  const keys=[...ev.keys()].sort((a,b)=>a-b),unit=.085*100/TBP.speed;let tt=0,prev=null;
+  keys.forEach(k=>{if(prev!=null){const gap=Math.floor(k/1e5)!==Math.floor(prev/1e5)?4:k-prev;tt+=Math.max(1,Math.min(gap,8))*unit}
+    const ns=ev.get(k).sort((a,b)=>b.str-a.str);TBP.timers.push(setTimeout(()=>ns.forEach((n,i)=>pluck(STD[6-n.str]+n.f,i*.014,.45)),tt*1000));prev=k});
+  TBP.timers.push(setTimeout(tbStop,(tt+1.4)*1000))}
+function tabBoard(res,key){
+  const seen=new Set(),dots=[];res.notes.forEach(n=>{const s=6-n.str,k=s+':'+n.f;if(seen.has(k))return;seen.add(k);const rel=((STD[s]+n.f-key)%12+12)%12,d=rel===0?'R':DEG[rel];dots.push({s,f:n.f,role:roleOf(d),label:S.lab==='deg'?d:nn(STD[s]+n.f)})});
+  return boardSVG(dots)}
+// Builds one transposed tab view into `el`.
+function tabView(el,text,src,dst,mode,opts={}){
+  const r=tabTranspose(text,src,dst,mode);
+  el.innerHTML=`<div class="row spread tvHead"><div class="row" style="gap:10px"><span class="tvKey">${t('tb.keyOf',nn(dst))}</span><span class="small muted">${tabPosText(r)}</span></div>`+
+    `<div class="row" style="gap:6px"><button type="button" class="btn sm" data-a="play">${t('tb.play')}</button>${opts.board===false?'':`<button type="button" class="btn ghost sm" data-a="board" aria-expanded="${!!opts.open}">${t('tb.board')}</button>`}${opts.extra||''}</div></div>`+
+    `<pre class="tabOut"></pre><div class="board tvBoard"${opts.open?'':' hidden'}></div>`;
+  el.querySelector('.tabOut').textContent=r.text;
+  el.querySelector('[data-a=play]').onclick=e=>tbPlay(r,e.currentTarget);
+  const bb=el.querySelector('[data-a=board]'),bd=el.querySelector('.tvBoard');
+  if(opts.open)bd.innerHTML=tabBoard(r,dst);
+  if(bb)bb.onclick=()=>{const open=bd.hidden;bd.hidden=!open;bb.setAttribute('aria-expanded',String(open));if(open)bd.innerHTML=tabBoard(r,dst);if(opts.onBoard)opts.onBoard(open)};
+  return r}
+// ---- turnarounds (written in E) ----
+function tabFromSteps(steps,chords){
+  const rows=['e','B','G','D','A','E'].map(x=>x+'|-');let top='';
+  steps.forEach((st,si)=>{
+    if(st==='|'){rows.forEach((r,i)=>rows[i]+='|-');return}
+    const w=Math.max(1,...st.map(p=>String(p[1]).length)),col=rows[0].length,lab=chords&&chords[si]?chords[si]:'',pad=Math.max(2,lab.length+1-w);
+    if(lab){if(top.length<col)top+=' '.repeat(col-top.length);else if(top.length)top+=' ';top+=lab}
+    rows.forEach((r,i)=>{const n=st.find(p=>p[0]===i+1),tx=n?String(n[1]):'';rows[i]+=tx+'-'.repeat(w-tx.length+pad)})});
+  const body=rows.map(r=>r+'|').join('\n');return chords?top+'\n'+body:body}
+const P=(...a)=>a;
+
+// ---- state ----
+const TBS={mode:store.get('tb.mode','grid'),grid:null,src:+store.get('tb.src',4),dst:+store.get('tb.dst',9),pos:store.get('tb.pos','near'),all:false,lib:jget('tb.lib',[]),cur:jget('tb.cur',null),arm:null,timer:null};
+if(!Array.isArray(TBS.lib))TBS.lib=[];
+const TB_SAMPLE='E7\n'+tabFromSteps([P([2,3]),P([2,0]),P([1,0]),P([2,0]),P([3,2]),P([3,0]),P([4,2]),P([4,0]),P([6,0])]);
+if(!TBS.cur||typeof TBS.cur.text!=='string')TBS.cur={id:null,title:'',text:TB_SAMPLE,src:4,sample:true};
+const POSOPTS=()=>[{v:'near',t:t('tb.near')},{v:'low',t:t('tb.low')},{v:'high',t:t('tb.high')}];
+const keyChips=(el,cur,on)=>chips(el,Array.from({length:12},(_,i)=>({v:i,t:nn(i)})),cur,on,true);
+/* ---- tab grid editor ---- */
+const normTab=v=>String(v||'').normalize('NFKC').replace(/[ー－―—–‐−─━‑]/g,'-');
+const TG_LAB=['e','B','G','D','A','E'];
+const emptyCol=()=>({type:'n',cells:['','','','','',''],ch:''});
+function defaultGrid(){const g=[];for(let i=0;i<16;i++){if(i===8)g.push({type:'bar'});g.push(emptyCol())}return g}
+function textToGrid(text){
+  const items=tabParse(text),cols=[];
+  items.forEach((it,i)=>{
+    if(!it.tab||it.tab.length!==6)return;
+    const prev=items[i-1],chLine=prev&&prev.text!=null&&isChordLine(prev.text)?prev.text:null,pl=it.tab[0].pre.length;
+    const G=it.tab.map(l=>{const gs=[],re=/\|+|[^-\s|]+/g;let m;while((m=re.exec(l.body)))gs.push({c:m.index,s:m[0]});return gs});
+    const len=Math.max(...it.tab.map(l=>l.body.length)),anc=[...new Set(G.flat().map(g=>g.c))].sort((a,b)=>a-b);
+    const chs=chLine?[...chLine.matchAll(/\S+/g)].map(x=>({c:x.index-pl,s:x[0]})):[];
+    if(cols.length)cols.push({type:'bar'});
+    let lastEnd=0;
+    anc.forEach((a,ai)=>{
+      const gap=a-lastEnd;for(let k=3;k<gap;k+=3)cols.push(emptyCol());
+      const bar=G.some(gs=>gs.some(g=>g.c===a&&g.s[0]==='|'));
+      if(bar){if(a>0&&a<len-1&&!(cols.length&&cols[cols.length-1].type==='bar'))cols.push({type:'bar'});lastEnd=a+1;return}
+      const col=emptyCol();G.forEach((gs,k)=>{const g=gs.find(x=>x.c===a);if(g)col.cells[k]=g.s});
+      const nx=anc[ai+1]!=null?anc[ai+1]:len,ch=chs.find(x=>x.c<nx&&(ai===0||x.c>=a-1));if(ch)col.ch=ch.s;
+      cols.push(col);lastEnd=a+Math.max(1,...col.cells.map(x=>x.length))});
+  });
+  while(cols.length&&cols[cols.length-1].type==='bar')cols.pop();
+  if(!cols.length)return defaultGrid();
+  while(cols.filter(c=>c.type!=='bar').length<16)cols.push(emptyCol());
+  return cols}
+function gridToText(cols){
+  const rows=TG_LAB.map(x=>x+'|-');let top='',hasCh=false;
+  cols.forEach(c=>{
+    if(c.type==='bar'){rows.forEach((r,i)=>rows[i]+='|-');return}
+    const w=Math.max(1,...c.cells.map(x=>x.length)),col=rows[0].length,lab=c.ch||'',pad=Math.max(2,lab.length+1-w);
+    if(lab){hasCh=true;if(top.length<col)top+=' '.repeat(col-top.length);else if(top.length)top+=' ';top+=lab}
+    rows.forEach((r,i)=>{const tx=c.cells[i]||'';rows[i]+=tx+'-'.repeat(w-tx.length+pad)})});
+  return (hasCh?top+'\n':'')+rows.map(r=>r+'|').join('\n')}
+const TG={sel:{c:0,s:0},fresh:true};
+function tgSync(){TBS.cur.text=gridToText(TBS.grid);TBS.cur.sample=false;tbSaveDraft();clearTimeout(TBS.timer);TBS.timer=setTimeout(()=>{tbStop();renderTabOut()},200)}
+function tgClampSel(){const n=TBS.grid.length;TG.sel.c=Math.max(0,Math.min(n-1,TG.sel.c));TG.sel.s=Math.max(0,Math.min(5,TG.sel.s))}
+function renderGrid(){
+  tgClampSel();const cols=TBS.grid,g=$('tbGrid'),sel=TG.sel;
+  g.style.gridTemplateColumns='30px '+cols.map(c=>c.type==='bar'?'12px':'minmax(36px,auto)').join(' ');
+  let h=`<div class="tgL tgChL">${t('tb.chordRow')}</div>`;
+  cols.forEach((c,ci)=>{h+=c.type==='bar'?'<div class="tgBar tgTop"></div>':`<button type="button" class="tgCh${ci===sel.c?' col':''}" data-c="${ci}" data-s="-1">${esc(c.ch||'')}</button>`});
+  for(let s=0;s<6;s++){h+=`<div class="tgL">${TG_LAB[s]}</div>`;
+    cols.forEach((c,ci)=>{if(c.type==='bar'){h+=`<div class="tgBar"></div>`;return}const v=c.cells[s];
+      h+=`<button type="button" class="tgC${ci===sel.c?' col':''}${ci===sel.c&&s===sel.s?' sel':''}" data-c="${ci}" data-s="${s}" aria-label="${esc(t('tb.cellL',s+1,ci+1))}">${v?`<span>${esc(v)}</span>`:''}</button>`})}
+  g.innerHTML=h;
+  const cur=cols[sel.c];$('tbSelInfo').textContent=cur&&cur.type==='bar'?t('tb.selBar',sel.c+1):t('tb.selInfo',sel.c+1,sel.s+1,TG_LAB[sel.s]);
+  const chI=$('tbChord');if(document.activeElement!==chI)chI.value=cur&&cur.type!=='bar'?cur.ch||'':'';chI.disabled=!cur||cur.type==='bar';
+  const btn=g.querySelector('.tgC.sel');if(btn)btn.scrollIntoView({block:'nearest',inline:'nearest'})}
+function tgEdit(fn){const c=TBS.grid[TG.sel.c];if(!c||c.type==='bar')return;const v=fn(c.cells[TG.sel.s]||'');c.cells[TG.sel.s]=v;TG.fresh=false;tgSync();renderGrid()}
+function tgDigit(d){tgEdit(v=>{
+  if(TG.fresh||!v||v==='x')return d;
+  if(/[hpbr\/\\]$/.test(v))return v+d;
+  const m=v.match(/(\d+)$/);if(m&&m[1].length===1&&+(m[1]+d)<=24)return v+d;
+  if(m)return v.slice(0,v.length-m[1].length)+d;return v+d})}
+function tgTech(ch){tgEdit(v=>{if(ch==='x')return 'x';if(!/\d$/.test(v)&&ch!=='~')return v;if(ch==='~')return /~$/.test(v)?v:v+'~';return v+ch})}
+function tgMove(dc,ds){const n=TBS.grid.length;TG.sel.s=Math.max(0,Math.min(5,TG.sel.s+ds));let c=TG.sel.c+dc;if(c>=n){TBS.grid.push(emptyCol());c=n;tgSync()}TG.sel.c=Math.max(0,c);TG.fresh=true;renderGrid()}
+$('tbGrid').addEventListener('click',e=>{const b=e.target.closest('[data-c]');if(!b)return;TG.sel.c=+b.dataset.c;if(+b.dataset.s>=0)TG.sel.s=+b.dataset.s;TG.fresh=true;renderGrid();
+  if(+b.dataset.s<0)$('tbChord').focus();else{const v=TBS.grid[TG.sel.c].cells[TG.sel.s];if(v&&/\d/.test(v)){const m=v.match(/\d+/g);ac();pluck(STD[5-TG.sel.s]+(+m[m.length-1]),0,.4)}}});
+$('tbPad').addEventListener('click',e=>{const b=e.target.closest('button[data-k]');if(!b)return;const k=b.dataset.k;
+  if(/^\d$/.test(k))tgDigit(k);else if(k==='bs')tgEdit(v=>v.slice(0,-1));else if(k==='clr')tgEdit(()=>'');
+  else if(k==='L')tgMove(-1,0);else if(k==='R')tgMove(1,0);else if(k==='U')tgMove(0,-1);else if(k==='D')tgMove(0,1);
+  else if(k==='ins'){TBS.grid.splice(TG.sel.c+1,0,emptyCol());TG.sel.c++;TG.fresh=true;tgSync();renderGrid()}
+  else if(k==='bar'){TBS.grid.splice(TG.sel.c+1,0,{type:'bar'});TG.sel.c+=2;if(TG.sel.c>=TBS.grid.length)TBS.grid.push(emptyCol());TG.fresh=true;tgSync();renderGrid()}
+  else if(k==='del'){if(TBS.grid.length>1){TBS.grid.splice(TG.sel.c,1);TG.fresh=true;tgSync();renderGrid()}}
+  else if(k==='add4'){for(let i=0;i<4;i++)TBS.grid.push(emptyCol());tgSync();renderGrid()}
+  else tgTech(k)});
+$('tbChord').addEventListener('input',e=>{const c=TBS.grid[TG.sel.c];if(!c||c.type==='bar')return;c.ch=normTab(e.target.value).replace(/\s+/g,'');tgSync();
+  const b=$('tbGrid').querySelector(`.tgCh[data-c="${TG.sel.c}"]`);if(b)b.textContent=c.ch});
+$('tbGrid').addEventListener('keydown',e=>{
+  if(e.metaKey||e.ctrlKey||e.altKey)return;const k=e.key;let done=true;
+  if(/^[0-9０-９]$/.test(k))tgDigit(normTab(k));else if(['h','p','b','r','/','\\','~','x'].includes(k.toLowerCase()))tgTech(k.toLowerCase());
+  else if(k==='Backspace')tgEdit(v=>v.slice(0,-1));else if(k==='Delete')tgEdit(()=>'');
+  else if(k==='ArrowLeft')tgMove(-1,0);else if(k==='ArrowRight'||k===' ')tgMove(1,0);else if(k==='ArrowUp')tgMove(0,-1);else if(k==='ArrowDown')tgMove(0,1);
+  else if(k==='|'){TBS.grid.splice(TG.sel.c+1,0,{type:'bar'});TG.sel.c+=2;if(TG.sel.c>=TBS.grid.length)TBS.grid.push(emptyCol());TG.fresh=true;tgSync();renderGrid()}
+  else done=false;
+  if(done){e.preventDefault();const b=$('tbGrid').querySelector('.tgC.sel');if(b)b.focus()}});
+function tbSetMode(m){TBS.mode=m;store.set('tb.mode',m);if(m==='grid')TBS.grid=textToGrid(TBS.cur.text);renderTabTool()}
+$('tbModeG').onclick=()=>tbSetMode('grid');$('tbModeT').onclick=()=>tbSetMode('text');
+
+function renderTabs(){
+  chips($('tbSpeed'),[50,75,100].map(v=>({v,t:v+'%'})),TBP.speed,v=>{TBP.speed=v;tbStop();renderTabs()},true);
+  renderTabTool()}
+function tbSaveDraft(){store.set('tb.cur',JSON.stringify(TBS.cur))}
+function renderTabTool(){
+  const c=TBS.cur;
+  const ti=$('tbTitle');if(document.activeElement!==ti)ti.value=c.title||'';
+  const tx=$('tbText');if(document.activeElement!==tx)tx.value=c.text||'';
+  const gm=TBS.mode!=='text';$('tbModeG').setAttribute('aria-pressed',String(gm));$('tbModeT').setAttribute('aria-pressed',String(!gm));
+  $('tbGridWrap').hidden=!gm;$('tbTextWrap').hidden=gm;$('tbTpl').hidden=gm;
+  if(gm){if(!TBS.grid)TBS.grid=textToGrid(c.text);renderGrid()}
+  keyChips($('tbSrc'),c.src,v=>{c.src=v;tbSaveDraft();renderTabTool()});
+  keyChips($('tbDst'),TBS.dst,v=>{TBS.dst=v;store.set('tb.dst',v);tbStop();renderTabTool()});
+  chips($('tbPos'),POSOPTS(),TBS.pos,v=>{TBS.pos=v;store.set('tb.pos',v);tbStop();renderTabTool()});
+  $('tbAll').checked=TBS.all;$('tbDstRow').hidden=TBS.all;
+  renderTabOut();renderTabLib()}
+function renderTabOut(){
+  const O=$('tbOut'),c=TBS.cur;O.innerHTML='';
+  if(!tabParse(c.text).some(x=>x.tab)){O.innerHTML=`<p class="hint">${t('tb.empty')}</p>`;return}
+  const keys=TBS.all?Array.from({length:12},(_,i)=>(c.src+i)%12):[TBS.dst];
+  keys.forEach(k=>{const d=document.createElement('div');d.className='tv'+(TBS.all?' tvAll':'');tabView(d,c.text,c.src,k,TBS.pos,{open:!TBS.all});O.appendChild(d)})}
+function renderTabLib(){
+  const L=$('tbLib');L.innerHTML='';
+  if(!TBS.lib.length){L.innerHTML=`<li style="display:block"><span class="hint">${t('tb.libEmpty')}</span></li>`;return}
+  TBS.lib.forEach(it=>{const li=document.createElement('li');
+    li.innerHTML=`<div style="min-width:0;display:grid;gap:2px"><span class="nm"></span><span class="meta">${t('tb.keyOf',nn(it.src))} · ${fmtDate(it.at)}</span></div><div class="acts"><button type="button" class="btn sm" data-a="open">${t('sv.open')}</button>${delCtl(TBS.arm===it.id)}</div>`;
+    li.querySelector('.nm').textContent=it.title||t('tb.untitled');
+    li.querySelector('[data-a=open]').onclick=()=>{TBS.cur={id:it.id,title:it.title,text:it.text,src:it.src};TBS.grid=null;TG.sel={c:0,s:0};tbSaveDraft();renderTabTool();$('tbTitle').scrollIntoView({behavior:'smooth',block:'center'})};
+    wireDel(li,TBS,'arm',it.id,renderTabLib,()=>{TBS.lib=TBS.lib.filter(x=>x.id!==it.id);store.set('tb.lib',JSON.stringify(TBS.lib));if(TBS.cur.id===it.id)TBS.cur.id=null;tbSaveDraft();renderTabLib()});
+    L.appendChild(li)})}
+$('tbText').addEventListener('input',e=>{const ta=e.target,nv=normTab(ta.value);if(nv!==ta.value){const p=ta.selectionStart;ta.value=nv;try{ta.setSelectionRange(p,p)}catch(_){}}TBS.grid=null;TBS.cur.text=ta.value;TBS.cur.sample=false;tbSaveDraft();clearTimeout(TBS.timer);TBS.timer=setTimeout(()=>{tbStop();renderTabOut()},250)});
+$('tbTitle').addEventListener('input',e=>{TBS.cur.title=e.target.value;tbSaveDraft()});
+$('tbAll').onchange=e=>{TBS.all=e.target.checked;tbStop();$('tbDstRow').hidden=TBS.all;renderTabOut()};
+$('tbNew').onclick=()=>{tbStop();TBS.cur={id:null,title:'',text:'',src:TBS.cur.src};TBS.grid=TBS.mode==='text'?null:defaultGrid();TG.sel={c:0,s:0};TG.fresh=true;if(TBS.grid)TBS.cur.text=gridToText(TBS.grid);tbSaveDraft();$('tbMsg').textContent='';renderTabTool();if(TBS.mode==='text')$('tbText').focus()};
+$('tbTpl').onclick=()=>{const tpl=['e','B','G','D','A','E'].map(x=>x+'|'+'-'.repeat(24)+'|').join('\n');const ta=$('tbText');const v=ta.value.replace(/\s+$/,'');ta.value=(v?v+'\n\n':'')+tpl;TBS.cur.text=ta.value;tbSaveDraft();renderTabOut();ta.focus()};
+$('tbSave').onclick=()=>{const c=TBS.cur;if(!c.text.trim())return;const title=(c.title||'').trim()||t('tb.untitled');
+  if(c.id&&TBS.lib.some(x=>x.id===c.id)){const it=TBS.lib.find(x=>x.id===c.id);Object.assign(it,{title,text:c.text,src:c.src,at:Date.now()})}
+  else{c.id=uid();TBS.lib.unshift({id:c.id,title,text:c.text,src:c.src,at:Date.now()})}
+  c.title=title;store.set('tb.lib',JSON.stringify(TBS.lib));tbSaveDraft();$('tbMsg').textContent=t('tb.saved',title);renderTabLib()};
+
 /* ================= TABS: order & visibility ================= */
-const TABDEF=['practice','tuner','metronome','recorder','listen','triads','tensions','voicings','chords','namer','scales'];
+const TABDEF=['practice','tabs','listen','triads','tensions','voicings','chords','scales','theory'];
+const EXTRA=['tuner','metronome','guide'],ALIAS={recorder:'practice',namer:'chords',blues:'tabs'},VIEWS=[...TABDEF,...EXTRA];
+const LINKABLE=['tabs','tuner','metronome','recorder','listen','triads','tensions','voicings','chords','namer','scales','theory'];
 let order=TABDEF.slice(),hidden=[];
 try{const o=JSON.parse(store.get('order','null'));if(Array.isArray(o)){const kept=o.filter(x=>TABDEF.includes(x));TABDEF.forEach((x,i)=>{if(!kept.includes(x))kept.splice(Math.min(i,kept.length),0,x)});order=kept}
   const h=JSON.parse(store.get('hidden','[]'));if(Array.isArray(h))hidden=h.filter(x=>TABDEF.includes(x))}catch(e){}
 const visibleTabs=()=>order.filter(x=>!hidden.includes(x));
 function saveTabs(){store.set('order',JSON.stringify(order));store.set('hidden',JSON.stringify(hidden))}
-function currentTab(){const h=location.hash.slice(1);return TABDEF.includes(h)?h:(visibleTabs()[0]||'tuner')}
+function currentTab(){const h=location.hash.slice(1);if(VIEWS.includes(h))return h;if(ALIAS[h])return ALIAS[h];return visibleTabs()[0]||'practice'}
 function renderNav(){
   const cur=currentTab();
   $('tabs').innerHTML=visibleTabs().map(k=>`<a href="#${k}" aria-current="${k===cur?'page':'false'}">${t('tab.'+k)}</a>`).join('');
+  [['hbTuner','tuner'],['hbMetro','metronome'],['ftGuide','guide']].forEach(([id,v])=>$(id).setAttribute('aria-current',v===cur?'page':'false'));
+  $('hbTuner').title=t('tab.tuner');$('hbMetro').title=t('tab.metronome');
 }
 function renderArr(){
   const L=$('arrList'),first=visibleTabs()[0];L.innerHTML='';
@@ -2062,13 +2889,15 @@ $('arrReset').onclick=()=>{order=TABDEF.slice();hidden=[];saveTabs();renderArr()
 /* ================= prefs & routing ================= */
 function syncPrefs(){
   [['langJa',S.lang==='ja'],['langEn',S.lang==='en'],['accS',S.acc==='s'],['accF',S.acc==='f'],['labD',S.lab==='deg'],['labN',S.lab==='name']].forEach(([id,v])=>$(id).setAttribute('aria-pressed',String(v)))}
-function renderAll(){applyStatic();syncPrefs();renderNav();renderTuningSel();renderStrBtns();micLabels();if(!micOn)idleTuner();renderLs();renderTri();renderTn();renderV3();renderChords();renderNm();renderMt();renderScales();renderPr();renderRec();if(!$('arrPanel').hidden)renderArr()}
+function renderAll(){applyStatic();syncPrefs();renderNav();renderTuningSel();renderStrBtns();micLabels();if(!micOn)idleTuner();renderLs();renderTri();renderTn();renderV3();renderChords();renderNm();renderMt();renderScales();renderPr();renderRec();renderTheory();renderGuide();renderTabs();if(!$('arrPanel').hidden)renderArr()}
 const setPref=(k,v)=>{S[k]=v;store.set(k,v);renderAll()};
 $('langJa').onclick=()=>setPref('lang','ja');$('langEn').onclick=()=>setPref('lang','en');
 $('accS').onclick=()=>setPref('acc','s');$('accF').onclick=()=>setPref('acc','f');
 $('labD').onclick=()=>setPref('lab','deg');$('labN').onclick=()=>setPref('lab','name');
-function route(){const cur=currentTab();TABDEF.forEach(k=>$('v-'+k).hidden=k!==cur);renderNav();
-  if(cur==='chords')renderChords();if(cur==='namer')renderNm();if(cur==='practice')renderPr();if(cur==='recorder')renderRec();if(cur==='voicings')renderV3();window.scrollTo({top:0})}
+function route(){const cur=currentTab(),h=location.hash.slice(1);tbStop();if(cur==='tabs')renderTabs();VIEWS.forEach(k=>$('v-'+k).hidden=k!==cur);renderNav();
+  if(cur==='chords'){const nmMode=h==='namer';$('chLookup').hidden=nmMode;$('chNamer').hidden=!nmMode;$('chModeA').setAttribute('aria-current',String(!nmMode));$('chModeB').setAttribute('aria-current',String(nmMode));if(nmMode)renderNm();else renderChords()}
+  if(cur==='practice'){renderPr();renderRec()}if(cur==='theory')renderTheory();if(cur==='voicings')renderV3();if(cur==='guide')renderGuide();
+  if(h==='recorder')requestAnimationFrame(()=>$('rcSection').scrollIntoView({block:'start'}));else if(!(cur==='chords'&&(h==='namer'||h==='chords')&&window.scrollY<400))window.scrollTo({top:0})}
 window.addEventListener('hashchange',route);
 renderAll();route();
 })();
