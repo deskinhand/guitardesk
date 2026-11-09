@@ -233,6 +233,78 @@ select{font:inherit;font-size:14px;padding:6px 10px;border-radius:8px;border:1px
 .mini{display:inline-flex;align-items:center;gap:6px;font-family:var(--f-mono);color:var(--accent-ink)!important;background:var(--accent)!important;border-color:var(--accent)!important}
 .mini i{width:8px;height:8px;border-radius:50%;background:currentColor;opacity:.35}
 .mini.tick i{opacity:1}
+/* Practice log */
+.prTop{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:16px;align-items:end}
+@media (max-width:560px){.prTop{grid-template-columns:1fr}}
+.prDate{font-family:var(--f-display);font-size:30px;line-height:1.15;margin-top:2px}
+.prStats{display:flex;gap:6px;flex-wrap:wrap}
+.stat{font-size:12px;font-weight:700;padding:3px 10px;border-radius:999px;background:var(--surface);border:1px solid var(--line)}
+.stat.hot{background:var(--accent-soft);border-color:var(--accent)}
+.timer{display:flex;align-items:center;gap:12px}
+.timer b{font-family:var(--f-mono);font-size:26px;font-variant-numeric:tabular-nums;display:block;line-height:1.1}
+.progress{height:8px;border-radius:4px;background:var(--sunk);border:1px solid var(--line);overflow:hidden}
+.progress>i{display:block;height:100%;background:var(--ok);width:0;transition:width .3s}
+@media (prefers-reduced-motion:reduce){.progress>i{transition:none}}
+.menu{list-style:none;margin:0;padding:0;display:grid;gap:8px}
+.mi{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:12px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:10px 12px}
+.mi.done{background:color-mix(in srgb,var(--ok) 9%,var(--surface));border-color:color-mix(in srgb,var(--ok) 45%,var(--line))}
+.mi.done .mname{text-decoration:line-through;text-decoration-color:var(--ok);text-decoration-thickness:2px}
+@media (max-width:560px){.mi{grid-template-columns:auto minmax(0,1fr)}.mi .mside{grid-column:2}}
+.chk{width:32px;height:32px;border-radius:8px;border:2px solid var(--line);background:var(--sunk);cursor:pointer;display:grid;place-items:center;padding:0;color:#fff}
+.chk:hover{border-color:var(--ok)}
+.chk[aria-checked="true"]{background:var(--ok);border-color:var(--ok)}
+.chk svg{opacity:0}.chk[aria-checked="true"] svg{opacity:1}
+.mname{font-weight:700;overflow-wrap:anywhere}
+.mnote{font-size:12.5px;color:var(--muted);overflow-wrap:anywhere}
+.mside{display:flex;gap:6px;align-items:center;flex-wrap:wrap}
+.bpmIn{width:64px;font:inherit;font-family:var(--f-mono);font-size:13px;padding:5px 6px;border:1px solid var(--line);border-radius:6px;background:var(--sunk);color:var(--fg);text-align:center}
+.ef{display:grid;gap:6px;min-width:0}
+.tin{font:inherit;padding:6px 8px;border:1px solid var(--line);border-radius:6px;background:var(--sunk);color:var(--fg);width:100%;min-width:0}
+.tin.sm{font-size:13px}
+.ef select{font:inherit;font-size:13px;padding:3px 6px;border-radius:6px;border:1px solid var(--line);background:var(--sunk);color:var(--fg)}
+.ord{display:grid;gap:4px}
+.ib{width:32px;height:26px;border-radius:6px;border:1px solid var(--line);background:var(--sunk);color:var(--fg);cursor:pointer;font:inherit;padding:0}
+.ib:disabled{opacity:.3;cursor:default}
+.mi.edit{grid-template-columns:auto minmax(0,1fr) auto}
+@media (max-width:560px){.mi.edit{grid-template-columns:auto minmax(0,1fr)}.mi.edit>.danger{grid-column:2;justify-self:start}}
+.prGrid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:18px}
+@media (max-width:760px){.prGrid{grid-template-columns:1fr}}
+textarea{font:inherit;font-size:14px;line-height:1.6;width:100%;min-height:150px;padding:10px 12px;border:1px solid var(--line);border-radius:8px;background:var(--sunk);color:var(--fg);resize:vertical}
+.goals{list-style:none;margin:0;padding:0;display:grid;gap:6px}
+.goals li{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:8px;align-items:center;padding:6px 8px;border:1px solid var(--line);border-radius:8px;background:var(--sunk)}
+.goals li.ach .tkName{text-decoration:line-through;text-decoration-color:var(--ok)}
+.goals .meta{font-size:11.5px;color:var(--muted);font-family:var(--f-mono);padding-left:4px}
+.goals .acts{display:flex;gap:6px}
+@media (max-width:480px){.goals li{grid-template-columns:1fr}}
+.btn.okb{background:var(--ok);border-color:var(--ok);color:#fff}
+.heat{display:grid;grid-auto-flow:column;grid-template-rows:repeat(7,13px);grid-auto-columns:13px;gap:3px;width:max-content}
+.heat button,.hl i{width:13px;height:13px;border-radius:3px;border:0;padding:0;background:var(--sunk);box-shadow:inset 0 0 0 1px var(--line);cursor:pointer;display:inline-block}
+.heat [data-l="1"],.hl [data-l="1"]{background:color-mix(in srgb,var(--ok) 30%,var(--sunk));box-shadow:none}
+.heat [data-l="2"],.hl [data-l="2"]{background:color-mix(in srgb,var(--ok) 55%,var(--sunk));box-shadow:none}
+.heat [data-l="3"],.hl [data-l="3"]{background:color-mix(in srgb,var(--ok) 78%,var(--sunk));box-shadow:none}
+.heat [data-l="4"],.hl [data-l="4"]{background:var(--ok);box-shadow:none}
+.heat .fut{visibility:hidden}
+.heat .sel{outline:2px solid var(--fg);outline-offset:1px}
+.hl{display:inline-flex;gap:3px;vertical-align:middle}
+.prDay{display:grid;gap:6px;border-top:1px solid var(--line);padding-top:10px;font-size:14px}
+.prDay ul{margin:0;padding-left:1.2em}
+.prDay .memo{white-space:pre-wrap;background:var(--sunk);border-radius:8px;padding:8px 10px;overflow-wrap:anywhere}
+/* Recorder */
+.recBig{font-family:var(--f-display);font-size:64px;line-height:1;font-variant-numeric:tabular-nums}
+.recDot{width:14px;height:14px;border-radius:50%;background:var(--bad);display:inline-block;opacity:.3}
+.recording .recDot{opacity:1;animation:blink 1s steps(2,start) infinite}
+@keyframes blink{to{opacity:.2}}
+@media (prefers-reduced-motion:reduce){.recording .recDot{animation:none}}
+.btn.rec{background:var(--bad);border-color:var(--bad);color:#fff}
+.meter .btn{min-width:150px;justify-content:center;height:48px;font-size:16px}
+.meter .btn.ghost{min-width:0}
+.takes{list-style:none;margin:0;padding:0;display:grid;gap:10px}
+.take{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:10px 12px;display:grid;gap:8px}
+.take.playing{border-color:var(--accent);box-shadow:inset 0 0 0 1px var(--accent)}
+.take .meta{font-size:12px;color:var(--muted);font-family:var(--f-mono);padding-left:4px}
+.tkName{font:inherit;font-weight:700;border:1px solid transparent;background:transparent;color:var(--fg);padding:3px 4px;border-radius:6px;width:100%;min-width:0}
+.tkName:hover,.tkName:focus{border-color:var(--line);background:var(--surface)}
+.wave{width:100%;height:52px;display:block;cursor:pointer;border-radius:6px;background:var(--sunk)}
 /* Chord namer */
 .nmGrid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:18px}
 @media (max-width:760px){.nmGrid{grid-template-columns:1fr}}
@@ -306,6 +378,54 @@ select{font:inherit;font-size:14px;padding:6px 10px;border-radius:8px;border:1px
     </div>
     <ol id="arrList"></ol>
   </div>
+
+  <!-- PRACTICE LOG -->
+  <section class="view" id="v-practice" hidden>
+    <div class="prTop">
+      <div>
+        <h2 data-t="pr.h">練習ノート</h2>
+        <div class="prDate" id="prDate"></div>
+        <div class="prStats" id="prStats" style="margin-top:8px"></div>
+      </div>
+      <div class="timer">
+        <div style="text-align:right"><div class="small muted" data-t="pr.time"></div><b id="prTime">0:00</b></div>
+        <button class="btn" type="button" id="prTimerBtn"></button>
+      </div>
+    </div>
+    <p class="lead" data-t="pr.lead" style="margin:0"></p>
+    <div class="panel" style="display:grid;gap:12px">
+      <div class="row spread"><h3 data-t="pr.menu" style="margin:0"></h3><button class="btn ghost sm" type="button" id="prEditBtn"></button></div>
+      <div class="small" id="prProg" style="font-weight:700"></div>
+      <div class="progress"><i id="prBar"></i></div>
+      <ul class="menu" id="prMenu"></ul>
+      <div class="savebar"><input type="text" id="prNew" maxlength="60" data-tp="pr.addPh" data-ta="pr.addPh"><button class="btn" type="button" id="prAddBtn" data-t="pr.add"></button></div>
+    </div>
+    <div class="prGrid">
+      <div class="panel" style="display:grid;gap:8px;align-content:start">
+        <div class="row spread"><h3 data-t="pr.memo" style="margin:0"></h3><span class="small muted" id="prMemoSt" aria-live="polite"></span></div>
+        <textarea id="prMemo" rows="6" data-tp="pr.memoPh" data-ta="pr.memo"></textarea>
+      </div>
+      <div class="panel" style="display:grid;gap:10px;align-content:start">
+        <div class="row spread"><h3 data-t="pr.goals" style="margin:0"></h3><span class="small muted" id="prGoalCount"></span></div>
+        <div class="savebar"><input type="text" id="prGoalNew" maxlength="120" data-tp="pr.goalPh" data-ta="pr.goalPh"><button class="btn" type="button" id="prGoalAdd" data-t="pr.goalAdd"></button></div>
+        <ul class="goals" id="prGoals"></ul>
+        <button class="btn ghost sm" type="button" id="prAchBtn" aria-expanded="false" aria-controls="prAch" style="justify-self:start"></button>
+        <ul class="goals" id="prAch" hidden></ul>
+      </div>
+    </div>
+    <div class="panel" style="display:grid;gap:10px">
+      <h3 data-t="pr.hist" style="margin:0"></h3>
+      <p class="hint" data-t="pr.histHint" style="margin:0"></p>
+      <div style="overflow-x:auto;padding:3px"><div class="heat" id="prHeat"></div></div>
+      <div class="legend" style="align-items:center"><span data-t="pr.less"></span><span class="hl" aria-hidden="true"><i data-l="0"></i><i data-l="1"></i><i data-l="2"></i><i data-l="3"></i><i data-l="4"></i></span><span data-t="pr.more"></span></div>
+      <div class="prDay" id="prDay"></div>
+    </div>
+    <div class="panel" style="display:grid;gap:8px">
+      <h3 data-t="pr.backup" style="margin:0"></h3>
+      <p class="hint" data-t="pr.backupHint" style="margin:0"></p>
+      <div class="row"><button class="btn ghost sm" type="button" id="prExport" data-t="pr.export"></button><label class="btn ghost sm" style="cursor:pointer"><span data-t="pr.import"></span><input type="file" id="prImportFile" accept="application/json,.json" hidden></label><span class="small muted" id="prBackupMsg" aria-live="polite"></span></div>
+    </div>
+  </section>
 
   <!-- TUNER -->
   <section class="view" id="v-tuner" hidden>
@@ -408,6 +528,38 @@ select{font:inherit;font-size:14px;padding:6px 10px;border-radius:8px;border:1px
         <p class="hint" data-t="gp.hint" style="margin:0"></p>
       </div>
       <p class="hint" data-t="mt.keys" style="margin:0"></p>
+    </div>
+  </section>
+
+  <!-- RECORDER -->
+  <section class="view" id="v-recorder" hidden>
+    <div>
+      <h2 data-t="rc.h">録音</h2>
+      <p class="lead" data-t="rc.lead"></p>
+    </div>
+    <div class="tuner">
+      <div class="meter" id="rcPanel" aria-live="polite">
+        <div class="row" style="gap:10px"><span class="recDot" aria-hidden="true"></span><span id="rcStatus" class="small"></span></div>
+        <div class="recBig" id="rcTime">0:00.0</div>
+        <div style="display:grid;gap:4px"><div class="barlab"><span data-t="ls.level"></span></div><div class="bar"><i id="rcLevel"></i></div></div>
+        <div class="row" style="gap:8px"><button class="btn rec" type="button" id="rcBtn"></button><button class="btn ghost" type="button" id="rcRetry" hidden data-t="rc.retry"></button><button class="btn ghost" type="button" id="rcDiscard" hidden data-t="rc.discard"></button><button class="btn ghost" type="button" id="rcRedo" hidden data-t="rc.redo"></button><button class="btn ghost" type="button" id="rcUndo" hidden></button></div>
+        <div class="small" id="rcMsg" style="opacity:.85;min-height:1.4em"></div>
+      </div>
+      <div class="panel controls">
+        <div><h3 data-t="rc.theme"></h3><select id="rcTheme" data-ta="rc.theme"></select></div>
+        <div><h3 data-t="rc.countL"></h3><div class="chips" id="rcCount"></div></div>
+        <div><label class="small" style="display:flex;gap:8px;align-items:center;font-weight:700"><input type="checkbox" id="rcClick"> <span data-t="rc.click"></span></label><p class="hint" data-t="rc.clickHint"></p></div>
+        <div class="row"><span class="small" id="rcBpm"></span><a href="#metronome" class="small" data-t="rc.mtLink" style="color:var(--accent);font-weight:700"></a></div>
+        <div id="rcErr" class="err" hidden></div>
+      </div>
+    </div>
+    <div style="display:grid;gap:10px">
+      <div class="row spread">
+        <h3 data-t="rc.takes" style="margin:0"></h3>
+        <div class="row" style="gap:8px"><span class="small muted" data-t="rc.speed"></span><div class="chips" id="rcSpeed"></div><label class="small" style="display:flex;gap:6px;align-items:center"><input type="checkbox" id="rcLoop"> <span data-t="rc.loop"></span></label></div>
+      </div>
+      <ul class="takes" id="rcTakes"></ul>
+      <p class="hint" id="rcNote" style="margin:0"></p>
     </div>
   </section>
 
@@ -670,7 +822,7 @@ const ord=n=>n===1?'1st':n===2?'2nd':n===3?'3rd':n+'th';
 const I18N={
 ja:{
  app:'GuitarDesk',nav:'ツール','pref.acc':'臨時記号','pref.lab':'指板の表示','pref.deg':'度数','pref.name':'音名',
- 'tab.tuner':'チューナー','tab.metronome':'メトロノーム','tab.listen':'耳コピ','tab.namer':'コードネーム','tab.triads':'トライアド','tab.tensions':'テンション','tab.voicings':'3音ヴォイシング','tab.chords':'コード','tab.scales':'スケール',
+ 'tab.practice':'練習ノート','tab.recorder':'録音','tab.tuner':'チューナー','tab.metronome':'メトロノーム','tab.listen':'耳コピ','tab.namer':'コードネーム','tab.triads':'トライアド','tab.tensions':'テンション','tab.voicings':'3音ヴォイシング','tab.chords':'コード','tab.scales':'スケール',
  'arr.btn':'並べ替え','arr.title':'タブの並べ替え','arr.hint':'今練習している項目を一番上に置くと、アプリを開いたときにそのタブから始まります。使わないタブは非表示にできます。','arr.reset':'もとに戻す','arr.done':'完了','arr.show':'表示','arr.up':'上へ','arr.down':'下へ','arr.start':'起動時に開く',
  'c.root':'ルート','c.quality':'種類','c.set':'弦セット','c.inv':'転回形','c.prev':'前のポジション','c.next':'次のポジション','c.play':'▶ 鳴らす','c.chord':'コード','c.type':'タイプ','c.key':'キー','c.scale':'スケール','c.shapes':'押さえ方（タップで鳴らす）','c.all':'すべて',
  'lg.root':'ルート','lg.3':'3度','lg.5':'5度','lg.7':'7度・テンション','lg.other':'その他','lg.omit':'省略した音','lg.tonic':'主音',
@@ -698,6 +850,28 @@ ja:{
  'nm.slash':(b,n)=>`最低音が ${b} なので、${n} の転回形として「/${b}」を付けて書きます（オンコード）。`,'nm.omit5':'5度は省略されています。省いても響きがほとんど変わらないので、ギターではよく省かれます。','nm.omit':l=>`${l} は省略されています。`,
  'nm.complete':'すべての構成音がそろっていて、ルートが最低音の基本形です。','nm.ambig':'同じ音の組み合わせでも、最低音や前後のコードによって呼び方が変わります。「別の読み方」も参考にしてください。',
  'nm.mute':'ミュート','nm.open0':'開放','nm.str':n=>`${n}弦`,'ch.findLink':'押さえた形からコード名を調べるときは「コードネーム」タブへ →',
+ 'pr.h':'練習ノート','pr.lead':'毎日の練習メニューにチェックを付け、気づいたことや課題を書き留めます。記録はこの端末のブラウザに保存されます。',
+ 'pr.streak':n=>`${n}日連続`,'pr.month':n=>`今月 ${n}日`,'pr.total':n=>`合計 ${n}日`,'pr.time':'今日の練習時間','pr.tStart':'▶ 練習開始','pr.tPause':'❚❚ 一時停止',
+ 'pr.menu':'今日の練習メニュー','pr.progress':(a,b)=>`${a} / ${b} 完了`,'pr.allDone':'今日のメニューをすべて終えました！','pr.edit':'メニューを編集','pr.editDone':'編集を終える',
+ 'pr.add':'追加','pr.addPh':'新しい練習テーマ（例：Chromatic）','pr.notePh':'メモ（目標BPMやポイントなど）','pr.bpmPh':'今日のBPM','pr.link':'開くタブ','pr.linkNone':'なし',
+ 'pr.del':'削除','pr.delSure':'本当に削除','pr.up':'上へ','pr.down':'下へ','pr.empty':'メニューがまだありません。下の欄から練習テーマを追加してください。',
+ 'pr.memo':'今日のメモ','pr.memoPh':'気づいたこと、うまくいかなかったこと、次に試したいことなど、自由に書けます。','pr.saved':'保存しました',
+ 'pr.goals':'課題','pr.goalPh':'これから取り組む課題（例：Aマイナーペンタを120 BPMで弾く）','pr.goalAdd':'追加','pr.goalDone':'できた！','pr.goalOpen':n=>`取り組み中 ${n}件`,'pr.goalEmpty':'取り組み中の課題はありません。上の欄から追加できます。',
+ 'pr.achieved':n=>`達成した課題（${n}件）`,'pr.since':d=>`${d} から取り組み中`,'pr.took':(a,b,n)=>`${a} → ${b} 達成（${n}日）`,'pr.reopen':'戻す','pr.goalText':'課題の内容',
+ 'pr.hist':'練習の記録','pr.histHint':'色が濃い日ほど多くのメニューをこなした日です。日付をタップすると、その日の内容を表示します。','pr.less':'少ない','pr.more':'多い',
+ 'pr.dayNone':'この日の記録はありません。','pr.dayDone':'終えたメニュー','pr.dayMemo':'メモ','pr.dayTime':t=>`練習時間 ${t}`,'pr.dayTakes':'録音したテイク',
+ 'pr.backup':'バックアップ','pr.export':'書き出す','pr.import':'読み込む','pr.backupHint':'記録はこのブラウザにだけ保存されます。機種変更やブラウザのデータ削除に備えて、ときどき書き出しておくと安心です。読み込むと、今の記録はファイルの内容に置き換わります（録音は含まれません）。',
+ 'pr.imported':'読み込みました。','pr.importErr':'このファイルは読み込めませんでした。GuitarDeskで書き出したファイルを選んでください。','pr.exported':'書き出しました。',
+ 'rc.h':'録音','rc.lead':'自分の演奏を録音して聴き返せます。録音はこの端末のブラウザに保存され、ファイルとして書き出すこともできます。',
+ 'rc.retry':'↺ やり直し','rc.discard':'✕ 破棄','rc.redo':'↺ 録り直す','rc.undo':'✕ 直前のテイクを取り消す','rc.undoSure':'本当に取り消す','rc.undone':'直前のテイクを取り消しました。','rc.discarded':'保存せずに止めました。',
+ 'rc.recHint':'「やり直し」は今の録音を捨てて最初から録り直します。「破棄」は保存せずに止めます。','rc.doneHint':'「録り直す」を押すと新しく録音し、保存した時点で直前のテイクと入れ替わります。','rc.saved':n=>`「${n}」を保存しました。`,
+ 'rc.rec':'● 録音','rc.stop':'■ 停止','rc.cancel':'中止','rc.ready':'待機中','rc.count':n=>`カウントイン… ${n}`,'rc.recording':'録音中','rc.saving':'保存中…',
+ 'rc.theme':'練習テーマ','rc.themeNone':'なし','rc.countL':'カウントイン','rc.c0':'なし','rc.c1':'1小節','rc.c2':'2小節',
+ 'rc.click':'録音中もメトロノームを鳴らす','rc.clickHint':'メトロノームの音もマイクに入るので、ヘッドホンやイヤホンの使用がおすすめです。','rc.bpm':(b,s)=>`メトロノーム：${b} BPM · ${s}`,'rc.mtLink':'メトロノームで変更 →',
+ 'rc.takes':'録音したテイク','rc.empty':'まだ録音はありません。「● 録音」を押すと始まります。','rc.play':'▶ 再生','rc.pause':'❚❚ 一時停止','rc.dl':'⬇ 保存','rc.wav':'⬇ WAV','rc.convert':'変換中…',
+ 'rc.del':'削除','rc.delSure':'本当に削除','rc.speed':'再生速度','rc.loop':'くり返し','rc.def':d=>`テイク ${d}`,'rc.usage':mb=>`使用量：約${mb}MB。`,
+ 'rc.note':'録音はこの端末のブラウザの中に保存され、ブラウザのデータを消すと一緒に消えます。残したいテイクは「保存」で書き出してください。「WAV」はほとんどのアプリで再生できる形式です（ファイルは大きくなります）。',
+ 'rc.err':'マイクを使えませんでした。ブラウザでマイクの使用を許可してください。','rc.noRec':'このブラウザは録音に対応していません。最新のChromeかSafariでお試しください。','rc.memOnly':'このブラウザでは録音を保存できないため、ページを閉じると消えます。','rc.wave':'波形（タップでその位置から再生）',
  'ls.h':'耳コピ','ls.lead':'スピーカーから流れる曲や自分の演奏をマイクで聴き取り、今鳴っているコードを推定します。音声は保存されず、この端末の外にも送られません。',
  'ls.start':'聴き取りを始める','ls.stop':'止める','ls.hold':'ホールド','ls.release':'ホールド解除','ls.waiting':'音を待っています…','ls.listening':'聴き取り中','ls.idle':'ボタンを押すと聴き取りを始めます','ls.held':'表示を止めています',
  'ls.confL':'確からしさ','ls.level':'入力レベル','ls.bass':b=>`ベース ${b}`,'ls.vocab':'判定するコード','ls.simple':'シンプル（メジャー・マイナー）','ls.full':'7th・sus4・dimも',
@@ -736,11 +910,11 @@ ja:{
  'ch.h':'コード','ch.lead':'コード名から押さえ方と構成音を調べられます。下の指板で音を選ぶと、そのコード名を判定します。','ch.play':'▶ 構成音を鳴らす','ch.board':'指板上の構成音','ch.noshape':'この範囲では押さえ方が見つかりませんでした。','ch.playAria':n=>`${n} を鳴らす`,
  'id.h':'コード名判定','id.hint':'各弦の押さえるフレットをタップします。左端の列は開放弦です。同じ所をもう一度タップするとミュートになります。','id.clear':'クリア','id.notes':'構成音：','id.pick':'音を選んでください','id.none':'該当なし',
  'sc.h':'スケール','sc.lead':'キーとスケールを選ぶと、15フレットまでの音の並びを表示します。7音スケールではダイアトニック・コードも出ます。','sc.play':'▶ 上行で鳴らす','sc.diat':'ダイアトニック・コード（タップでコード表へ）',
- 'scn.pm':'マイナー・ペンタ','scn.pM':'メジャー・ペンタ','scn.blues':'ブルース','scn.major':'メジャー','scn.minor':'ナチュラル・マイナー','scn.hm':'ハーモニック・マイナー','scn.mm':'メロディック・マイナー','scn.dor':'ドリアン','scn.phr':'フリジアン','scn.lyd':'リディアン','scn.mix':'ミクソリディアン','scn.loc':'ロクリアン',
+ 'scn.pm':'マイナー・ペンタ','scn.pM':'メジャー・ペンタ','scn.blues':'ブルース','scn.major':'メジャー','scn.minor':'ナチュラル・マイナー','scn.hm':'ハーモニック・マイナー','scn.mm':'メロディック・マイナー','scn.pelog':'ペロッグ（バリ）','scn.dor':'ドリアン','scn.phr':'フリジアン','scn.lyd':'リディアン','scn.mix':'ミクソリディアン','scn.loc':'ロクリアン',
 },
 en:{
  app:'GuitarDesk',nav:'Tools','pref.acc':'Accidentals','pref.lab':'Neck labels','pref.deg':'Degrees','pref.name':'Notes',
- 'tab.tuner':'Tuner','tab.metronome':'Metronome','tab.listen':'Listen','tab.namer':'Chord namer','tab.triads':'Triads','tab.tensions':'Tensions','tab.voicings':'3-note voicings','tab.chords':'Chords','tab.scales':'Scales',
+ 'tab.practice':'Practice log','tab.recorder':'Recorder','tab.tuner':'Tuner','tab.metronome':'Metronome','tab.listen':'Listen','tab.namer':'Chord namer','tab.triads':'Triads','tab.tensions':'Tensions','tab.voicings':'3-note voicings','tab.chords':'Chords','tab.scales':'Scales',
  'arr.btn':'Arrange','arr.title':'Arrange tabs','arr.hint':'Put what you are practicing at the top and the app will open on that tab. Hide tabs you are not using.','arr.reset':'Reset','arr.done':'Done','arr.show':'Show','arr.up':'Move up','arr.down':'Move down','arr.start':'Opens first',
  'c.root':'Root','c.quality':'Quality','c.set':'Strings','c.inv':'Inversion','c.prev':'Previous position','c.next':'Next position','c.play':'▶ Play','c.chord':'Chord','c.type':'Type','c.key':'Key','c.scale':'Scale','c.shapes':'Shapes (tap to play)','c.all':'All',
  'lg.root':'Root','lg.3':'3rd','lg.5':'5th','lg.7':'7th & tensions','lg.other':'Other','lg.omit':'Omitted','lg.tonic':'Tonic',
@@ -768,6 +942,28 @@ en:{
  'nm.slash':(b,n)=>`The lowest note is ${b}, so it is written as an inversion of ${n} with "/${b}" (a slash chord).`,'nm.omit5':'The 5th is omitted. It barely changes the sound, so guitarists often leave it out.','nm.omit':l=>`The ${l} is omitted.`,
  'nm.complete':'Every chord tone is present, with the root in the bass.','nm.ambig':'The same notes can take different names depending on the bass note and the surrounding chords. See "Other names" too.',
  'nm.mute':'muted','nm.open0':'open','nm.str':n=>`String ${n}`,'ch.findLink':'To name a shape you are holding, use the Chord namer tab →',
+ 'pr.h':'Practice log','pr.lead':'Tick off your daily practice menu and jot down what you noticed and what to work on next. Everything is saved in this browser.',
+ 'pr.streak':n=>`${n}-day streak`,'pr.month':n=>`${n} days this month`,'pr.total':n=>`${n} days total`,'pr.time':'Practice time today','pr.tStart':'▶ Start practice','pr.tPause':'❚❚ Pause',
+ 'pr.menu':"Today's practice menu",'pr.progress':(a,b)=>`${a} of ${b} done`,'pr.allDone':"You finished today's menu!",'pr.edit':'Edit menu','pr.editDone':'Done editing',
+ 'pr.add':'Add','pr.addPh':'New practice topic (e.g. Chromatic)','pr.notePh':'Note (target BPM, focus points…)','pr.bpmPh':"Today's BPM",'pr.link':'Opens tab','pr.linkNone':'None',
+ 'pr.del':'Delete','pr.delSure':'Really delete','pr.up':'Move up','pr.down':'Move down','pr.empty':'No menu items yet. Add a practice topic below.',
+ 'pr.memo':"Today's notes",'pr.memoPh':"Write anything: what you noticed, what didn't work, what to try next.",'pr.saved':'Saved',
+ 'pr.goals':'Goals','pr.goalPh':'Something to work on (e.g. A minor pentatonic at 120 BPM)','pr.goalAdd':'Add','pr.goalDone':'Done!','pr.goalOpen':n=>`${n} in progress`,'pr.goalEmpty':'No goals in progress. Add one above.',
+ 'pr.achieved':n=>`Achieved (${n})`,'pr.since':d=>`Since ${d}`,'pr.took':(a,b,n)=>`${a} → ${b} (${n} day${n===1?'':'s'})`,'pr.reopen':'Reopen','pr.goalText':'Goal',
+ 'pr.hist':'Practice history','pr.histHint':'Darker days are days you finished more of your menu. Tap a day to see what you did.','pr.less':'Less','pr.more':'More',
+ 'pr.dayNone':'Nothing recorded on this day.','pr.dayDone':'Finished','pr.dayMemo':'Notes','pr.dayTime':t=>`Practice time ${t}`,'pr.dayTakes':'Recorded takes',
+ 'pr.backup':'Backup','pr.export':'Export','pr.import':'Import','pr.backupHint':'Your log lives only in this browser. Export it now and then in case you change phones or clear browser data. Importing replaces the current log with the file (recordings are not included).',
+ 'pr.imported':'Imported.','pr.importErr':"Couldn't read this file. Choose a file exported from GuitarDesk.",'pr.exported':'Exported.',
+ 'rc.h':'Recorder','rc.lead':'Record your playing and listen back. Takes are saved in this browser, and you can export them as files.',
+ 'rc.retry':'↺ Restart','rc.discard':'✕ Discard','rc.redo':'↺ Record again','rc.undo':'✕ Remove last take','rc.undoSure':'Really remove','rc.undone':'Last take removed.','rc.discarded':'Stopped without saving.',
+ 'rc.recHint':'"Restart" throws away this recording and starts over. "Discard" stops without saving.','rc.doneHint':'"Record again" makes a new recording that replaces the last take once it is saved.','rc.saved':n=>`Saved "${n}".`,
+ 'rc.rec':'● Record','rc.stop':'■ Stop','rc.cancel':'Cancel','rc.ready':'Ready','rc.count':n=>`Count-in… ${n}`,'rc.recording':'Recording','rc.saving':'Saving…',
+ 'rc.theme':'Practice topic','rc.themeNone':'None','rc.countL':'Count-in','rc.c0':'Off','rc.c1':'1 bar','rc.c2':'2 bars',
+ 'rc.click':'Keep the metronome on while recording','rc.clickHint':'The microphone will pick up the click too, so headphones or earphones are recommended.','rc.bpm':(b,s)=>`Metronome: ${b} BPM · ${s}`,'rc.mtLink':'Change in Metronome →',
+ 'rc.takes':'Takes','rc.empty':'No recordings yet. Press "● Record" to start.','rc.play':'▶ Play','rc.pause':'❚❚ Pause','rc.dl':'⬇ Save','rc.wav':'⬇ WAV','rc.convert':'Converting…',
+ 'rc.del':'Delete','rc.delSure':'Really delete','rc.speed':'Speed','rc.loop':'Loop','rc.def':d=>`Take ${d}`,'rc.usage':mb=>`Storage used: about ${mb} MB.`,
+ 'rc.note':'Takes are stored in this browser and disappear if you clear its data. Use "Save" to export the ones you want to keep. "WAV" plays in almost any app (the file is larger).',
+ 'rc.err':"Couldn't use the microphone. Allow microphone access in your browser.",'rc.noRec':"This browser can't record audio. Try the latest Chrome or Safari.",'rc.memOnly':"This browser can't store recordings, so they disappear when you close the page.",'rc.wave':'Waveform (tap to play from there)',
  'ls.h':'Chord listener','ls.lead':'Listens through the microphone to a song on a speaker or to your own playing, and estimates the chord sounding right now. Audio is never saved or sent off this device.',
  'ls.start':'Start listening','ls.stop':'Stop','ls.hold':'Hold','ls.release':'Release','ls.waiting':'Waiting for sound…','ls.listening':'Listening','ls.idle':'Press start to listen','ls.held':'Display held',
  'ls.confL':'Confidence','ls.level':'Input level','ls.bass':b=>`Bass ${b}`,'ls.vocab':'Chords to detect','ls.simple':'Simple (major/minor)','ls.full':'Also 7th, sus4, dim',
@@ -806,7 +1002,7 @@ en:{
  'ch.h':'Chords','ch.lead':'Look up shapes and chord tones by name. Pick notes on the neck below to identify a chord.','ch.play':'▶ Play chord tones','ch.board':'Chord tones on the neck','ch.noshape':'No shape found in this range.','ch.playAria':n=>`Play ${n}`,
  'id.h':'Chord finder','id.hint':'Tap a fret on each string. The leftmost column is the open string. Tap the same spot again to mute it.','id.clear':'Clear','id.notes':'Notes: ','id.pick':'Pick some notes','id.none':'No match',
  'sc.h':'Scales','sc.lead':'Pick a key and scale to see every note up to the 15th fret. Seven-note scales also list their diatonic chords.','sc.play':'▶ Play ascending','sc.diat':'Diatonic chords (tap to open in Chords)',
- 'scn.pm':'Minor pentatonic','scn.pM':'Major pentatonic','scn.blues':'Blues','scn.major':'Major','scn.minor':'Natural minor','scn.hm':'Harmonic minor','scn.mm':'Melodic minor','scn.dor':'Dorian','scn.phr':'Phrygian','scn.lyd':'Lydian','scn.mix':'Mixolydian','scn.loc':'Locrian',
+ 'scn.pm':'Minor pentatonic','scn.pM':'Major pentatonic','scn.blues':'Blues','scn.major':'Major','scn.minor':'Natural minor','scn.hm':'Harmonic minor','scn.mm':'Melodic minor','scn.pelog':'Pelog (Balinese)','scn.dor':'Dorian','scn.phr':'Phrygian','scn.lyd':'Lydian','scn.mix':'Mixolydian','scn.loc':'Locrian',
 }};
 const store={get(k,d){try{const v=localStorage.getItem('fn.'+k);return v==null?d:v}catch(e){return d}},set(k,v){try{localStorage.setItem('fn.'+k,v)}catch(e){}}};
 const S={lang:store.get('lang','ja'),acc:store.get('acc','s'),lab:store.get('lab','deg'),
@@ -823,6 +1019,7 @@ function applyStatic(){
   document.documentElement.lang=S.lang;
   document.querySelectorAll('[data-t]').forEach(el=>el.textContent=t(el.dataset.t));
   document.querySelectorAll('[data-ta]').forEach(el=>el.setAttribute('aria-label',t(el.dataset.ta)));
+  document.querySelectorAll('[data-tp]').forEach(el=>el.placeholder=t(el.dataset.tp));
 }
 
 /* ================= theory ================= */
@@ -849,7 +1046,7 @@ const chordByK=k=>CHORDS.find(c=>c.k===k);
 const SCALES=[
  {k:'pm',iv:[0,3,5,7,10]},{k:'pM',iv:[0,2,4,7,9]},{k:'blues',iv:[0,3,5,6,7,10]},
  {k:'major',iv:[0,2,4,5,7,9,11]},{k:'minor',iv:[0,2,3,5,7,8,10]},{k:'hm',iv:[0,2,3,5,7,8,11]},{k:'mm',iv:[0,2,3,5,7,9,11]},
- {k:'dor',iv:[0,2,3,5,7,9,10]},{k:'phr',iv:[0,1,3,5,7,8,10]},{k:'lyd',iv:[0,2,4,6,7,9,11]},{k:'mix',iv:[0,2,4,5,7,9,10]},{k:'loc',iv:[0,1,3,5,6,8,10]},
+ {k:'pelog',iv:[0,1,3,7,8]},{k:'dor',iv:[0,2,3,5,7,9,10]},{k:'phr',iv:[0,1,3,5,7,8,10]},{k:'lyd',iv:[0,2,4,6,7,9,11]},{k:'mix',iv:[0,2,4,5,7,9,10]},{k:'loc',iv:[0,1,3,5,6,8,10]},
 ];
 const DEG=['1','♭2','2','♭3','3','4','♭5','5','♭6','6','♭7','7'];
 const scaleDeg=(sc,i)=>(i===6&&sc.k==='lyd')?'♯4':DEG[i];
@@ -1591,8 +1788,251 @@ function renderLs(){
   $('lsTips').innerHTML=t('ls.tips').map(x=>`<li>${x}</li>`).join('');
   lsLabels();lsShowChord();lsRenderHist();lsRenderKey();lsRenderSaved();if(PL.id)renderPl()}
 
+/* ================= shared helpers ================= */
+const esc=x=>String(x).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const uid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,7);
+const dkey=(d=new Date())=>`${d.getFullYear()}-${pad2(d.getMonth()+1)}-${pad2(d.getDate())}`;
+const LOC=()=>S.lang==='ja'?'ja-JP':'en-US';
+const fmtDur=x=>{x=Math.floor(x||0);const h=Math.floor(x/3600),m=Math.floor(x%3600/60),c=x%60;return h?`${h}:${pad2(m)}:${pad2(c)}`:`${m}:${pad2(c)}`};
+function saveBlob(blob,name){const u=URL.createObjectURL(blob),a=document.createElement('a');a.href=u;a.download=name;a.rel='noopener';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(u),8000)}
+function armBtn(state,key,id,render){if(state[key]!==id){state[key]=id;render();setTimeout(()=>{if(state[key]===id){state[key]=null;render()}},4000);return false}state[key]=null;return true}
+const CHK='<svg width="16" height="16" viewBox="0 0 16 16" aria-hidden="true"><path d="M3 8.5l3 3 7-7" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+
+/* ================= PRACTICE LOG ================= */
+const PR_SEED=[['Chromatic','metronome'],['Triad','triads'],['Pentatonic scale','scales'],['Alone blues','recorder'],['Backing and solo','recorder']];
+let PR=(()=>{try{const x=JSON.parse(localStorage.getItem('fn.pr')||'null');if(x&&Array.isArray(x.items))return Object.assign({log:{},goals:[]},x)}catch(e){}
+  return {items:PR_SEED.map(([name,link])=>({id:uid(),name,note:'',link})),log:{},goals:[]}})();
+function prSave(){try{localStorage.setItem('fn.pr',JSON.stringify(PR));return true}catch(e){return false}}
+const prDay=(k=dkey())=>PR.log[k]||(PR.log[k]={done:[],memo:'',sec:0,bpm:{}});
+const PRS={edit:false,sel:null,timer:null,tStart:0,armed:null,showAch:false,memoT:null,n:0};
+function prActive(k){const d=PR.log[k];return !!d&&((d.done||[]).length>0||(d.memo||'').trim()!==''||(d.sec||0)>=60)}
+function prStreak(){let n=0;const d=new Date();if(!prActive(dkey(d)))d.setDate(d.getDate()-1);while(prActive(dkey(d))){n++;d.setDate(d.getDate()-1)}return n}
+const prTodaySec=()=>((PR.log[dkey()]||{}).sec||0)+(PRS.timer?(performance.now()-PRS.tStart)/1000:0);
+function prFlush(){if(!PRS.timer)return;const now=performance.now();prDay().sec+=(now-PRS.tStart)/1000;PRS.tStart=now;prSave()}
+function prTimerUI(){$('prTime').textContent=fmtDur(prTodaySec());const b=$('prTimerBtn');b.textContent=PRS.timer?t('pr.tPause'):t('pr.tStart');b.classList.toggle('ghost',!!PRS.timer)}
+$('prTimerBtn').onclick=()=>{if(PRS.timer){prFlush();clearInterval(PRS.timer);PRS.timer=null;renderPr()}else{PRS.tStart=performance.now();PRS.timer=setInterval(()=>{$('prTime').textContent=fmtDur(prTodaySec());if(++PRS.n%15===0)prFlush()},1000)}prTimerUI()};
+window.addEventListener('pagehide',prFlush);document.addEventListener('visibilitychange',()=>{if(document.hidden)prFlush()});
+function renderPr(){
+  const now=new Date();
+  $('prDate').textContent=now.toLocaleDateString(LOC(),{month:'long',day:'numeric',weekday:'short'});
+  const st=prStreak();
+  $('prStats').innerHTML=`<span class="stat${st>0?' hot':''}">${t('pr.streak',st)}</span><span class="stat">${t('pr.month',Object.keys(PR.log).filter(k=>k.startsWith(dkey().slice(0,7))&&prActive(k)).length)}</span><span class="stat">${t('pr.total',Object.keys(PR.log).filter(prActive).length)}</span>`;
+  prTimerUI();prRenderMenu();
+  const m=$('prMemo');if(document.activeElement!==m)m.value=(PR.log[dkey()]||{}).memo||'';
+  prRenderGoals();prRenderHeat();prRenderDay()}
+function prRenderMenu(){
+  const L=$('prMenu'),day=PR.log[dkey()],done=new Set(day?day.done:[]),n=PR.items.length,c=PR.items.filter(i=>done.has(i.id)).length;
+  $('prEditBtn').textContent=PRS.edit?t('pr.editDone'):t('pr.edit');
+  $('prProg').textContent=n?(c===n?t('pr.allDone'):t('pr.progress',c,n)):'';$('prProg').style.color=n&&c===n?'var(--ok)':'';
+  $('prBar').style.width=n?(c/n*100)+'%':'0';
+  L.innerHTML=n?'':`<li class="hint">${t('pr.empty')}</li>`;
+  PR.items.forEach((it,i)=>{
+    const li=document.createElement('li'),isD=done.has(it.id);li.className='mi'+(isD&&!PRS.edit?' done':'')+(PRS.edit?' edit':'');
+    if(PRS.edit){
+      li.innerHTML=`<div class="ord"><button type="button" class="ib" data-a="up" aria-label="${t('pr.up')}"${i===0?' disabled':''}>↑</button><button type="button" class="ib" data-a="down" aria-label="${t('pr.down')}"${i===n-1?' disabled':''}>↓</button></div>`+
+        `<div class="ef"><input type="text" class="tin" data-f="name" maxlength="60" aria-label="${t('pr.menu')}"><input type="text" class="tin sm" data-f="note" maxlength="140" placeholder="${esc(t('pr.notePh'))}" aria-label="${esc(t('pr.notePh'))}"><label class="small muted" style="display:flex;gap:6px;align-items:center">${t('pr.link')} <select data-f="link"></select></label></div>`+
+        `<button type="button" class="btn ghost sm danger${PRS.armed===it.id?' armed':''}" data-a="del">${PRS.armed===it.id?t('pr.delSure'):t('pr.del')}</button>`;
+      const nm=li.querySelector('[data-f=name]'),nt=li.querySelector('[data-f=note]'),sel=li.querySelector('select');
+      nm.value=it.name;nt.value=it.note||'';
+      sel.innerHTML=`<option value="">${t('pr.linkNone')}</option>`+TABDEF.filter(x=>x!=='practice').map(x=>`<option value="${x}"${x===it.link?' selected':''}>${t('tab.'+x)}</option>`).join('');
+      nm.onchange=()=>{const v=nm.value.trim();if(v){it.name=v;prSave()}else nm.value=it.name};
+      nt.onchange=()=>{it.note=nt.value.trim();prSave()};
+      sel.onchange=()=>{it.link=sel.value;prSave()};
+      li.querySelector('[data-a=up]').onclick=()=>{[PR.items[i-1],PR.items[i]]=[PR.items[i],PR.items[i-1]];prSave();prRenderMenu()};
+      li.querySelector('[data-a=down]').onclick=()=>{[PR.items[i+1],PR.items[i]]=[PR.items[i],PR.items[i+1]];prSave();prRenderMenu()};
+      li.querySelector('[data-a=del]').onclick=()=>{if(!armBtn(PRS,'armed',it.id,prRenderMenu))return;PR.items.splice(i,1);prSave();renderPr()};
+    }else{
+      li.innerHTML=`<button type="button" class="chk" role="checkbox" aria-checked="${isD}">${CHK}</button><div style="min-width:0"><div class="mname"></div><div class="mnote"></div></div>`+
+        `<div class="mside"><input type="text" inputmode="numeric" class="bpmIn" maxlength="4" placeholder="BPM" aria-label="${esc(t('pr.bpmPh'))}">${it.link?`<button type="button" class="btn ghost sm" data-a="go">${t('tab.'+it.link)} →</button>`:''}</div>`;
+      li.querySelector('.mname').textContent=it.name;const no=li.querySelector('.mnote');no.textContent=it.note||'';no.hidden=!it.note;
+      const ck=li.querySelector('.chk');ck.setAttribute('aria-label',it.name);
+      ck.onclick=()=>{const d=prDay(),k=d.done.indexOf(it.id);if(k>=0)d.done.splice(k,1);else d.done.push(it.id);prSave();renderPr()};
+      const bi=li.querySelector('.bpmIn');bi.value=(day&&day.bpm&&day.bpm[it.id])||'';
+      bi.onchange=()=>{const d=prDay();d.bpm=d.bpm||{};const v=bi.value.replace(/[^0-9]/g,'').slice(0,3);bi.value=v;if(v)d.bpm[it.id]=v;else delete d.bpm[it.id];prSave();prRenderDay()};
+      const go=li.querySelector('[data-a=go]');if(go)go.onclick=()=>{location.hash='#'+it.link};
+    }
+    L.appendChild(li)})}
+$('prEditBtn').onclick=()=>{PRS.edit=!PRS.edit;PRS.armed=null;prRenderMenu()};
+function prAdd(){const v=$('prNew').value.trim();if(!v)return;PR.items.push({id:uid(),name:v,note:'',link:''});prSave();$('prNew').value='';renderPr()}
+$('prAddBtn').onclick=prAdd;$('prNew').addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.isComposing)prAdd()});
+$('prMemo').addEventListener('input',()=>{clearTimeout(PRS.memoT);$('prMemoSt').textContent='';PRS.memoT=setTimeout(()=>{prDay().memo=$('prMemo').value;prSave();$('prMemoSt').textContent=t('pr.saved');prRenderHeat();prRenderDay()},600)});
+const shortDate=ms=>new Date(ms).toLocaleDateString(LOC(),{month:'numeric',day:'numeric'});
+function prRenderGoals(){
+  const open=PR.goals.filter(g=>!g.doneAt),ach=PR.goals.filter(g=>g.doneAt).sort((a,b)=>b.doneAt-a.doneAt);
+  $('prGoalCount').textContent=t('pr.goalOpen',open.length);
+  const G=$('prGoals');G.innerHTML=open.length?'':`<li class="hint" style="display:block;background:transparent;border-style:dashed">${t('pr.goalEmpty')}</li>`;
+  const row=(g,isAch)=>{const li=document.createElement('li');if(isAch)li.className='ach';
+    const days=isAch?Math.max(1,Math.round((new Date(dkey(new Date(g.doneAt))+'T00:00')-new Date(dkey(new Date(g.at))+'T00:00'))/864e5)+1):0;
+    li.innerHTML=`<div style="min-width:0"><input type="text" class="tkName" maxlength="140" aria-label="${esc(t('pr.goalText'))}"><div class="meta">${isAch?t('pr.took',shortDate(g.at),shortDate(g.doneAt),days):t('pr.since',shortDate(g.at))}</div></div>`+
+      `<div class="acts">${isAch?`<button type="button" class="btn ghost sm" data-a="re">${t('pr.reopen')}</button>`:`<button type="button" class="btn sm okb" data-a="ok">${t('pr.goalDone')}</button>`}<button type="button" class="btn ghost sm danger${PRS.armed===g.id?' armed':''}" data-a="del">${PRS.armed===g.id?t('pr.delSure'):t('pr.del')}</button></div>`;
+    const inp=li.querySelector('.tkName');inp.value=g.text;inp.onchange=()=>{const v=inp.value.trim();if(v){g.text=v;prSave()}else inp.value=g.text};
+    const ok=li.querySelector('[data-a=ok]');if(ok)ok.onclick=()=>{g.doneAt=Date.now();prSave();prRenderGoals()};
+    const re=li.querySelector('[data-a=re]');if(re)re.onclick=()=>{g.doneAt=null;prSave();prRenderGoals()};
+    li.querySelector('[data-a=del]').onclick=()=>{if(!armBtn(PRS,'armed',g.id,prRenderGoals))return;PR.goals=PR.goals.filter(x=>x.id!==g.id);prSave();prRenderGoals()};
+    return li};
+  open.forEach(g=>G.appendChild(row(g,false)));
+  const A=$('prAch'),ab=$('prAchBtn');ab.hidden=!ach.length;ab.textContent=(PRS.showAch?'▾ ':'▸ ')+t('pr.achieved',ach.length);ab.setAttribute('aria-expanded',String(PRS.showAch));
+  A.hidden=!PRS.showAch||!ach.length;A.innerHTML='';ach.forEach(g=>A.appendChild(row(g,true)))}
+function prAddGoal(){const v=$('prGoalNew').value.trim();if(!v)return;PR.goals.unshift({id:uid(),text:v,at:Date.now(),doneAt:null});prSave();$('prGoalNew').value='';prRenderGoals()}
+$('prGoalAdd').onclick=prAddGoal;$('prGoalNew').addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.isComposing)prAddGoal()});
+$('prAchBtn').onclick=()=>{PRS.showAch=!PRS.showAch;prRenderGoals()};
+function prRenderHeat(){
+  const H=$('prHeat'),weeks=17,today=new Date();today.setHours(0,0,0,0);
+  const start=new Date(today);start.setDate(start.getDate()-today.getDay()-(weeks-1)*7);
+  const n=Math.max(1,PR.items.length),selK=PRS.sel||dkey();H.innerHTML='';
+  for(let i=0;i<weeks*7;i++){const d=new Date(start);d.setDate(start.getDate()+i);const k=dkey(d),b=document.createElement('button');b.type='button';
+    if(d>today){b.className='fut';b.tabIndex=-1;b.disabled=true}
+    else{const x=PR.log[k];b.dataset.l=prActive(k)?Math.max(1,Math.min(4,Math.ceil((x.done||[]).length/n*4))):0;
+      const lab=d.toLocaleDateString(LOC(),{month:'short',day:'numeric',weekday:'short'});b.title=lab;b.setAttribute('aria-label',lab);
+      if(k===selK)b.classList.add('sel');b.onclick=()=>{PRS.sel=k;prRenderHeat();prRenderDay()}}
+    H.appendChild(b)}}
+function prRenderDay(){
+  const k=PRS.sel||dkey(),x=PR.log[k],D=$('prDay'),dt=new Date(k+'T00:00:00');
+  let h=`<b>${dt.toLocaleDateString(LOC(),{year:'numeric',month:'long',day:'numeric',weekday:'short'})}</b>`;
+  const takes=REC.takes.filter(tk=>dkey(new Date(tk.at))===k);
+  if(!prActive(k)&&!takes.length&&!(x&&x.done&&x.done.length)){h+=`<span class="hint">${t('pr.dayNone')}</span>`}
+  else{
+    if(x&&x.done&&x.done.length){const names=x.done.map(id=>{const it=PR.items.find(i=>i.id===id);if(!it)return null;const b=x.bpm&&x.bpm[id];return esc(it.name)+(b?` <span class="muted">(${esc(b)} BPM)</span>`:'')}).filter(Boolean);
+      if(names.length)h+=`<div><span class="small muted">${t('pr.dayDone')}</span><ul>${names.map(z=>`<li>${z}</li>`).join('')}</ul></div>`}
+    if(x&&(x.sec||0)>=60)h+=`<div class="small">${t('pr.dayTime',fmtDur(x.sec))}</div>`;
+    if(x&&(x.memo||'').trim())h+=`<div><span class="small muted">${t('pr.dayMemo')}</span><div class="memo">${esc(x.memo)}</div></div>`;
+    if(takes.length)h+=`<div><span class="small muted">${t('pr.dayTakes')}</span><ul>${takes.map(tk=>`<li><a href="#recorder" style="color:var(--accent)">${esc(tk.name)}</a> <span class="muted small">${fmtDur(tk.dur)}</span></li>`).join('')}</ul></div>`}
+  D.innerHTML=h}
+$('prExport').onclick=()=>{prFlush();const data={app:'GuitarDesk',v:1,exported:new Date().toISOString(),practice:PR,progressions:svLoad()};
+  saveBlob(new Blob([JSON.stringify(data)],{type:'application/json'}),`guitardesk-backup-${dkey()}.json`);$('prBackupMsg').textContent=t('pr.exported')};
+$('prImportFile').onchange=async e=>{const f=e.target.files[0];e.target.value='';if(!f)return;
+  try{const d=JSON.parse(await f.text());if(!d||d.app!=='GuitarDesk'||!d.practice||!Array.isArray(d.practice.items))throw 0;
+    PR=Object.assign({log:{},goals:[]},d.practice);prSave();if(Array.isArray(d.progressions))svStore(d.progressions);renderPr();lsRenderSaved();$('prBackupMsg').textContent=t('pr.imported')}
+  catch(err){$('prBackupMsg').textContent=t('pr.importErr')}};
+
+/* ================= RECORDER ================= */
+const REC={state:'idle',stream:null,mr:null,chunks:[],t0:0,tick:null,raf:0,an:null,abuf:null,countT:null,countEnd:0,startedMt:false,dur:0,
+  count:Math.max(0,Math.min(2,+store.get('rc.count',1)||0)),click:store.get('rc.click','0')==='1',theme:store.get('rc.theme',''),
+  takes:[],mem:false,db:null,audio:new Audio(),playId:null,url:null,speed:100,loop:false,armed:null,praf:0,discard:false,restart:false,replaceId:null,lastId:null,undoArm:false,msg:''};
+REC.audio.preservesPitch=true;REC.audio.webkitPreservesPitch=true;REC.audio.mozPreservesPitch=true;
+function idb(){return new Promise((res,rej)=>{if(REC.db)return res(REC.db);if(!window.indexedDB)return rej(new Error('noidb'));let r;try{r=indexedDB.open('guitardesk',1)}catch(e){return rej(e)}
+  r.onupgradeneeded=()=>r.result.createObjectStore('takes',{keyPath:'id'});r.onsuccess=()=>{REC.db=r.result;res(REC.db)};r.onerror=()=>rej(r.error)})}
+async function idbAll(){const db=await idb();return new Promise((res,rej)=>{const q=db.transaction('takes').objectStore('takes').getAll();q.onsuccess=()=>res(q.result||[]);q.onerror=()=>rej(q.error)})}
+async function idbPut(x){const db=await idb();return new Promise((res,rej)=>{const tx=db.transaction('takes','readwrite');tx.objectStore('takes').put(x);tx.oncomplete=()=>res();tx.onerror=()=>rej(tx.error)})}
+async function idbDel(id){const db=await idb();return new Promise((res,rej)=>{const tx=db.transaction('takes','readwrite');tx.objectStore('takes').delete(id);tx.oncomplete=()=>res();tx.onerror=()=>rej(tx.error)})}
+function recLevel(){if(!REC.stream)return;REC.an.getFloatTimeDomainData(REC.abuf);let r=0;for(let i=0;i<REC.abuf.length;i++)r+=REC.abuf[i]*REC.abuf[i];$('rcLevel').style.width=Math.min(100,Math.sqrt(r/REC.abuf.length)*400)+'%';REC.raf=requestAnimationFrame(recLevel)}
+function recUI(){
+  const s=REC.state,b=$('rcBtn'),el=s==='rec'?(performance.now()-REC.t0)/1000:0;
+  $('rcPanel').classList.toggle('recording',s==='rec');
+  $('rcTime').textContent=fmtDur(el)+'.'+Math.floor((el%1)*10);
+  $('rcStatus').textContent=s==='rec'?t('rc.recording'):s==='count'?t('rc.count',Math.max(1,Math.ceil((REC.countEnd-performance.now())/1000*MT.bpm/60))):s==='saving'?t('rc.saving'):t('rc.ready');
+  const hasLast=s==='idle'&&REC.lastId&&REC.takes.some(x=>x.id===REC.lastId);if(!hasLast&&s==='idle')REC.lastId=null;
+  $('rcRetry').hidden=$('rcDiscard').hidden=s!=='rec';$('rcRedo').hidden=$('rcUndo').hidden=!hasLast;
+  $('rcUndo').textContent=REC.undoArm?t('rc.undoSure'):t('rc.undo');$('rcUndo').classList.toggle('armed',REC.undoArm);
+  $('rcMsg').textContent=s==='rec'?t('rc.recHint'):(REC.msg||(hasLast?t('rc.doneHint'):''));
+  b.textContent=s==='idle'?t('rc.rec'):s==='count'?t('rc.cancel'):t('rc.stop');b.disabled=s==='saving'||s==='starting';b.classList.toggle('rec',s==='idle');b.classList.toggle('ghost',s!=='idle');
+  if(s==='rec'&&el>900)recStop()}
+async function recStart(){
+  if(REC.state!=='idle')return;REC.state='starting';REC.msg='';REC.undoArm=false;recUI();
+  const err=$('rcErr');err.hidden=true;
+  if(!window.MediaRecorder||!navigator.mediaDevices||!navigator.mediaDevices.getUserMedia){err.hidden=false;err.textContent=t('rc.noRec');REC.state='idle';REC.replaceId=null;recUI();return}
+  REC.audio.pause();
+  try{if(micOn)stopMic();if(LS.on)LS.stop();ac();REC.stream=await navigator.mediaDevices.getUserMedia({audio:{echoCancellation:false,noiseSuppression:false,autoGainControl:false}})}
+  catch(e){err.hidden=false;err.textContent=t('rc.err');REC.state='idle';REC.replaceId=null;recUI();return}
+  const src=AC.createMediaStreamSource(REC.stream);REC.an=AC.createAnalyser();REC.an.fftSize=2048;REC.abuf=new Float32Array(2048);src.connect(REC.an);recLevel();
+  if((REC.count>0||REC.click)&&!MT.on){mtStart();REC.startedMt=true}
+  if(REC.count>0){const dur=mtBeats()*REC.count*60/MT.bpm;REC.state='count';REC.countEnd=performance.now()+dur*1000;REC.countT=setTimeout(recBegin,dur*1000);REC.tick=setInterval(recUI,100);recUI()}
+  else recBegin()}
+function recBegin(){
+  clearInterval(REC.tick);if(REC.startedMt&&!REC.click){mtStop();REC.startedMt=false}
+  const mime=['audio/mp4','audio/webm;codecs=opus','audio/webm','audio/ogg;codecs=opus'].find(m=>MediaRecorder.isTypeSupported&&MediaRecorder.isTypeSupported(m))||'';
+  try{REC.mr=mime?new MediaRecorder(REC.stream,{mimeType:mime}):new MediaRecorder(REC.stream)}catch(e){REC.mr=new MediaRecorder(REC.stream)}
+  REC.chunks=[];REC.mr.ondataavailable=e=>{if(e.data&&e.data.size)REC.chunks.push(e.data)};REC.mr.onstop=recFinish;REC.mr.start(500);
+  REC.t0=performance.now();REC.state='rec';REC.tick=setInterval(recUI,100);recUI()}
+function recCleanup(){cancelAnimationFrame(REC.raf);if(REC.stream)REC.stream.getTracks().forEach(x=>x.stop());REC.stream=null;if(REC.startedMt){mtStop();REC.startedMt=false}$('rcLevel').style.width='0'}
+function recStop(){
+  if(REC.state==='count'){clearTimeout(REC.countT);clearInterval(REC.tick);recCleanup();REC.state='idle';REC.replaceId=null;recUI();return}
+  if(REC.state==='rec'){REC.state='saving';clearInterval(REC.tick);REC.dur=(performance.now()-REC.t0)/1000;recUI();REC.mr.stop()}}
+async function recPeaks(blob){
+  const buf=await AC.decodeAudioData(await blob.arrayBuffer()),d=buf.getChannelData(0),N=240,step=Math.max(1,Math.floor(d.length/N)),out=[];let mx=0;
+  for(let i=0;i<N;i++){let p=0;const e=Math.min(d.length,(i+1)*step);for(let j=i*step;j<e;j++){const v=Math.abs(d[j]);if(v>p)p=v}out.push(p);if(p>mx)mx=p}
+  return {peaks:out.map(v=>mx?Math.round(v/mx*1000)/1000:0),dur:buf.duration}}
+async function recFinish(){
+  if(REC.discard){REC.discard=false;REC.chunks=[];recCleanup();REC.state='idle';
+    if(REC.restart){REC.restart=false;recStart()}else{REC.replaceId=null;REC.msg=t('rc.discarded');recUI()}return}
+  const type=(REC.mr&&REC.mr.mimeType)||(REC.chunks[0]&&REC.chunks[0].type)||'audio/webm',blob=new Blob(REC.chunks,{type});recCleanup();
+  const th=PR.items.find(i=>i.id===REC.theme),when=fmtDate(Date.now());
+  const tk={id:uid(),name:th?`${th.name} ${when}`:t('rc.def',when),at:Date.now(),dur:REC.dur,mime:type,size:blob.size,blob,theme:th?th.id:'',peaks:null};
+  try{const r=await recPeaks(blob);tk.peaks=r.peaks;if(r.dur&&isFinite(r.dur))tk.dur=r.dur}catch(e){}
+  REC.takes.unshift(tk);
+  if(!REC.mem){try{await idbPut(tk)}catch(e){REC.mem=true}}
+  if(REC.replaceId){const old=REC.replaceId;REC.replaceId=null;if(REC.playId===old){REC.audio.pause();REC.playId=null}REC.takes=REC.takes.filter(x=>x.id!==old);if(!REC.mem)idbDel(old).catch(()=>{})}
+  REC.lastId=tk.id;REC.msg=t('rc.saved',tk.name);
+  try{if(navigator.storage&&navigator.storage.persist)navigator.storage.persist().catch(()=>{})}catch(e){}
+  REC.state='idle';recUI();recRenderList();prRenderDay()}
+$('rcBtn').onclick=()=>REC.state==='idle'?recStart():recStop();
+function recAbort(restart){if(REC.state!=='rec')return;REC.discard=true;REC.restart=restart;REC.state='saving';clearInterval(REC.tick);recUI();REC.mr.stop()}
+$('rcRetry').onclick=()=>recAbort(true);
+$('rcDiscard').onclick=()=>recAbort(false);
+$('rcRedo').onclick=()=>{if(!REC.lastId)return;REC.replaceId=REC.lastId;recStart()};
+$('rcUndo').onclick=()=>{const id=REC.lastId;if(!id)return;
+  if(!REC.undoArm){REC.undoArm=true;recUI();setTimeout(()=>{if(REC.undoArm){REC.undoArm=false;recUI()}},4000);return}
+  REC.undoArm=false;if(REC.playId===id){REC.audio.pause();REC.playId=null}REC.takes=REC.takes.filter(x=>x.id!==id);if(!REC.mem)idbDel(id).catch(()=>{});
+  REC.lastId=null;REC.msg=t('rc.undone');recRenderList();recUI();prRenderDay()};
+const extOf=m=>/mp4|aac|m4a/.test(m)?'m4a':/webm/.test(m)?'webm':/ogg/.test(m)?'ogg':/wav/.test(m)?'wav':'audio';
+const fileBase=n=>(n||'take').replace(/[\\/:*?"<>|]+/g,'_').trim()||'take';
+function wavEncode(buf){
+  const ch=buf.numberOfChannels,len=buf.length,sr=buf.sampleRate,data=new Int16Array(len),cs=[];for(let c=0;c<ch;c++)cs.push(buf.getChannelData(c));
+  for(let i=0;i<len;i++){let v=0;for(let c=0;c<ch;c++)v+=cs[c][i];v=Math.max(-1,Math.min(1,v/ch));data[i]=v<0?v*0x8000:v*0x7fff}
+  const hd=new ArrayBuffer(44),dv=new DataView(hd),w=(o,x)=>{for(let i=0;i<x.length;i++)dv.setUint8(o+i,x.charCodeAt(i))};
+  w(0,'RIFF');dv.setUint32(4,36+len*2,true);w(8,'WAVE');w(12,'fmt ');dv.setUint32(16,16,true);dv.setUint16(20,1,true);dv.setUint16(22,1,true);dv.setUint32(24,sr,true);dv.setUint32(28,sr*2,true);dv.setUint16(32,2,true);dv.setUint16(34,16,true);w(36,'data');dv.setUint32(40,len*2,true);
+  return new Blob([hd,data.buffer],{type:'audio/wav'})}
+function cssVar(n){return getComputedStyle(document.body).getPropertyValue(n).trim()||'#888'}
+function recDraw(tk){
+  const cv=document.querySelector(`.take[data-id="${tk.id}"] canvas`);if(!cv)return;const w=cv.clientWidth,h=cv.clientHeight;if(!w)return;
+  const dpr=window.devicePixelRatio||1;if(cv.width!==Math.round(w*dpr)){cv.width=Math.round(w*dpr);cv.height=Math.round(h*dpr)}
+  const g=cv.getContext('2d');g.setTransform(dpr,0,0,dpr,0,0);g.clearRect(0,0,w,h);
+  const pk=tk.peaks||[],n=pk.length||60,bw=w/n,prog=(REC.playId===tk.id&&tk.dur)?Math.min(1,REC.audio.currentTime/tk.dur):0,acc=cssVar('--accent'),mu=cssVar('--muted');
+  for(let i=0;i<n;i++){const v=pk.length?Math.max(.04,pk[i]):.04,bh=v*(h-8);g.fillStyle=(i/n)<prog?acc:mu;g.globalAlpha=(i/n)<prog?1:.55;g.fillRect(i*bw+bw*.15,(h-bh)/2,Math.max(1,bw*.7),bh)}
+  g.globalAlpha=1;if(REC.playId===tk.id){g.fillStyle=cssVar('--fg');g.fillRect(prog*w-1,2,2,h-4)}}
+function recDrawAll(){REC.takes.forEach(recDraw)}
+function recProgLoop(){cancelAnimationFrame(REC.praf);const tk=REC.takes.find(x=>x.id===REC.playId);if(tk)recDraw(tk);if(!REC.audio.paused)REC.praf=requestAnimationFrame(recProgLoop)}
+function recPlay(id,frac){
+  const tk=REC.takes.find(x=>x.id===id),a=REC.audio;if(!tk)return;
+  if(REC.playId===id&&frac==null){if(a.paused)a.play().catch(()=>{});else a.pause();return}
+  if(REC.playId!==id){if(REC.url)URL.revokeObjectURL(REC.url);REC.url=URL.createObjectURL(tk.blob);a.src=REC.url;REC.playId=id}
+  a.loop=REC.loop;
+  const go=()=>{a.playbackRate=REC.speed/100;if(frac!=null){try{a.currentTime=frac*tk.dur}catch(e){}}a.play().catch(()=>{})};
+  if(a.readyState>=1)go();else a.addEventListener('loadedmetadata',go,{once:true})}
+['play','pause','ended'].forEach(ev=>REC.audio.addEventListener(ev,()=>{REC.audio.playbackRate=REC.speed/100;recButtons();recProgLoop()}));
+function recButtons(){document.querySelectorAll('.take').forEach(li=>{const on=li.dataset.id===REC.playId;li.classList.toggle('playing',on);li.querySelector('[data-a=play]').textContent=on&&!REC.audio.paused?t('rc.pause'):t('rc.play')})}
+function recRenderList(){
+  const L=$('rcTakes');L.innerHTML=REC.takes.length?'':`<li class="hint">${t('rc.empty')}</li>`;
+  REC.takes.forEach(tk=>{
+    const li=document.createElement('li');li.className='take';li.dataset.id=tk.id;const th=PR.items.find(i=>i.id===tk.theme);
+    li.innerHTML=`<input type="text" class="tkName" maxlength="60" aria-label="${esc(t('sv.nameL'))}"><div class="meta">${fmtDate(tk.at)} · ${fmtDur(tk.dur)} · ${tk.size<1048576?Math.max(1,Math.round(tk.size/1024))+'KB':(tk.size/1048576).toFixed(1)+'MB'}${th?' · '+esc(th.name):''}</div>`+
+      `<canvas class="wave" role="img" aria-label="${esc(t('rc.wave'))}"></canvas>`+
+      `<div class="row" style="gap:6px"><button type="button" class="btn sm" data-a="play"></button><button type="button" class="btn ghost sm" data-a="dl">${t('rc.dl')}</button><button type="button" class="btn ghost sm" data-a="wav">${t('rc.wav')}</button><button type="button" class="btn ghost sm danger${REC.armed===tk.id?' armed':''}" data-a="del">${REC.armed===tk.id?t('rc.delSure'):t('rc.del')}</button></div>`;
+    const nm=li.querySelector('.tkName');nm.value=tk.name;nm.onchange=()=>{const v=nm.value.trim();if(!v){nm.value=tk.name;return}tk.name=v;if(!REC.mem)idbPut(tk).catch(()=>{});prRenderDay()};
+    li.querySelector('[data-a=play]').onclick=()=>recPlay(tk.id);
+    li.querySelector('canvas').onclick=e=>{const r=e.currentTarget.getBoundingClientRect();recPlay(tk.id,Math.max(0,Math.min(.999,(e.clientX-r.left)/r.width)))};
+    li.querySelector('[data-a=dl]').onclick=()=>saveBlob(tk.blob,`${fileBase(tk.name)}.${extOf(tk.mime)}`);
+    li.querySelector('[data-a=wav]').onclick=async e=>{const b=e.currentTarget;b.disabled=true;b.textContent=t('rc.convert');try{ac();const buf=await AC.decodeAudioData(await tk.blob.arrayBuffer());saveBlob(wavEncode(buf),`${fileBase(tk.name)}.wav`)}catch(err){}b.disabled=false;b.textContent=t('rc.wav')};
+    li.querySelector('[data-a=del]').onclick=()=>{if(!armBtn(REC,'armed',tk.id,recRenderList))return;
+      if(REC.playId===tk.id){REC.audio.pause();REC.playId=null}REC.takes=REC.takes.filter(x=>x.id!==tk.id);if(!REC.mem)idbDel(tk.id).catch(()=>{});recRenderList();prRenderDay()};
+    L.appendChild(li)});
+  recButtons();requestAnimationFrame(recDrawAll);if(REC.state==='idle')recUI();
+  let note=t('rc.note');if(REC.mem)note=t('rc.memOnly')+' '+note;$('rcNote').textContent=note;
+  try{if(navigator.storage&&navigator.storage.estimate)navigator.storage.estimate().then(e=>{if(e&&e.usage!=null)$('rcNote').textContent=(REC.mem?t('rc.memOnly')+' ':'')+t('rc.usage',(e.usage/1048576).toFixed(1))+' '+t('rc.note')}).catch(()=>{})}catch(e){}}
+function renderRec(){
+  const sel=$('rcTheme');sel.innerHTML=`<option value="">${t('rc.themeNone')}</option>`+PR.items.map(i=>`<option value="${i.id}"${i.id===REC.theme?' selected':''}>${esc(i.name)}</option>`).join('');
+  chips($('rcCount'),[0,1,2].map(v=>({v,t:t('rc.c'+v)})),REC.count,v=>{REC.count=v;store.set('rc.count',v);renderRec()});
+  $('rcClick').checked=REC.click;$('rcBpm').textContent=t('rc.bpm',MT.bpm,MT.sig);
+  chips($('rcSpeed'),[50,75,100].map(v=>({v,t:v+'%'})),REC.speed,v=>{REC.speed=v;REC.audio.playbackRate=v/100;renderRec()},true);
+  $('rcLoop').checked=REC.loop;recUI();recRenderList()}
+$('rcTheme').onchange=e=>{REC.theme=e.target.value;store.set('rc.theme',REC.theme)};
+$('rcClick').onchange=e=>{REC.click=e.target.checked;store.set('rc.click',REC.click?'1':'0')};
+$('rcLoop').onchange=e=>{REC.loop=e.target.checked;REC.audio.loop=REC.loop};
+window.addEventListener('resize',()=>{if(currentTab()==='recorder')recDrawAll()});
+(async()=>{try{const all=await idbAll();REC.takes=all.sort((a,b)=>b.at-a.at)}catch(e){REC.mem=true}recRenderList();prRenderDay()})();
+
 /* ================= TABS: order & visibility ================= */
-const TABDEF=['tuner','metronome','listen','triads','tensions','voicings','chords','namer','scales'];
+const TABDEF=['practice','tuner','metronome','recorder','listen','triads','tensions','voicings','chords','namer','scales'];
 let order=TABDEF.slice(),hidden=[];
 try{const o=JSON.parse(store.get('order','null'));if(Array.isArray(o)){const kept=o.filter(x=>TABDEF.includes(x));TABDEF.forEach((x,i)=>{if(!kept.includes(x))kept.splice(Math.min(i,kept.length),0,x)});order=kept}
   const h=JSON.parse(store.get('hidden','[]'));if(Array.isArray(h))hidden=h.filter(x=>TABDEF.includes(x))}catch(e){}
@@ -1622,13 +2062,13 @@ $('arrReset').onclick=()=>{order=TABDEF.slice();hidden=[];saveTabs();renderArr()
 /* ================= prefs & routing ================= */
 function syncPrefs(){
   [['langJa',S.lang==='ja'],['langEn',S.lang==='en'],['accS',S.acc==='s'],['accF',S.acc==='f'],['labD',S.lab==='deg'],['labN',S.lab==='name']].forEach(([id,v])=>$(id).setAttribute('aria-pressed',String(v)))}
-function renderAll(){applyStatic();syncPrefs();renderNav();renderTuningSel();renderStrBtns();micLabels();if(!micOn)idleTuner();renderLs();renderTri();renderTn();renderV3();renderChords();renderNm();renderMt();renderScales();if(!$('arrPanel').hidden)renderArr()}
+function renderAll(){applyStatic();syncPrefs();renderNav();renderTuningSel();renderStrBtns();micLabels();if(!micOn)idleTuner();renderLs();renderTri();renderTn();renderV3();renderChords();renderNm();renderMt();renderScales();renderPr();renderRec();if(!$('arrPanel').hidden)renderArr()}
 const setPref=(k,v)=>{S[k]=v;store.set(k,v);renderAll()};
 $('langJa').onclick=()=>setPref('lang','ja');$('langEn').onclick=()=>setPref('lang','en');
 $('accS').onclick=()=>setPref('acc','s');$('accF').onclick=()=>setPref('acc','f');
 $('labD').onclick=()=>setPref('lab','deg');$('labN').onclick=()=>setPref('lab','name');
 function route(){const cur=currentTab();TABDEF.forEach(k=>$('v-'+k).hidden=k!==cur);renderNav();
-  if(cur==='chords')renderChords();if(cur==='namer')renderNm();if(cur==='voicings')renderV3();window.scrollTo({top:0})}
+  if(cur==='chords')renderChords();if(cur==='namer')renderNm();if(cur==='practice')renderPr();if(cur==='recorder')renderRec();if(cur==='voicings')renderV3();window.scrollTo({top:0})}
 window.addEventListener('hashchange',route);
 renderAll();route();
 })();
